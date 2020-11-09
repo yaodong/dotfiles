@@ -1,0 +1,23 @@
+* Emacs Configuration
+
+
+** Install Dependencies
+
+#+begin_src sh
+brew install coreutils ripgrep fd
+
+# Languages
+brew install shellcheck aspell jq pandoc
+
+# Scala
+brew install ammonite-repl
+
+# Utils
+brew install editorconfig
+#+end_src
+
+** Install Emacs
+
+#+begin_src sh
+brew install emacs-plus@27
+#+end_src
