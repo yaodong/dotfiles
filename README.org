@@ -21,3 +21,12 @@ brew install editorconfig
 #+begin_src sh
 brew install emacs-plus@27
 #+end_src
+
+** Install Configuration
+
+Install [[https://github.com/hlissner/doom-emacs#install][Doom Emacs]] then clone this repository:
+
+#+begin_src sh
+git clone git@github.com:yaodong/.doom.d.git ~/.doom.d
+~/.emacs.d/bin/doom sync
+#+end_src
