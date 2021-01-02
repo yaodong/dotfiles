@@ -24,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-zenburn)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -62,7 +62,12 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
-     (scala . t))))
+     (scala . t)))
+  (setq org-capture-templates
+        '(("n" "Note" entry (file "~/.org/notes.org")
+           "* %?\n%i\n")
+          ("t" "Todo" entry (file "~/.org/todo.org")
+           "* TODO %?\n%i\n"))))
 
 (use-package! ob-ammonite
   :after org
@@ -74,9 +79,7 @@
   :bind ("C-c n j" . org-journal-new-entry)
   :custom
   (org-journal-dir "~/.org")
-  (org-journal-date-prefix "#+TITLE: ")
   (org-journal-file-format "%Y-%m-%d.org")
-  (org-journal-date-format "%A, %d %B %Y")
   (org-journal-enable-agenda-integration t))
 
 (use-package! deft
@@ -85,7 +88,15 @@
   (deft-recursive t)
   (deft-use-filter-string-for-filename t)
   (deft-default-extension "org")
-  (deft-directory "~/.org"))
+  (deft-directory "~/.org/deft"))
+
+(use-package! zetteldeft
+  :after deft
+  :custom
+  (zetteldeft-id-format "%y%m%d%H%M")
+  (zetteldeft-id-regex "[0-9]\\{10\\}")
+  :config
+  (zetteldeft-set-classic-keybindings))
 
 ;; Switch workspace
 (global-set-key (kbd "s-{") '+workspace/switch-left)
