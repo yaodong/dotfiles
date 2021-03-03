@@ -19,20 +19,23 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Monaco" :size 13 :weight 'semi-light))
+(setq doom-font (font-spec :family "Hack" :size 13 :weight 'semi-light))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-gruvbox)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/Documents/Organize")
+(setq org-roam-directory org-directory)
+(setq deft-directory org-directory)
+(setq org-journal-dir (concat org-directory "/journal"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -56,8 +59,6 @@
   (global-disable-mouse-mode))
 
 (use-package! org
-  :custom
-  (org-directory "~/Documents/Organize")
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -78,7 +79,6 @@
   :after org
   :bind ("C-c n j" . org-journal-new-entry)
   :custom
-  (org-journal-dir "~/Documents/Journal")
   (org-journal-file-format "%Y-%m-%d.org")
   (org-journal-enable-agenda-integration t))
 
@@ -87,8 +87,7 @@
   :custom
   (deft-recursive t)
   (deft-use-filter-string-for-filename t)
-  (deft-default-extension "org")
-  (deft-directory "~/Documents/Deft"))
+  (deft-default-extension "org"))
 
 (use-package! zetteldeft
   :after deft
