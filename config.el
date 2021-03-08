@@ -31,7 +31,6 @@
 (setq org-directory "~/Documents/Organize")
 (setq org-roam-directory org-directory)
 (setq deft-directory org-directory)
-(setq org-journal-dir (concat org-directory "/journal"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -58,44 +57,12 @@
   :config
   (global-disable-mouse-mode))
 
-(use-package! org
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (scala . t)))
-  (setq org-capture-templates
-        '(("n" "Notes" entry (file "~/Documents/Organize/Captures.org")
-           "* %?\n%i\n")
-          ("t" "Tasks" entry (file "~/Documents/Organize/Captures.org")
-           "* TODO %?\n%i\n"))))
-
-(use-package! ob-ammonite
-  :after org
-  :config
-  (defalias 'org-babel-execute:scala 'org-babel-execute:amm))
-
-(use-package! org-journal
-  :after org
-  :bind ("C-c n j" . org-journal-new-entry)
-  :custom
-  (org-journal-file-format "%Y-%m-%d.org")
-  (org-journal-enable-agenda-integration t))
-
 (use-package! deft
   :after org
   :custom
   (deft-recursive t)
   (deft-use-filter-string-for-filename t)
   (deft-default-extension "org"))
-
-(use-package! zetteldeft
-  :after deft
-  :custom
-  (zetteldeft-id-format "%y%m%d%H%M")
-  (zetteldeft-id-regex "[0-9]\\{10\\}")
-  :config
-  (zetteldeft-set-classic-keybindings))
 
 ;; Switch workspace
 (global-set-key (kbd "s-{") '+workspace/switch-left)
