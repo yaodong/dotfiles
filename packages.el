@@ -4,6 +4,8 @@
 (package! org-ref)
 (package! org-super-agenda)
 (package! disable-mouse)
+(package! org-appear
+  :recipe (:host github :repo "awth13/org-appear"))
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'
 ;; on the command line, then restart Emacs for the changes to take effect -- or

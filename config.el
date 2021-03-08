@@ -29,7 +29,8 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/Organize")
-(setq org-roam-directory org-directory)
+(setq org-agenda-files (list (concat org-directory "/todo.org")))
+(setq org-roam-directory (concat org-directory "/roam"))
 (setq deft-directory org-directory)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -56,6 +57,10 @@
 (use-package! disable-mouse
   :config
   (global-disable-mouse-mode))
+
+(after! org
+  (setq org-hide-emphasis-markers t)
+  (add-hook! org-mode :append #'org-appear-mode))
 
 (use-package! deft
   :after org
