@@ -60,7 +60,14 @@
 
 (after! org
   (setq org-hide-emphasis-markers t)
-  (add-hook! org-mode :append #'org-appear-mode))
+  (add-hook! org-mode :append #'org-appear-mode)
+  (setq org-capture-templates
+        '(("t" "todo" entry
+           (file+headline +org-capture-todo-file "Inbox")
+           "* TODO %?\n%i\n%a" :prepend t)
+          ("n" "note" entry
+           (file+headline +org-capture-notes-file "Inbox")
+           "* %u %?\n%i\n%a" :prepend t))))
 
 (use-package! deft
   :after org
