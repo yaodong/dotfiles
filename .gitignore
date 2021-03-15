@@ -25,3 +25,4 @@ places
 /org-journal.cache
 /ido.last
 /.cache/
+/flycheck_config.el
