@@ -66,3 +66,11 @@
                      "--stdin" filepath))
         apheleia-formatters)
   (push '(ruby-mode . rubocop) apheleia-mode-alist))
+
+(use-package! web-mode
+  :config
+  (setq indent-tabs-mode nil
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2)
+  )
