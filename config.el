@@ -37,6 +37,10 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+;; Always use native fullscreen.
+;; Emacs crushes if you click the full-screen button then use Command-Control-F to swith it back.
+;; https://crypt.codemancers.com/posts/2013-07-05-non-native-fullscreen-for-osx-on-emacs-24-dot-3/
+(setq ns-use-native-fullscreen t)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
