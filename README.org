@@ -1,30 +1,24 @@
-* Emacs Configuration
-
-
-** Install Dependencies
+* My Emacs Configuration
 
 #+begin_src sh
-brew install coreutils ripgrep fd
-
-# Languages
-brew install shellcheck aspell jq pandoc
-
-# Scala
-brew install ammonite-repl
-
-# Utils
-brew install editorconfig
+brew install coreutils ripgrep fd shellcheck aspell jq pandoc editorconfig
 #+end_src
 
-** Install Emacs
+Install [[https://github.com/d12frosted/homebrew-emacs-plus#install][emacs-plus]]:
 
 #+begin_src sh
-brew install emacs-plus@27
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --with-native-comp
 #+end_src
 
-** Install Configuration
+Install [[https://github.com/doomemacs/doomemacs#install][Doom Emacs]]:
 
-Install [[https://github.com/hlissner/doom-emacs#install][Doom Emacs]] then clone this repository:
+#+begin_src sh
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+#+end_src
+
+Install this configuration:
 
 #+begin_src sh
 git clone git@github.com:yaodong/.doom.d.git ~/.doom.d
