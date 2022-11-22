@@ -27,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one-light)
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -59,20 +59,10 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(map!
+ "M-s-l" #'+format/buffer)
+
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
-
-(use-package! apheleia
-  :config
-  (add-hook! 'prog-mode-hook #'apheleia-mode))
-
-(after! apheleia
-  (push '(rubocop . ("rubocop"
-                     "--auto-correct"
-                     "--format" "quiet"
-                     "--stderr"
-                     "--stdin" filepath))
-        apheleia-formatters)
-  (push '(ruby-mode . rubocop) apheleia-mode-alist))
 
 (use-package! web-mode
   :config
