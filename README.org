@@ -4,6 +4,10 @@
 brew install coreutils ripgrep fd shellcheck aspell jq pandoc editorconfig
 #+end_src
 
+Install fonts:
+
+- https://github.com/mozilla/Fira
+
 Install [[https://github.com/d12frosted/homebrew-emacs-plus#install][emacs-plus]]:
 
 #+begin_src sh
