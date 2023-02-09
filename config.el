@@ -21,7 +21,7 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "Jetbrains Mono" :size 14 :weight 'light)
+(setq doom-font (font-spec :family "Fira Mono" :size 14 :weight 'normal)
       doom-big-font-increment 1)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -75,3 +75,12 @@
 (use-package treemacs
   :config
   (treemacs-follow-mode t))
+
+;; Increase and decrease font size
+(map! :n "C-="    #'doom/reset-font-size
+      ;; Buffer-local font resizing
+      :n "C-+"    #'text-scale-increase
+      :n "C--"    #'text-scale-decrease)
+
+;; Navigating through emacs, across buffer.
+(setq avy-all-windows t)
