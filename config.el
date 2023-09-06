@@ -20,8 +20,9 @@
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
-(setq doom-font (font-spec :family "Fira Mono" :size 13 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14))
+(setq doom-font (font-spec :family "Fira Mono" :size 14 :slant 'normal :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14 :slant 'normal :weight 'normal)
+      doom-font-increment 1)
 
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -44,7 +45,9 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/Organized/")
+(setq org-directory "~/Documents/Journal/"
+      org-journal-file-format "%Y-%m-%d.org"
+      org-journal-time-prefix "** TODO ")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -81,6 +84,16 @@
 
 (map!
  "M-s-l" #'+format/buffer)
+
+(map! :leader
+      :desc "Open code-runner.org"
+      "o c"
+      #'(lambda () (interactive) (find-file (concat org-directory "code-runner.org"))))
+
+(map! :leader
+      :desc "Open scratch.org"
+      "o s"
+      #'(lambda () (interactive) (find-file (concat org-directory "scratch.org"))))
 
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 
