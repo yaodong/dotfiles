@@ -45,7 +45,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/Journal/"
+(setq org-directory "~/Documents/"
       org-journal-file-format "%Y-%m-%d.org"
       org-journal-time-prefix "** TODO ")
 
