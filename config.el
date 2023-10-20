@@ -82,9 +82,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(map!
- "M-s-l" #'+format/buffer)
-
 (map! :leader
       :desc "Open code-runner.org"
       "o c"
@@ -104,10 +101,6 @@
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2)
   )
-
-(use-package treemacs
-  :config
-  (treemacs-follow-mode t))
 
 ;; Increase and decrease font size
 (map! :n "C-="    #'doom/reset-font-size
@@ -131,5 +124,12 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (flycheck-select-checker 'ruby-standard)))
+
+;; Tabs
+(map! :n "s-}" #'centaur-tabs-forward
+      :n "s-{" #'centaur-tabs-backward)
+
+;; disable tab-bar
+(tab-bar-mode -1)
 
 ;;; config.el ends here
