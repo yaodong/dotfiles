@@ -20,7 +20,7 @@
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
-(setq doom-font (font-spec :family "Fira Mono" :size 14 :slant 'normal :weight 'normal)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 14 :slant 'normal :weight 'normal)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14 :slant 'normal :weight 'normal)
       doom-font-increment 1)
 
@@ -117,3 +117,19 @@
 
 ;; Navigating through emacs, across buffer.
 (setq avy-all-windows t)
+
+;; Copilot
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+;; Ruby
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (flycheck-select-checker 'ruby-standard)))
+
+;;; config.el ends here
