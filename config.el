@@ -134,7 +134,7 @@
 
 ;; hidde tabs
 (after! centaur-tabs
-  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async" "*Native" "*scratch", "*apheleia"))
+  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async" "*Native" "*scratch" "*apheleia"))
     (add-to-list 'centaur-tabs-excluded-prefixes item)))
 
 ;; web-mode
