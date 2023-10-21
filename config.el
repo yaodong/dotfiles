@@ -134,7 +134,7 @@
 
 ;; hidde tabs
 (after! centaur-tabs
-  (dolist (item '("*Message" "*Warnings" "*copilot", "*Async", "*Native", "*scratch"))
+  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async" "*Native" "*scratch"))
     (add-to-list 'centaur-tabs-excluded-prefixes item)))
 
 ;;; Config.el ends here
