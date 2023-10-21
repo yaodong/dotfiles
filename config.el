@@ -132,4 +132,9 @@
 ;; disable tab-bar
 (tab-bar-mode -1)
 
-;;; config.el ends here
+;; hidde tabs
+(after! centaur-tabs
+  (dolist (item '("*Message" "*Warnings" "*copilot", "*Async", "*Native", "*scratch"))
+    (add-to-list 'centaur-tabs-excluded-prefixes item)))
+
+;;; Config.el ends here
