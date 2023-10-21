@@ -7,6 +7,8 @@ brew install coreutils ripgrep fd shellcheck aspell jq pandoc editorconfig
 Install fonts:
 
 - https://github.com/mozilla/Fira
+- https://www.jetbrains.com/lp/mono/
+-
 
 Install [[https://github.com/d12frosted/homebrew-emacs-plus#install][emacs-plus]]:
 
@@ -18,13 +20,32 @@ brew install emacs-plus --with-native-comp
 Install [[https://github.com/doomemacs/doomemacs#install][Doom Emacs]]:
 
 #+begin_src sh
-git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
-~/.emacs.d/bin/doom install
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+~/.config/emacs/bin/doom install
 #+end_src
 
 Install this configuration:
 
 #+begin_src sh
-git clone git@github.com:yaodong/emacs-conf.git ~/.doom.d
-~/.emacs.d/bin/doom sync
+git clone git@github.com:yaodong/emacs-conf.git ~/.config/doom
+~/.config/emacs/bin/doom sync
 #+end_src
+
+Install fonts using `M-x` and `nerd-icons-install-fonts`.
+
+** Configurations
+
+*** Format
+
+Add the yarn global bin directory to the `$PATH` variable. You can obtain the directory path by running the command `yarn global bin`.
+
+#+begin_src shell
+export PATH="$PATH:$HOME/.yarn/bin"
+#+end_src
+
+Then install prettier:
+
+#+begin_src shell
+yarn global add prettier
+#+end_src
+

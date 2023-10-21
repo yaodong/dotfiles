@@ -134,7 +134,24 @@
 
 ;; hidde tabs
 (after! centaur-tabs
-  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async" "*Native" "*scratch"))
+  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async" "*Native" "*scratch", "*apheleia"))
     (add-to-list 'centaur-tabs-excluded-prefixes item)))
+
+;; web-mode
+(use-package! web-mode
+  :custom
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2))
+
+(define-derived-mode erb-mode web-mode "ERB"
+  "Major mode for editing ERB (Embedded Ruby) templates.")
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode))
+
+(use-package! apheleia
+  :config
+  (add-to-list 'apheleia-formatters
+               '(erblint . ("erblint" "--stdin" filepath "-a")))
+  (add-to-list 'apheleia-mode-alist '(erb-mode . erblint)))
 
 ;;; Config.el ends here
