@@ -33,7 +33,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-one-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -120,6 +120,12 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
+;; Treemacs
+;; enable follow up mode
+(use-package! treemacs
+  :config
+  (treemacs-follow-mode 1))
+
 ;; Ruby
 (add-hook 'ruby-mode-hook
           (lambda ()
@@ -144,14 +150,14 @@
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2))
 
-(define-derived-mode erb-mode web-mode "ERB"
-  "Major mode for editing ERB (Embedded Ruby) templates.")
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode))
+;; (define-derived-mode erb-mode web-mode "ERB"
+;;   "Major mode for editing ERB (Embedded Ruby) templates.")
+;; (add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode))
 
 (use-package! apheleia
   :config
-  (add-to-list 'apheleia-formatters
-               '(erblint . ("erblint" "--stdin" filepath "-a")))
-  (add-to-list 'apheleia-mode-alist '(erb-mode . erblint)))
+  ;; use rubocop for ruby
+  (add-to-list 'apheleia-mode-alist
+               '(ruby-mode rubocop)))
 
-;;; Config.el ends here
+;; config.el ends here
