@@ -60,6 +60,26 @@ If the dashboard icons are broken, install the missing fonts using `M-x` and `ne
 
 Following are detailed explanations about the customizations.
 
-** Format
+** Restrict Commit Message
+
+To restrict commit messages to my personal contact information, I use [[https://github.com/sds/overcommit][Overcommit]] (Ruby) for checking the committer's email. There are alternatives, such as [[https://pre-commit.com/][pre-commit]] (Python) and [[https://github.com/typicode/husky][Husky]] (JavaScript).
+
+** Switching Themes
+
+I constantly switch between light and dark themes, so I use [[https://github.com/valignatev/heaven-and-hell][heaven-and-hell]] along with the keybinding ~SPC h h~ to toggle between the ~doom-one-light~ and ~doom-nord~ themes.
+
+** Handy Buffers
+
+TBD
+
+** Appearance
+
+TBD
+
+** Programming
+
+TBD
+
+** Org-mode
 
 TBD

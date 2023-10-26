@@ -81,6 +81,19 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+
+;; Themes
+(use-package! heaven-and-hell
+  :config
+  (setq heaven-and-hell-themes
+        '((light . doom-one-light)
+          (dark . doom-nord)))
+  (setq heaven-and-hell-load-theme-no-confirm t)
+  :hook (after-init . heaven-and-hell-init-hook)
+  :bind (:map doom-leader-map
+              ("h h" . heaven-and-hell-toggle-theme)))
+
+;; Handy Buffers
 (map! :leader
       :desc "Open code-runner.org"
       "o c"
@@ -91,24 +104,36 @@
       "o s"
       #'(lambda () (interactive) (find-file (concat org-directory "scratch.org"))))
 
+;; File Modes
+
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 
 (use-package! web-mode
-  :config
-  (setq indent-tabs-mode nil
-        web-mode-markup-indent-offset 2
+  :custom
+  (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2)
-  )
+        web-mode-code-indent-offset 2))
 
-;; Increase and decrease font size
+
+;; UI
 (map! :n "C-="    #'doom/reset-font-size
       ;; Buffer-local font resizing
       :n "C-+"    #'text-scale-increase
       :n "C--"    #'text-scale-decrease)
 
-;; Navigating through emacs, across buffer.
 (setq avy-all-windows t)
+(tab-bar-mode -1)
+(after! centaur-tabs
+  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async" "*Native" "*scratch" "*apheleia" "*lsp" "*compilation"))
+    (add-to-list 'centaur-tabs-excluded-prefixes item)))
+
+
+(use-package! treemacs
+  :config
+  (treemacs-follow-mode 1))
+
+(map! :n "s-}" #'centaur-tabs-forward
+      :n "s-{" #'centaur-tabs-backward)
 
 ;; Copilot
 (use-package! copilot
@@ -119,44 +144,15 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
-;; Treemacs
-;; enable follow up mode
-(use-package! treemacs
-  :config
-  (treemacs-follow-mode 1))
-
-;; Ruby
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (flycheck-select-checker 'ruby-standard)))
-
-;; Tabs
-(map! :n "s-}" #'centaur-tabs-forward
-      :n "s-{" #'centaur-tabs-backward)
-
-;; disable tab-bar
-(tab-bar-mode -1)
-
-;; hidde tabs
-(after! centaur-tabs
-  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async" "*Native" "*scratch" "*apheleia" "*lsp" "*compilation"))
-    (add-to-list 'centaur-tabs-excluded-prefixes item)))
-
-;; web-mode
-(use-package! web-mode
-  :custom
-  (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2))
-
-;; (define-derived-mode erb-mode web-mode "ERB"
-;;   "Major mode for editing ERB (Embedded Ruby) templates.")
-;; (add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode))
-
+;; Programming
 (use-package! apheleia
   :config
-  ;; use rubocop for ruby
   (add-to-list 'apheleia-mode-alist
                '(ruby-mode rubocop)))
+
+;; Programming - Ruby
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (flycheck-select-checker 'ruby-rubocop)))
 
 ;; config.el ends here
