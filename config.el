@@ -20,8 +20,7 @@
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 14 :slant 'normal :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14 :slant 'normal :weight 'normal)
+(setq doom-font (font-spec :family "Jetbrains Mono" :size 13 :slant 'normal :weight 'normal)
       doom-font-increment 1)
 
 ;;

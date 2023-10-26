@@ -1,51 +1,65 @@
-* My Emacs Configuration
+#+TITLE: Emacs Configuration
+
+This GitHub repository houses my personal Emacs configuration. It serves as a centralized location for me to manage and customize my Emacs setup according to my individual needs and preferences.
+
+Please bear in mind that this configuration is tailored specifically to my own workflow and might not be suitable for everyone. While others are welcome to explore and utilize it as a reference, it is advised to review and modify the configuration to better align with your own requirements and preferences.
+
+Feel free to browse the files and settings within this repository. If you find any areas of interest or have suggestions for improvements, I welcome your feedback. Happy Emacs customization!
+
+* Installation
+
+I use [[https://github.com/doomemacs/doomemacs][Doom Emacs]]. If you're not familiar with it, here are some useful resources:
+
+- [[https://github.com/doomemacs/doomemacs/blob/develop/docs/getting_started.org][Doom Emacs Getting Started Guide]]
+- [[https://github.com/tecosaur/emacs-config/blob/master/config.org][tecosaur's Doom Emacs Configuration]]
+
+** Install Dependencies
 
 #+begin_src sh
-brew install coreutils ripgrep fd shellcheck aspell jq pandoc editorconfig
+brew install git ripgrep coreutils fd
+xcode-select --install
 #+end_src
 
-Install fonts:
+** Install Fonts
 
-- https://github.com/mozilla/Fira
-- https://www.jetbrains.com/lp/mono/
--
+I use [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]] as my default font to ensure consistency across all my editors.
 
-Install [[https://github.com/d12frosted/homebrew-emacs-plus#install][emacs-plus]]:
+** Install Emacs
+
+I recommened using [[https://github.com/d12frosted/homebrew-emacs-plus#install][emacs-plus]], as it is well-maintained, up-to-date, and stable.
 
 #+begin_src sh
 brew tap d12frosted/emacs-plus
 brew install emacs-plus --with-native-comp
 #+end_src
 
-Install [[https://github.com/doomemacs/doomemacs#install][Doom Emacs]]:
+** Install Doom Emacs
+
+The following commands are soruced from the [[https://github.com/doomemacs/doomemacs#install][Doom Emacs]] README document.
+However, it is highly recommened to refer to the original documentation for the most up-to-date information.
 
 #+begin_src sh
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 ~/.config/emacs/bin/doom install
 #+end_src
 
-Install this configuration:
+** Install This Configuration
+
+Finally, clone this repo before starting Emacs.
 
 #+begin_src sh
 git clone git@github.com:yaodong/emacs-conf.git ~/.config/doom
 ~/.config/emacs/bin/doom sync
 #+end_src
 
-Install fonts using `M-x` and `nerd-icons-install-fonts`.
+** Install Nerd Icons Fonts
 
-** Configurations
+If the dashboard icons are broken, install the missing fonts using `M-x` and `nerd-icons-install-fonts`.
 
-*** Format
+* Customizations
 
-Add the yarn global bin directory to the `$PATH` variable. You can obtain the directory path by running the command `yarn global bin`.
+Following are detailed explanations about the customizations.
 
-#+begin_src shell
-export PATH="$PATH:$HOME/.yarn/bin"
-#+end_src
+** Format
 
-Then install prettier:
-
-#+begin_src shell
-yarn global add prettier
-#+end_src
-
+TBD
