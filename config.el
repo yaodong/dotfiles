@@ -4,7 +4,7 @@
 ;; sync' after modifying this file!
 
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; Some functionality uses this to identify you, e.g. CPI configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Yaodong Zhao"
       user-mail-address "emacs@yaodong.dev")
@@ -44,7 +44,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/"
+(setq org-directory "~/org"
       org-journal-file-format "%Y-%m-%d.org"
       org-journal-time-prefix "** TODO ")
 
@@ -154,5 +154,15 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (flycheck-select-checker 'ruby-rubocop)))
+
+
+;; org-roam
+(use-package! org-roam
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-db-location (expand-file-name ".cache/org-roam.db" org-directory))
+  :config
+  (org-roam-db-autosync-enable))
 
 ;; config.el ends here

@@ -68,6 +68,10 @@ Following are detailed explanations about the customizations.
 
 To restrict commit messages to my personal contact information, I use [[https://github.com/sds/overcommit][Overcommit]] (Ruby) for checking the committer's email. There are alternatives, such as [[https://pre-commit.com/][pre-commit]] (Python) and [[https://github.com/typicode/husky][Husky]] (JavaScript).
 
+** Keybinding
+
+According to the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html][Emacs manual]], sequences consisting of ~C-c~ and a letter are reserved for users; they are *only* sequences reserved for users. So I bind frequently used functions with prefix key ~C-c~.
+
 ** Switching Themes
 
 I constantly switch between light and dark themes, so I use [[https://github.com/valignatev/heaven-and-hell][heaven-and-hell]] along with the keybinding ~SPC h h~ to toggle between the ~doom-one-light~ and ~doom-nord~ themes.
@@ -87,3 +91,21 @@ TBD
 ** Org-mode
 
 TBD
+
+** Org-roam for Managing Notes
+
+*** Topic-specific Captures
+
+TBD
+
+*** Installation
+
+Install ~graphviz~ if ~org-roam-graph~ raises the following error:
+
+#+begin_example
+if: Cannot find executable "dot" to generate the graph.  Please adjust ‘org-roam-graph-executable’
+#+end_example
+
+*** References
+
+- [[https://systemcrafters.net/build-a-second-brain-in-emacs/][Build a Second Brain in Emacs]] by System Crafters
