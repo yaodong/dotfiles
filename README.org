@@ -11,7 +11,11 @@ Feel free to browse the files and settings within this repository. If you find a
 I use [[https://github.com/doomemacs/doomemacs][Doom Emacs]]. If you're not familiar with it, here are some useful resources:
 
 - [[https://github.com/doomemacs/doomemacs/blob/develop/docs/getting_started.org][Doom Emacs Getting Started Guide]]
-- [[https://github.com/tecosaur/emacs-config/blob/master/config.org][tecosaur's Doom Emacs Configuration]]
+
+Other awesome starter kits:
+
+- [[https://github.com/purcell/emacs.d][Purcell’s .emacs.d]]
+- [[https://github.com/bbatsov/prelude][Prelude]]
 
 ** Install Dependencies
 
@@ -48,13 +52,13 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 Finally, clone this repo before starting Emacs.
 
 #+begin_src sh
-git clone git@github.com:yaodong/emacs-conf.git ~/.config/doom
+git clone git@github.com:yaodong/doom.git ~/.config/doom
 ~/.config/emacs/bin/doom sync
 #+end_src
 
 ** Install Nerd Icons Fonts
 
-If the dashboard icons are broken, install the missing fonts using `M-x` and `nerd-icons-install-fonts`.
+If the dashboard icons are broken, install the missing fonts using ~M-x~ and ~nerd-icons-install-fonts~.
 
 * Customizations
 
