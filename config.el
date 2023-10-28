@@ -93,16 +93,19 @@
   :bind (:map doom-leader-map
               ("h h" . heaven-and-hell-toggle-theme)))
 
-;; Handy Buffers
-(map! :leader
-      :desc "Open code-runner.org"
-      "o c"
-      #'(lambda () (interactive) (find-file (concat org-directory "code-runner.org"))))
+;; Handy Temp Buffer
+(defun user/create-temp-buffer ()
+  "Create a temp buffer named *temp*."
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*temp*"))
+  (setq buffer-file-name nil) ;; makes sure the buffer is not associated with any file on disk
+  (set-buffer-modified-p nil) ;; makes sure the buffer is not "modified"
+  (org-mode))
 
 (map! :leader
-      :desc "Open scratch.org"
-      "o s"
-      #'(lambda () (interactive) (find-file (concat org-directory "scratch.org"))))
+      :desc "Open temp buffer"
+      "o t" #'user/create-temp-buffer)
+
 
 ;; File Modes
 
