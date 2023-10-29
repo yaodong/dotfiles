@@ -166,6 +166,14 @@
   :custom
   (org-roam-db-location (expand-file-name ".cache/org-roam.db" org-directory))
   :config
-  (org-roam-db-autosync-enable))
+  (org-roam-db-autosync-enable)
+  (which-key-add-key-based-replacements "C-c n" "org-roam")
+  :bind
+  (("C-c n n" . org-roam-capture)
+   ("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n i" . org-roam-node-insert)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n d" . org-roam-dailies-capture-today)
+   ("C-c n t" . org-roam-dailies-goto-today)))
 
 ;; config.el ends here
