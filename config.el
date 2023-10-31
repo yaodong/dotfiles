@@ -150,13 +150,16 @@
 ;; Programming
 (use-package! apheleia
   :config
+  (add-to-list 'apheleia-formatters
+               '(ruby-standard . ("standardrb" "--stdin" filepath "--fix" "--stderr"
+                                  "--format" "quiet" "--fail-level" "fatal")))
   (add-to-list 'apheleia-mode-alist
-               '(ruby-mode rubocop)))
+               '(ruby-mode . ruby-standard)))
 
 ;; Programming - Ruby
 (add-hook 'ruby-mode-hook
           (lambda ()
-            (flycheck-select-checker 'ruby-rubocop)))
+            (flycheck-select-checker 'ruby-standard)))
 
 
 ;; org-roam
@@ -173,7 +176,9 @@
    ("C-c n l" . org-roam-buffer-toggle)
    ("C-c n i" . org-roam-node-insert)
    ("C-c n f" . org-roam-node-find)
-   ("C-c n d" . org-roam-dailies-capture-today)
-   ("C-c n t" . org-roam-dailies-goto-today)))
+   ("C-c n t" . org-roam-dailies-goto-today)
+   ("C-c n c" . org-roam-dailies-capture-today)
+   ("C-c n T" . org-roam-dailies-capture-tomorrow)
+   ("C-c n y" . org-roam-dailies-capture-yesterday)))
 
 ;; config.el ends here
