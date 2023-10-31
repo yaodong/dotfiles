@@ -135,8 +135,11 @@
   :config
   (treemacs-follow-mode 1))
 
+;; Keybindings
 (map! :n "s-}" #'centaur-tabs-forward
-      :n "s-{" #'centaur-tabs-backward)
+      :n "s-{" #'centaur-tabs-backward
+      :n "s-]" #'evil-jump-forward
+      :n "s-[" #'evil-jump-backward)
 
 ;; Copilot
 (use-package! copilot
