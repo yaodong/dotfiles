@@ -114,9 +114,12 @@
 
 (use-package! web-mode
   :custom
-  (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2))
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  :config
+  (define-derived-mode erb-mode web-mode "web[erb]")
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode)))
 
 
 ;; UI
@@ -153,14 +156,23 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
+
+
 ;; Programming
 (use-package! apheleia
   :config
+  ;; use ruby-standard to format ruby files
   (add-to-list 'apheleia-formatters
-               '(ruby-standard . ("standardrb" "--stdin" filepath "--fix" "--stderr"
-                                  "--format" "quiet" "--fail-level" "fatal")))
+               '(ruby-standard . ("standardrb" "--stdin" filepath "--fix" "--stderr" "--format" "quiet" "--fail-level" "fatal")))
   (add-to-list 'apheleia-mode-alist
-               '(ruby-mode . ruby-standard)))
+               '(ruby-mode . ruby-standard))
+  ;; use htmlbeautifier to format erb files
+  (add-to-list 'apheleia-formatters
+               '(htmlbeautifier . ("htmlbeautifier")))
+  (add-to-list 'apheleia-mode-alist
+               '(erb-mode . htmlbeautifier)))
+
+
 
 ;; Programming - Ruby
 (add-hook 'ruby-mode-hook
