@@ -189,6 +189,11 @@
   :config
   (add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html")))
 
+(use-package! lsp-mode
+  :config
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]tmp\\'"))
+
+(setq projectile-switch-project-action #'projectile-dired)
 
 ;; org-roam
 (use-package! org-roam
