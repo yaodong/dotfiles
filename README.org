@@ -96,6 +96,28 @@ I enabled the following layers:
 
 The ~+lsp~ module will automatically configure flycheck to use lsp as default checker.
 
+*** Rust
+
+Install cargo using [[https://doc.rust-lang.org/cargo/getting-started/installation.html][rustup]]:
+
+#+begin_src shell
+curl https://sh.rustup.rs -sSf | sh
+#+end_src
+
+Add cargo bin folder to ~$PATH~:
+
+#+begin_src bash
+export PATH="$PATH:$HOME/.cargo/bin"
+#+end_src
+
+*** Tailwindcss
+
+Install [[https://github.com/avencera/rustywind][rustywind]]:
+
+#+begin_src
+cargo install rustywind
+#+end_src
+
 ** Org-mode
 
 TBD

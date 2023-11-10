@@ -121,6 +121,10 @@
   (define-derived-mode erb-mode web-mode "web[erb]")
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode)))
 
+(use-package! css-mode
+  :custom
+  (css-indent-offset 2))
+
 
 ;; UI
 (map! :n "C-="    #'doom/reset-font-size
@@ -168,7 +172,7 @@
                '(ruby-mode . ruby-standard))
   ;; use htmlbeautifier to format erb files
   (add-to-list 'apheleia-formatters
-               '(htmlbeautifier . ("htmlbeautifier")))
+               '(htmlbeautifier . ("htmlbeautifier" "--keep-blank-lines" "1")))
   (add-to-list 'apheleia-mode-alist
                '(erb-mode . htmlbeautifier)))
 
@@ -178,6 +182,12 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (flycheck-select-checker 'ruby-standard)))
+
+
+;; Programming - Tailwindcss
+(use-package! lsp-tailwindcss
+  :config
+  (add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html")))
 
 
 ;; org-roam
