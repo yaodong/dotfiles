@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-one-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -88,7 +88,7 @@
   (setq heaven-and-hell-theme-type 'dark) ;; Omit to use light by default
   (setq heaven-and-hell-themes
         '((light . doom-one-light)
-          (dark . doom-nord)))
+          (dark . doom-one)))
   (setq heaven-and-hell-load-theme-no-confirm t)
   :hook (after-init . heaven-and-hell-init-hook)
   :bind (:map doom-leader-map
@@ -123,7 +123,10 @@
 
 (use-package! css-mode
   :custom
-  (css-indent-offset 2))
+  (css-indent-offset 2)
+  :config
+  (remove-hook! '(css-mode-hook sass-mode-hook stylus-mode-hook)
+    #'rainbow-mode))
 
 
 ;; UI
