@@ -87,7 +87,7 @@
   :config
   (setq heaven-and-hell-theme-type 'dark) ;; Omit to use light by default
   (setq heaven-and-hell-themes
-        '((light . doom-one-light)
+        '((light . doom-solarized-light)
           (dark . doom-one)))
   (setq heaven-and-hell-load-theme-no-confirm t)
   :hook (after-init . heaven-and-hell-init-hook)
