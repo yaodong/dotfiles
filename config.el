@@ -20,7 +20,7 @@
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
-(setq doom-font (font-spec :family "Jetbrains Mono" :size 13 :slant 'normal :weight 'normal)
+(setq doom-font (font-spec :family "Jetbrains Mono" :size 14 :slant 'normal :weight 'normal)
       doom-font-increment 1)
 
 ;;
@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one-light)
+(setq doom-theme 'doom-gruvbox)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -85,10 +85,10 @@
 ;; Themes
 (use-package! heaven-and-hell
   :config
-  (setq heaven-and-hell-theme-type 'dark) ;; Omit to use light by default
+  (setq heaven-and-hell-theme-type 'dark)
   (setq heaven-and-hell-themes
         '((light . doom-solarized-light)
-          (dark . doom-one)))
+          (dark . doom-gruvbox)))
   (setq heaven-and-hell-load-theme-no-confirm t)
   :hook (after-init . heaven-and-hell-init-hook)
   :bind (:map doom-leader-map
@@ -165,19 +165,19 @@
 
 
 
-;; Programming
+;; Programming / Formatting
 (use-package! apheleia
   :config
-  ;; use ruby-standard to format ruby files
+  ;; https://github.com/standardrb/standard
   (add-to-list 'apheleia-formatters
                '(ruby-standard . ("standardrb" "--stdin" filepath "--fix" "--stderr" "--format" "quiet" "--fail-level" "fatal")))
   (add-to-list 'apheleia-mode-alist
                '(ruby-mode . ruby-standard))
-  ;; use htmlbeautifier to format erb files
+  ;; https://github.com/nebulab/erb-formatter
   (add-to-list 'apheleia-formatters
-               '(htmlbeautifier . ("htmlbeautifier" "--keep-blank-lines" "1")))
+               '(erb-format . ("erb-format" "--stdin" "--print-width" "120" "--stdin-filename" filepath)))
   (add-to-list 'apheleia-mode-alist
-               '(erb-mode . htmlbeautifier)))
+               '(erb-mode . erb-format)))
 
 
 
@@ -199,25 +199,26 @@
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]tmp\\'"))
 
-(setq projectile-switch-project-action #'projectile-dired)
+;; Open dired when switching project
+;; (setq projectile-switch-project-action #'projectile-dired)
 
 ;; org-roam
-(use-package! org-roam
-  :init
-  (setq org-roam-v2-ack t)
-  :custom
-  (org-roam-db-location (expand-file-name ".cache/org-roam.db" org-directory))
-  :config
-  (org-roam-db-autosync-enable)
-  (which-key-add-key-based-replacements "C-c n" "org-roam")
-  :bind
-  (("C-c n n" . org-roam-capture)
-   ("C-c n l" . org-roam-buffer-toggle)
-   ("C-c n i" . org-roam-node-insert)
-   ("C-c n f" . org-roam-node-find)
-   ("C-c n t" . org-roam-dailies-goto-today)
-   ("C-c n c" . org-roam-dailies-capture-today)
-   ("C-c n T" . org-roam-dailies-capture-tomorrow)
-   ("C-c n y" . org-roam-dailies-capture-yesterday)))
+;; (use-package! org-roam
+;;   :init
+;;   (setq org-roam-v2-ack t)
+;;   :custom
+;;   (org-roam-db-location (expand-file-name ".cache/org-roam.db" org-directory))
+;;   :config
+;;   (org-roam-db-autosync-enable)
+;;   (which-key-add-key-based-replacements "C-c n" "org-roam")
+;;   :bind
+;;   (("C-c n n" . org-roam-capture)
+;;    ("C-c n l" . org-roam-buffer-toggle)
+;;    ("C-c n i" . org-roam-node-insert)
+;;    ("C-c n f" . org-roam-node-find)
+;;    ("C-c n t" . org-roam-dailies-goto-today)
+;;    ("C-c n c" . org-roam-dailies-capture-today)
+;;    ("C-c n T" . org-roam-dailies-capture-tomorrow)
+;;    ("C-c n y" . org-roam-dailies-capture-yesterday)))
 
 ;; config.el ends here
