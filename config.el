@@ -199,6 +199,10 @@
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]tmp\\'"))
 
+;; Programming - Python
+(after! dap-mode
+  (setq dap-python-debugger 'debugpy))
+
 ;; Open dired when switching project
 ;; (setq projectile-switch-project-action #'projectile-dired)
 

@@ -96,6 +96,12 @@ I enabled the following layers:
 
 The ~+lsp~ module will automatically configure flycheck to use lsp as default checker.
 
+To enable debugger, install
+
+#+begin_src shell
+pip install debugpy
+#+end_src
+
 *** Rust
 
 Install cargo using [[https://doc.rust-lang.org/cargo/getting-started/installation.html][rustup]]:
