@@ -154,7 +154,9 @@
       :n "s-]" #'evil-jump-forward
       :n "s-[" #'evil-jump-backward)
 
-;; Copilot
+;; accept completion from copilot and fallback to company
+;; Strongly recommend to enable childframe option in company module
+;; ((company +childframe)) to prevent overlay conflict.
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
@@ -162,8 +164,6 @@
               ("TAB" . 'copilot-accept-completion)
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
-
-
 
 ;; Programming / Formatting
 (use-package! apheleia
