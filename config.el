@@ -82,6 +82,9 @@
 ;; they are implemented.
 
 
+;; Too many warning messages
+(setq warning-minimum-level :error)
+
 ;; Themes
 (use-package! heaven-and-hell
   :config
@@ -185,7 +188,6 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (flycheck-select-checker 'ruby-standard)))
-
 
 ;; Programming - Tailwindcss
 (use-package! lsp-tailwindcss
