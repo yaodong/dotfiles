@@ -116,21 +116,9 @@
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 
 (use-package! web-mode
-  :custom
-  (web-mode-markup-indent-offset 2)
-  (web-mode-css-indent-offset 2)
-  (web-mode-code-indent-offset 2)
   :config
   (define-derived-mode erb-mode web-mode "web[erb]")
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode)))
-
-(use-package! css-mode
-  :custom
-  (css-indent-offset 2)
-  :config
-  (remove-hook! '(css-mode-hook sass-mode-hook stylus-mode-hook)
-    #'rainbow-mode))
-
 
 ;; UI
 (map! :n "C-="    #'doom/reset-font-size
@@ -188,14 +176,6 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (flycheck-select-checker 'ruby-standard)))
-
-;; Programming - Tailwindcss
-(use-package! lsp-tailwindcss
-  :init
-  (setq lsp-tailwindcss-add-on-mode t)
-  (setq lsp-tailwindcss-major-modes '(html-mode css-mode web-mode))
-  :config
-  (add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html")))
 
 (use-package! lsp-mode
   :config

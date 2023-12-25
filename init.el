@@ -194,5 +194,5 @@
        (default +bindings +smartparens)
 
        :custom
-       css
+       web
        )

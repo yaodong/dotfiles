@@ -1,2 +1,2 @@
 ;; -*- no-byte-compile: t; -*-
-;;; private/css/packages.el
+;;; custom/web/packages.el
