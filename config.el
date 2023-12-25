@@ -156,27 +156,6 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
-;; Programming / Formatting
-(use-package! apheleia
-  :config
-  ;; https://github.com/standardrb/standard
-  (add-to-list 'apheleia-formatters
-               '(ruby-standard . ("standardrb" "--stdin" filepath "--fix" "--stderr" "--format" "quiet" "--fail-level" "fatal")))
-  (add-to-list 'apheleia-mode-alist
-               '(ruby-mode . ruby-standard))
-  ;; https://github.com/nebulab/erb-formatter
-  (add-to-list 'apheleia-formatters
-               '(erb-format . ("erb-format" "--stdin" "--print-width" "120" "--stdin-filename" filepath)))
-  (add-to-list 'apheleia-mode-alist
-               '(erb-mode . erb-format)))
-
-
-
-;; Programming - Ruby
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (flycheck-select-checker 'ruby-standard)))
-
 (use-package! lsp-mode
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]tmp\\'"))

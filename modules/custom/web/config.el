@@ -2,7 +2,7 @@
 
 ;; Use stylelint as the default checker for css-mode
 (defun custom|css-setup-stylelint ()
-  "Custom setup for css-mode."
+  "Setup stylelint as the default checker for css-mode."
   (flycheck-select-checker 'css-stylelint))
 
 ;; Correctly highlight @apply rules
