@@ -20,7 +20,7 @@
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
-(setq doom-font (font-spec :family "Jetbrains Mono" :size 14 :slant 'normal :weight 'normal)
+(setq doom-font (font-spec :family "Jetbrains Mono" :size 15 :slant 'normal :weight 'normal)
       doom-font-increment 1)
 
 ;;
@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -90,8 +90,8 @@
   :config
   (setq heaven-and-hell-theme-type 'dark)
   (setq heaven-and-hell-themes
-        '((light . doom-solarized-light)
-          (dark . doom-gruvbox)))
+        '((light . doom-one-light)
+          (dark . doom-one)))
   (setq heaven-and-hell-load-theme-no-confirm t)
   :hook (after-init . heaven-and-hell-init-hook)
   :bind (:map doom-leader-map
@@ -114,6 +114,13 @@
 ;; File Modes
 
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; multi-cursor
+(use-package! evil-mc
+  :after evil
+  :config
+  (global-set-key (kbd "M-S-<mouse-1>") 'evil-mc-toggle-cursor-on-click))
 
 (use-package! web-mode
   :config
@@ -144,17 +151,6 @@
       :n "s-{" #'centaur-tabs-backward
       :n "s-]" #'evil-jump-forward
       :n "s-[" #'evil-jump-backward)
-
-;; accept completion from copilot and fallback to company
-;; Strongly recommend to enable childframe option in company module
-;; ((company +childframe)) to prevent overlay conflict.
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 (use-package! lsp-mode
   :config
