@@ -85,6 +85,16 @@
 ;; Too many warning messages
 (setq warning-minimum-level :error)
 
+;; format buffer
+(global-set-key (kbd "M-s-l") '+format/buffer)
+
+(defun custom|after-switch-project()
+  "Auto refresh projectile cache when switching to a project"
+  (if (projectile-project-p)
+      (projectile-invalidate-cache nil)))
+
+(add-hook 'after-switch-project-project-hook 'custom|after-switch-project)
+
 ;; Themes
 (use-package! heaven-and-hell
   :config
