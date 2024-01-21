@@ -9,6 +9,10 @@
   :config
   (add-hook 'ruby-mode-hook #'custom|ruby-setup-flycheck))
 
+;; Load the snippets
+(after! minitest
+  (minitest-install-snippets))
+
 ;; Explicitly set the ruby and erb formatters
 (use-package! apheleia
   :config
