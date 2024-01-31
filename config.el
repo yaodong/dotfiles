@@ -121,11 +121,6 @@
       "o t" #'user/create-temp-buffer)
 
 
-;; File Modes
-
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
 ;; multi-cursor
 (use-package! evil-mc
   :after evil
