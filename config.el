@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-solarized-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -98,27 +98,14 @@
 ;; Themes
 (use-package! heaven-and-hell
   :config
-  (setq heaven-and-hell-theme-type 'dark)
+  ;; (setq heaven-and-hell-theme-type 'dark)
   (setq heaven-and-hell-themes
-        '((light . doom-one-light)
-          (dark . doom-one)))
+        '((light . doom-solarized-light)
+          (dark . doom-gruvbox)))
   (setq heaven-and-hell-load-theme-no-confirm t)
   :hook (after-init . heaven-and-hell-init-hook)
   :bind (:map doom-leader-map
               ("h h" . heaven-and-hell-toggle-theme)))
-
-;; Handy Temp Buffer
-(defun user/create-temp-buffer ()
-  "Create a temp buffer named *temp*."
-  (interactive)
-  (switch-to-buffer (get-buffer-create "*temp*"))
-  (setq buffer-file-name nil) ;; makes sure the buffer is not associated with any file on disk
-  (set-buffer-modified-p nil) ;; makes sure the buffer is not "modified"
-  (org-mode))
-
-(map! :leader
-      :desc "Open temp buffer"
-      "o t" #'user/create-temp-buffer)
 
 
 ;; multi-cursor
@@ -140,30 +127,17 @@
 
 (setq avy-all-windows t)
 (tab-bar-mode -1)
-(after! centaur-tabs
-  (dolist (item '("*Message" "*Warnings" "*copilot" "*Async"
-                  "*Native" "*scratch" "*apheleia" "*lsp"
-                  "*compilation" "*pyright"))
-    (add-to-list 'centaur-tabs-excluded-prefixes item)))
-
 
 (use-package! treemacs
   :config
   (treemacs-follow-mode 1))
 
 ;; Keybindings
-(map! :n "s-}" #'centaur-tabs-forward
-      :n "s-{" #'centaur-tabs-backward
+(map! :n "s-}" #'+workspace:switch-previous
+      :n "s-{" #'+workspace:switch-next
+      :n "s-N" #'+workspace:new
       :n "s-]" #'evil-jump-forward
       :n "s-[" #'evil-jump-backward)
-
-(use-package! lsp-mode
-  :config
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]tmp\\'"))
-
-;; Programming - Python
-(after! dap-mode
-  (setq dap-python-debugger 'debugpy))
 
 ;; Open dired when switching project
 ;; (setq projectile-switch-project-action #'projectile-dired)
