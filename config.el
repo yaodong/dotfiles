@@ -139,26 +139,4 @@
       :n "s-]" #'evil-jump-forward
       :n "s-[" #'evil-jump-backward)
 
-;; Open dired when switching project
-;; (setq projectile-switch-project-action #'projectile-dired)
-
-;; org-roam
-;; (use-package! org-roam
-;;   :init
-;;   (setq org-roam-v2-ack t)
-;;   :custom
-;;   (org-roam-db-location (expand-file-name ".cache/org-roam.db" org-directory))
-;;   :config
-;;   (org-roam-db-autosync-enable)
-;;   (which-key-add-key-based-replacements "C-c n" "org-roam")
-;;   :bind
-;;   (("C-c n n" . org-roam-capture)
-;;    ("C-c n l" . org-roam-buffer-toggle)
-;;    ("C-c n i" . org-roam-node-insert)
-;;    ("C-c n f" . org-roam-node-find)
-;;    ("C-c n t" . org-roam-dailies-goto-today)
-;;    ("C-c n c" . org-roam-dailies-capture-today)
-;;    ("C-c n T" . org-roam-dailies-capture-tomorrow)
-;;    ("C-c n y" . org-roam-dailies-capture-yesterday)))
-
 ;; config.el ends here
