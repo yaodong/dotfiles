@@ -146,7 +146,7 @@
   ;; - xyz: Specifies the directory name to be ignored.
   ;; - \\' : Ensures a word boundary at the end, matching "xyz" exactly, avoiding partial matches like "xyz_extra".
   ;; If the folder name starts with dot (.), use a double backslash, e.g., [\\.]env for ".env" directories.
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\].ruby-lsp\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.ruby-lsp\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]builds\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]log\\'")
