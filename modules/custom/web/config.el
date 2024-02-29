@@ -29,13 +29,6 @@
     '(css-mode-hook sass-mode-hook stylus-mode-hook)
     #'rainbow-mode))
 
-(use-package! lsp-tailwindcss
-  :init
-  (setq lsp-tailwindcss-add-on-mode t)
-  (setq lsp-tailwindcss-major-modes '(html-mode css-mode web-mode))
-  :config
-  (add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html")))
-
 (use-package! web-mode
   :custom
   (web-mode-markup-indent-offset 2)

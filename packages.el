@@ -6,6 +6,3 @@
 ;; use 'M-x doom/reload'.
 
 (package! heaven-and-hell)
-
-(package! lsp-tailwindcss
-  :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
