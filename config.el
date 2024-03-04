@@ -153,4 +153,4 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]storage\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]tmp\\'"))
 
-;; config.el ends here
+;;; config.el ends here
