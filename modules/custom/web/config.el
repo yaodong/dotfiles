@@ -29,8 +29,14 @@
     '(css-mode-hook sass-mode-hook stylus-mode-hook)
     #'rainbow-mode))
 
+
+(use-package! lsp-tailwindcss
+  :init
+  (setq lsp-tailwindcss-add-on-mode t))
+
 (use-package! web-mode
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
-  (web-mode-code-indent-offset 2))
+  (web-mode-code-indent-offset 2)
+  :hook ((web-mode . lsp)))

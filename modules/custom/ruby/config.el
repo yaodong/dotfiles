@@ -1,5 +1,7 @@
 ;;; custom/ruby/config.el -*- lexical-binding: t; -*-
 
+;; https://github.com/doomemacs/doomemacs/issues/5858
+(add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html"))
 
 (defun custom|ruby-setup-flycheck ()
   "Use ruby-standard as the default checker for ruby-mode."
@@ -7,7 +9,8 @@
 
 (use-package! ruby-mode
   :config
-  (add-hook 'ruby-mode-hook #'custom|ruby-setup-flycheck))
+  (add-hook 'ruby-mode-hook #'custom|ruby-setup-flycheck)
+  :hook ((ruby-mode . lsp)))
 
 ;; Load the snippets
 (after! minitest
