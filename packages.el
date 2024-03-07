@@ -6,3 +6,4 @@
 ;; use 'M-x doom/reload'.
 
 (package! heaven-and-hell)
+(package! jenkinsfile-mode)

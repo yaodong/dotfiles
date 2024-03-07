@@ -153,4 +153,7 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]storage\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]tmp\\'"))
 
+;; Jenkinsfile
+(use-package! jenkinsfile-mode)
+
 ;;; config.el ends here
