@@ -30,9 +30,7 @@
     #'rainbow-mode))
 
 
-(use-package! lsp-tailwindcss
-  :init
-  (setq lsp-tailwindcss-add-on-mode t))
+(use-package! lsp-tailwindcss)
 
 (use-package! web-mode
   :custom
