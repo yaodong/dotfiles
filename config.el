@@ -133,8 +133,8 @@
   (treemacs-follow-mode 1))
 
 ;; Keybindings
-(map! :n "s-}" #'+workspace:switch-previous
-      :n "s-{" #'+workspace:switch-next
+(map! :n "s-}" #'+workspace:switch-next
+      :n "s-{" #'+workspace:switch-previous
       :n "s-N" #'+workspace:new
       :n "s-]" #'evil-jump-forward
       :n "s-[" #'evil-jump-backward)
