@@ -196,4 +196,5 @@
        :custom
        web
        ruby
+       yaml
        )
