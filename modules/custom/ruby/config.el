@@ -27,6 +27,6 @@
 
   ;; https://github.com/nebulab/erb-formatter
   (add-to-list 'apheleia-formatters
-               '(erb-format . ("erb-format" "--stdin" "--print-width" "120" "--stdin-filename" filepath)))
+               '(erb-format . ("erb-format" "--stdin" "--print-width" "999" "--stdin-filename" filepath)))
   (add-to-list 'apheleia-mode-alist
                '(erb-mode . erb-format)))
