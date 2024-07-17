@@ -98,7 +98,7 @@
 ;; Themes
 (use-package! heaven-and-hell
   :config
-  ;; (setq heaven-and-hell-theme-type 'dark)
+  (setq heaven-and-hell-theme-type 'dark)
   (setq heaven-and-hell-themes
         '((light . doom-solarized-light)
           (dark . doom-gruvbox)))
@@ -155,5 +155,10 @@
 
 ;; Jenkinsfile
 (use-package! jenkinsfile-mode)
+
+;; Verb
+(use-package org
+  :mode ("\\.org\\'" . org-mode)
+  :config (define-key org-mode-map (kbd "C-c C-r") verb-command-map))
 
 ;;; config.el ends here

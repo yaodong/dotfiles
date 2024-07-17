@@ -7,3 +7,4 @@
 
 (package! heaven-and-hell)
 (package! jenkinsfile-mode)
+(package! verb)
