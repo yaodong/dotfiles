@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-solarized-light)
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -81,6 +81,10 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Use native full screen
+(setq ns-use-native-fullscreen t)
+(setq frame-resize-pixelwise t)
+
 
 ;; Too many warning messages
 (setq warning-minimum-level :error)
@@ -100,8 +104,8 @@
   :config
   (setq heaven-and-hell-theme-type 'dark)
   (setq heaven-and-hell-themes
-        '((light . doom-solarized-light)
-          (dark . doom-gruvbox)))
+        '((light . doom-one-light)
+          (dark . doom-one)))
   (setq heaven-and-hell-load-theme-no-confirm t)
   :hook (after-init . heaven-and-hell-init-hook)
   :bind (:map doom-leader-map
