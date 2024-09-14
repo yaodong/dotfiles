@@ -30,17 +30,17 @@ I use [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]] as my default font 
 
 ** Install Emacs
 
-I recommened using [[https://github.com/d12frosted/homebrew-emacs-plus#install][emacs-plus]], as it is well-maintained, up-to-date, and stable.
+I recommend using [[https://github.com/d12frosted/homebrew-emacs-plus#install][emacs-plus]], as it is well-maintained, up-to-date, and stable.
 
 #+begin_src sh
 brew tap d12frosted/emacs-plus
-brew install emacs-plus@31 --with-native-comp --with-imagemagick --with-poll
+brew install emacs-plus@30 --with-native-comp --with-poll
 #+end_src
 
 ** Install Doom Emacs
 
-The following commands are soruced from the [[https://github.com/doomemacs/doomemacs#install][Doom Emacs]] README document.
-However, it is highly recommened to refer to the original documentation for the most up-to-date information.
+The following commands are sourced from the [[https://github.com/doomemacs/doomemacs#install][Doom Emacs]] README document.
+However, it is highly recommended that you refer to the original documentation for the most up-to-date information.
 
 #+begin_src sh
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
@@ -49,7 +49,7 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 
 ** Install This Configuration
 
-Finally, clone this repo before starting Emacs.
+Finally, please clone this repo before starting Emacs.
 
 #+begin_src sh
 git clone git@github.com:yaodong/doom.git ~/.config/doom
@@ -62,7 +62,7 @@ If the dashboard icons are broken, install the missing fonts using ~M-x~ and ~ne
 
 * Customizations
 
-Following are detailed explanations about the customizations.
+I've included for you detailed explanations about the customizations.
 
 ** Restrict Commit Message
 
