@@ -34,7 +34,7 @@ I recommened using [[https://github.com/d12frosted/homebrew-emacs-plus#install][
 
 #+begin_src sh
 brew tap d12frosted/emacs-plus
-brew install emacs-plus --with-native-comp
+brew install emacs-plus@31 --with-native-comp --with-imagemagick --with-poll
 #+end_src
 
 ** Install Doom Emacs
