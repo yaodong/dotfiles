@@ -8,3 +8,5 @@
 (package! heaven-and-hell)
 (package! jenkinsfile-mode)
 (package! verb)
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))

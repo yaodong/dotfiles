@@ -85,7 +85,6 @@
 (setq ns-use-native-fullscreen t)
 (setq frame-resize-pixelwise t)
 
-
 ;; Too many warning messages
 (setq warning-minimum-level :error)
 
@@ -111,7 +110,6 @@
   :bind (:map doom-leader-map
               ("h h" . heaven-and-hell-toggle-theme)))
 
-
 ;; multi-cursor
 (use-package! evil-mc
   :after evil
@@ -135,6 +133,15 @@
 (use-package! treemacs
   :config
   (treemacs-follow-mode 1))
+
+;; Accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 ;; Keybindings
 (map! :n "s-}" #'+workspace:switch-next
