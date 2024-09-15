@@ -91,10 +91,8 @@ TBD
 I enabled the following layers:
 
 #+begin_src elisp
-(python +pyenv +lsp +pyright)
+(python +pyenv +pyright)
 #+end_src
-
-The ~+lsp~ module will automatically configure flycheck to use lsp as default checker.
 
 To enable debugger, install
 

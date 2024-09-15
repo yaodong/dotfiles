@@ -1,16 +1,12 @@
 ;;; custom/ruby/config.el -*- lexical-binding: t; -*-
 
-;; https://github.com/doomemacs/doomemacs/issues/5858
-(add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html"))
-
 (defun custom|ruby-setup-flycheck ()
   "Use ruby-standard as the default checker for ruby-mode."
   (flycheck-select-checker 'ruby-rubocop))
 
 (use-package! ruby-mode
   :config
-  (add-hook 'ruby-mode-hook #'custom|ruby-setup-flycheck)
-  :hook ((ruby-mode . lsp)))
+  (add-hook 'ruby-mode-hook #'custom|ruby-setup-flycheck))
 
 (use-package! web-mode
   :config
