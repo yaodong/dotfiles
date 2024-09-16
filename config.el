@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. CPI configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Yaodong Zhao"
@@ -136,7 +135,8 @@
 
 ;; Accept completion from copilot and fallback to company
 (use-package! copilot
-  :hook (prog-mode . copilot-mode)
+  :hook ((prog-mode . copilot-mode)
+         (org-mode . copilot-mode))
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
@@ -153,6 +153,11 @@
 
 ;; Jenkinsfile
 (use-package! jenkinsfile-mode)
+
+;; Enable eglot-booster
+(use-package! eglot-booster
+  :after eglot
+  :config (eglot-booster-mode))
 
 ;; Verb
 (use-package org

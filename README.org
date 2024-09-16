@@ -86,12 +86,24 @@ TBD
 
 ** Programming
 
+*** LSP
+
+It uses ~elgot~ for LSP and [[https://github.com/blahgeek/emacs-lsp-booster][emacs-lsp-booster]] for better performance.
+
+*** Ruby
+
+For ruby, I use ~solargraph~:
+
+#+begin_src shell
+gem install solargraph
+#+end_src
+
 *** Python
 
 I enabled the following layers:
 
 #+begin_src elisp
-(python +pyenv +pyright)
+(python +lsp +pyenv +pyright)
 #+end_src
 
 To enable debugger, install
@@ -125,21 +137,3 @@ cargo install rustywind
 ** Org-mode
 
 TBD
-
-** Org-roam for Managing Notes
-
-*** Topic-specific Captures
-
-TBD
-
-*** Installation
-
-Install ~graphviz~ if ~org-roam-graph~ raises the following error:
-
-#+begin_example
-if: Cannot find executable "dot" to generate the graph.  Please adjust ‘org-roam-graph-executable’
-#+end_example
-
-*** References
-
-- [[https://systemcrafters.net/build-a-second-brain-in-emacs/][Build a Second Brain in Emacs]] by System Crafters

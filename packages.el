@@ -8,5 +8,8 @@
 (package! heaven-and-hell)
 (package! jenkinsfile-mode)
 (package! verb)
+(package! eglot-booster
+  :recipe (:host github
+           :repo "jdtsmith/eglot-booster"))
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
