@@ -200,4 +200,5 @@
        ruby
        yaml
        python
+       copilot-chat
        )
