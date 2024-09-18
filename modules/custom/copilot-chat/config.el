@@ -5,11 +5,7 @@
 (require 'org)
 (require 'openai)
 (require 'request)
-
-(defun copilot-chat-hello-world ()
-  "Print Hello, World! to the echo area."
-  (interactive)
-  (message "Hello, World!"))
+(require 'auth-source)
 
 (defvar copilot-chat-buffer-name "*Copilot Chat*"
   "Name of the Copilot chat buffer.")
@@ -22,6 +18,21 @@
 
 (defvar copilot-chat-input-window-height 8
   "Height of the Copilot chat input window.")
+
+;; To store the OpenAI API key to keychain, run the following command:
+;; security add-internet-password -s api.openai.com -a apikey -w YOUR_API_KEY -l "OpenAI API Key"
+(defun get-openai-api-key ()
+  "Retrieve the OpenAI API key from the authinfo file."
+  (let* ((auth-info (car (auth-source-search
+                          :host "api.openai.com"
+                          :user "apikey"
+                          :require '(:secret))))
+         (secret (plist-get auth-info :secret)))
+    (if auth-info
+        (if (functionp secret)
+            (funcall secret)
+          secret)
+      (error "OpenAI API key not found in authinfo file"))))
 
 (defun copilot-chat-create-or-select-window (buffer-name slot content &optional read-only)
   "Create or select a window for BUFFER-NAME.
@@ -149,7 +160,7 @@ If READ-ONLY is non-nil, the buffer will be read-only."
 (defun copilot-chat-send-to-api (message)
   "Send MESSAGE to the ChatGPT API and return the response."
   (let ((api-url "https://api.openai.com/v1/chat/completions")
-        (api-key "REDACTED_OPENAI_KEY")
+        (api-key (get-openai-api-key))
         (response ""))
     (request api-url
       :type "POST"
