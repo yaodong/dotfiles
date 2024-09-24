@@ -28,6 +28,10 @@ tap 'hashicorp/tap'
 brew 'hashicorp/tap/terraform'
 
 # Utilities
+cask 'alacritty', args: { no_quarantine: true }
+cask 'font-hack'
+cask 'font-hack-nerd-font'
+cask 'font-jetbrains-mono'
 brew 'starship'
 brew 'zellij'
 brew 'fzf'

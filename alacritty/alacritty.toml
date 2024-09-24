@@ -1,0 +1,50 @@
+[env]
+TERM = "xterm-256color"
+IS_ALACRITTY = "true"
+
+[shell]
+program = "/bin/zsh"
+args = ["-l", "-c", "zellij attach -c Hack || zellij"]
+
+[font]
+size = 13
+normal = { family = "Hack Nerd Font Mono", style = "Regular" }
+bold = { family = "Hack Nerd Font Mono", style = "Bold" }
+italic = { family = "Hack Nerd Font Mono", style = "Italic" }
+
+[window]
+padding.x = 6
+padding.y = 3
+dynamic_padding = true
+opacity = 0.9
+blur = true
+option_as_alt = "both"
+
+# Colors (Everforest Dark)
+
+# Default colors
+[colors.primary]
+background = '#2d353b'
+foreground = '#d3c6aa'
+
+# Normal colors
+[colors.normal]
+black   = '#475258'
+red     = '#e67e80'
+green   = '#a7c080'
+yellow  = '#dbbc7f'
+blue    = '#7fbbb3'
+magenta = '#d699b6'
+cyan    = '#83c092'
+white   = '#d3c6aa'
+
+# Bright colors
+[colors.bright]
+black   = '#475258'
+red     = '#e67e80'
+green   = '#a7c080'
+yellow  = '#dbbc7f'
+blue    = '#7fbbb3'
+magenta = '#d699b6'
+cyan    = '#83c092'
+white   = '#d3c6aa'

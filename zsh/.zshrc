@@ -77,9 +77,4 @@ export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8
 
 # enable starship prompt
-eval "$(starship init zsh)"
-
-# use Tmux only if current term program is Apple Terminal
-if [ "$TERM_PROGRAM" = 'Apple_Terminal' ]; then
-    [ -z "$ZELLIJ" ] && zellij attach -c Hack
-fi
+eval "$(/opt/homebrew/bin/starship init zsh)"

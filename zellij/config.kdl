@@ -1,5 +1,4 @@
-theme "catppuccin"
-default_layout "compact"
+theme "everforest-dark"
 on_force_close "quit"
 simplified_ui true
 copy_command "pbcopy"
@@ -7,7 +6,6 @@ copy_command "pbcopy"
 ui {
     pane_frames {
         rounded_corners true
-        hide_session_name true
     }
 }
 
