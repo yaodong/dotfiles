@@ -28,6 +28,7 @@ tap 'hashicorp/tap'
 brew 'hashicorp/tap/terraform'
 
 # Utilities
+brew 'starship'
 brew 'zellij'
 brew 'fzf'
 brew 'git'

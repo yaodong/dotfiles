@@ -5,6 +5,6 @@ set -e
 brew update
 brew bundle install
 
-ln -s "$HOME/.local/bento/zellij" "$HOME/.config/zellij"
-ln -s "$HOME/.local/bento/doom" "$HOME/.config/doom"
-ln -s "$HOME/.local/zsh/.zshrc" "$HOME/.zshrc"
+ln -sf "$HOME/.local/bento/zellij" "$HOME/.config/zellij"
+ln -sf "$HOME/.local/bento/doom" "$HOME/.config/doom"
+ln -sf "$HOME/.local/bento/zsh/.zshrc" "$HOME/.zshrc"

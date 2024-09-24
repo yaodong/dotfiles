@@ -1,6 +1,7 @@
 theme "catppuccin"
 default_layout "compact"
 on_force_close "quit"
+simplified_ui true
 copy_command "pbcopy"
 
 ui {
@@ -9,3 +10,4 @@ ui {
         hide_session_name true
     }
 }
+

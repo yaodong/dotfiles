@@ -68,7 +68,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(tmux git ruby rbenv rails python pyenv docker yarn fzf z zsh-interactive-cd)
+plugins=(git ruby rbenv python pyenv docker yarn fzf z zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,29 +76,10 @@ source $ZSH/oh-my-zsh.sh
 export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8
 
-# use nvim instead of vim
-alias vim=nvim
-
 # enable starship prompt
 eval "$(starship init zsh)"
 
-# add cargo bin to path
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# Add grep
-PATH="$PATH:/opt/homebrew/opt/grep/libexec/gnubin"
-
-export LSP_USE_PLISTS=true
-
-export DOOMDIR="~/.local/bento/doom"
-
 # use Tmux only if current term program is Apple Terminal
 if [ "$TERM_PROGRAM" = 'Apple_Terminal' ]; then
- tmux has -t hack &> /dev/null
- if [ $? != 0 ]; then
-   tmux new -s hack
- elif [ -z $TMUX ]; then
-   tmux attach -t hack
- fi
+    [ -z "$ZELLIJ" ] && zellij attach -c Hack
 fi
-
