@@ -8,6 +8,7 @@
 (package! heaven-and-hell)
 (package! jenkinsfile-mode)
 (package! verb)
+(package! catppuccin-theme)
 (package! eglot-booster
   :recipe (:host github
            :repo "jdtsmith/eglot-booster"))
