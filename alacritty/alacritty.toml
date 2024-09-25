@@ -7,44 +7,92 @@ program = "/bin/zsh"
 args = ["-l", "-c", "zellij attach -c Hack || zellij"]
 
 [font]
-size = 13
-normal = { family = "Hack Nerd Font Mono", style = "Regular" }
-bold = { family = "Hack Nerd Font Mono", style = "Bold" }
-italic = { family = "Hack Nerd Font Mono", style = "Italic" }
+size = 14
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Light" }
+bold = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
 
 [window]
 padding.x = 6
 padding.y = 3
 dynamic_padding = true
-opacity = 0.9
-blur = true
 option_as_alt = "both"
 
-# Colors (Everforest Dark)
+# Catppuccin for Alacritty
+# https://github.com/catppuccin/alacritty/blob/main/catppuccin-frappe.toml
 
-# Default colors
 [colors.primary]
-background = '#2d353b'
-foreground = '#d3c6aa'
+background = "#303446"
+foreground = "#c6d0f5"
+dim_foreground = "#838ba7"
+bright_foreground = "#c6d0f5"
 
-# Normal colors
+[colors.cursor]
+text = "#303446"
+cursor = "#f2d5cf"
+
+[colors.vi_mode_cursor]
+text = "#303446"
+cursor = "#babbf1"
+
+[colors.search.matches]
+foreground = "#303446"
+background = "#a5adce"
+
+[colors.search.focused_match]
+foreground = "#303446"
+background = "#a6d189"
+
+[colors.footer_bar]
+foreground = "#303446"
+background = "#a5adce"
+
+[colors.hints.start]
+foreground = "#303446"
+background = "#e5c890"
+
+[colors.hints.end]
+foreground = "#303446"
+background = "#a5adce"
+
+[colors.selection]
+text = "#303446"
+background = "#f2d5cf"
+
 [colors.normal]
-black   = '#475258'
-red     = '#e67e80'
-green   = '#a7c080'
-yellow  = '#dbbc7f'
-blue    = '#7fbbb3'
-magenta = '#d699b6'
-cyan    = '#83c092'
-white   = '#d3c6aa'
+black = "#51576d"
+red = "#e78284"
+green = "#a6d189"
+yellow = "#e5c890"
+blue = "#8caaee"
+magenta = "#f4b8e4"
+cyan = "#81c8be"
+white = "#b5bfe2"
 
-# Bright colors
 [colors.bright]
-black   = '#475258'
-red     = '#e67e80'
-green   = '#a7c080'
-yellow  = '#dbbc7f'
-blue    = '#7fbbb3'
-magenta = '#d699b6'
-cyan    = '#83c092'
-white   = '#d3c6aa'
+black = "#626880"
+red = "#e78284"
+green = "#a6d189"
+yellow = "#e5c890"
+blue = "#8caaee"
+magenta = "#f4b8e4"
+cyan = "#81c8be"
+white = "#a5adce"
+
+[colors.dim]
+black = "#51576d"
+red = "#e78284"
+green = "#a6d189"
+yellow = "#e5c890"
+blue = "#8caaee"
+magenta = "#f4b8e4"
+cyan = "#81c8be"
+white = "#b5bfe2"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#ef9f76"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#f2d5cf"

@@ -8,6 +8,17 @@ brew 'coreutils'
 brew 'fd'
 brew 'cmake'
 
+# Utilities
+brew 'bat'
+brew 'btop'
+brew 'eza'
+brew 'fd'
+brew 'fzf'
+brew 'git'
+brew 'tldr'
+brew 'wget'
+brew 'zoxide'
+
 # Bun
 tap 'oven-sh/bun'
 brew 'oven-sh/bun/bun'
@@ -27,14 +38,11 @@ brew 'd12frosted/emacs-plus/emacs-plus@29', args: %w[with-native-comp with-poll]
 tap 'hashicorp/tap'
 brew 'hashicorp/tap/terraform'
 
-# Utilities
+# Applications
 cask 'alacritty', args: { no_quarantine: true }
-cask 'font-hack'
-cask 'font-hack-nerd-font'
-cask 'font-jetbrains-mono'
 brew 'starship'
 brew 'zellij'
-brew 'fzf'
-brew 'git'
-brew 'wget'
-brew 'z'
+
+# Fonts
+cask 'font-jetbrains-mono'
+cask 'font-jetbrains-mono-nerd-font'

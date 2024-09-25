@@ -1,29 +1,15 @@
 themes {
-  everforest-dark {
-    bg "#2b3339"
-    fg "#d3c6aa"
-    black "#4b565c"
-    red "#e67e80"
-    green "#a7c080"
-    yellow "#dbbc7f"
-    blue "#7fbbb3"
-    magenta "#d699b6"
-    cyan "#83c092"
-    white "#d3c6aa"
-    orange "#FF9E64"
-  }
-
-  everforest-light {
-    bg "#fff9e8"
-    fg "#5c6a72"
-    black "#5c6a72"
-    red "#f85552"
-    green "#8da101"
-    yellow "#dfa000"
-    blue "#3a94c5"
-    magenta "#df69ba"
-    cyan "#35a77c"
-    white "#dfddc8"
-    orange "#FF9E64"
+  catppuccin-frappe {
+    bg "#626880"
+    fg "#c6d0f5"
+    red "#e78284"
+    green "#a6d189"
+    blue "#8caaee"
+    yellow "#e5c890"
+    magenta "#f4b8e4"
+    orange "#ef9f76"
+    cyan "#99d1db"
+    black "#303446"
+    white "#c6d0f5"
   }
 }

@@ -68,7 +68,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby rbenv python pyenv docker yarn fzf z zsh-interactive-cd)
+plugins=(git ruby rbenv python pyenv docker yarn fzf zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,3 +78,12 @@ export LANG=en_US.utf-8
 
 # enable starship prompt
 eval "$(/opt/homebrew/bin/starship init zsh)"
+
+# enable zoxide
+eval "$(zoxide init zsh)"
+
+alias ls='eza -lh --group-directories-first --icons'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
+alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
