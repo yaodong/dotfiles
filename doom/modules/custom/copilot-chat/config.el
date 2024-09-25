@@ -2,14 +2,13 @@
 
 ;;; Code:
 
-(require 'org)
 (require 'request)
 (require 'auth-source)
 
-(defvar copilot-chat-buffer-name "*Copilot Chat*"
+(defvar copilot-chat-buffer-name "*Copilot Chat Coversation*"
   "Name of the Copilot chat buffer.")
 
-(defvar copilot-chat-input-buffer-name "*Copilot Chat Input*"
+(defvar copilot-chat-input-buffer-name "*Copilot Chat*"
   "Name of the Copilot chat input buffer.")
 
 (defvar copilot-chat-window-width 50
@@ -43,11 +42,14 @@ If READ-ONLY is non-nil, the buffer will be read-only."
 
     ;; Set up buffer content if it's empty
     (with-current-buffer buffer
-      (unless (eq major-mode 'org-mode)
-        (org-mode)
+      (unless (eq major-mode 'markdown-mode)
+        (markdown-mode)
         (erase-buffer)
         (insert content)
-        (read-only-mode (if read-only 1 0))))
+        (read-only-mode (if read-only 1 0)))
+      (setq display-line-numbers nil)
+      (setq indicate-empty-lines nil)
+      (setq indicate-unused-lines nil))
 
     ;; Display or create the window
     (unless (and window (window-live-p window))
@@ -57,6 +59,13 @@ If READ-ONLY is non-nil, the buffer will be read-only."
                       (slot . ,slot)
                       (window-resizable . t)
                       (window-width . ,copilot-chat-window-width))))
+      ;; The window cannot be selected by commands that select other windows.
+      (set-window-parameter window 'no-other-window t)
+      ;; The window cannot be deleted by commands that delete other windows.
+      (set-window-parameter window 'no-delete-other-windows t)
+      ;; The window can be resized from the side.
+      (set-window-parameter window 'window-side-resize t)
+      (set-window-dedicated-p window t)
       (select-window window))))
 
 (defun copilot-chat-create-chat-window ()
@@ -66,7 +75,7 @@ If READ-ONLY is non-nil, the buffer will be read-only."
     (copilot-chat-create-or-select-window
      copilot-chat-buffer-name
      0
-     (format "* Chat %s\n\n" current-time)
+     (format "# Chat %s\n\n" current-time)
      t)))
 
 (defun copilot-chat-create-input-window ()
@@ -79,8 +88,6 @@ If READ-ONLY is non-nil, the buffer will be read-only."
    "")
   ;; set the major mode and key bindings for the input buffer
   (with-current-buffer copilot-chat-input-buffer-name
-    (setq-local major-mode 'copilot-chat-input-mode)
-    (use-local-map (copy-keymap org-mode-map))
     (local-set-key (kbd "C-c C-c") #'copilot-chat-create-completion))
   ;; set the window height
   (let ((input-window (get-buffer-window copilot-chat-input-buffer-name)))
@@ -219,22 +226,6 @@ If READ-ONLY is non-nil, the buffer will be read-only."
     (forward-line -1)
     (looking-at "^data: \\[DONE\\]")))
 
-(defun copilot-chat-process-content-line (line)
-  "Process a single line of content from the stream."
-  (let* ((json-object-type 'hash-table)
-         (json-array-type 'list)
-         (json-key-type 'string)
-         (parsed (condition-case nil
-                     (json-read-from-string line)
-                   (error nil))))
-    (when parsed
-      (let* ((choices (gethash "choices" parsed))
-             (delta (and choices (gethash "delta" (car choices))))
-             (content (and delta (gethash "content" delta))))
-        (when content
-          (copilot-chat-append-message content)
-          (sit-for 0.01))))))
-
 
 (defun copilot-chat-finalize-stream ()
   "Perform final actions after the stream has ended."
@@ -256,11 +247,11 @@ If READ-ONLY is non-nil, the buffer will be read-only."
   (let ((user-message (copilot-chat-get-input-content)))
     (when user-message
       ;; Append user's message to chat buffer
-      (copilot-chat-append-message "** You\n\n")
+      (copilot-chat-append-message "## You\n\n")
       (copilot-chat-append-message user-message)
       (copilot-chat-append-message "\n\n")
       ;; Append the start of the AI's response to the chat buffer
-      (copilot-chat-append-message "** Assistant\n\n")
+      (copilot-chat-append-message "## Assistant\n\n")
       ;; Clear the input buffer
       (with-current-buffer (get-buffer copilot-chat-input-buffer-name)
         (erase-buffer))
