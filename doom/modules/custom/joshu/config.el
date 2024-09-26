@@ -1,25 +1,33 @@
-;;; custom/copilot-chat/config.el -*- lexical-binding: t; -*-
+;;; custom/joshu/config.el -*- lexical-binding: t; -*-
 
 ;;; Code:
 
 (require 'request)
 (require 'auth-source)
 
-(defvar copilot-chat-buffer-name "*Copilot Chat Coversation*"
+(defvar joshu-chat-buffer-name "*Joshu*"
   "Name of the Copilot chat buffer.")
 
-(defvar copilot-chat-input-buffer-name "*Copilot Chat*"
+(defvar joshu-input-buffer-name "*Joshu Input*"
   "Name of the Copilot chat input buffer.")
 
-(defvar copilot-chat-window-width 50
+(defvar joshu-window-width 50
   "Width of the Copilot chat sidebar.")
 
-(defvar copilot-chat-input-window-height 8
+(defvar joshu-message-window-height 8
   "Height of the Copilot chat input window.")
+
+(defun joshu-mode-setup ()
+  "Disable line numbers."
+  (display-line-numbers-mode -1))
+
+(define-derived-mode joshu-mode markdown-mode "Joshu"
+  "Major mode for the Joshu chat buffer."
+  (add-hook 'joshu-mode-hook 'joshu-mode-setup))
 
 ;; To store the OpenAI API key to keychain, run the following command:
 ;; security add-internet-password -s api.openai.com -a apikey -w YOUR_API_KEY -l "OpenAI API Key"
-(defun copilot-chat-get-api-key ()
+(defun joshu-get-api-key ()
   "Retrieve the OpenAI API key from the authinfo file."
   (let* ((auth-info (car (auth-source-search
                           :host "api.openai.com"
@@ -32,7 +40,7 @@
           secret)
       (error "OpenAI API key not found in authinfo file"))))
 
-(defun copilot-chat-create-or-select-window (buffer-name slot content &optional read-only)
+(defun joshu-create-or-select-window (buffer-name slot content &optional read-only)
   "Create or select a window for BUFFER-NAME.
 SLOT specifies the position of the window.
 CONTENT is the initial content to insert into the buffer.
@@ -42,12 +50,11 @@ If READ-ONLY is non-nil, the buffer will be read-only."
 
     ;; Set up buffer content if it's empty
     (with-current-buffer buffer
-      (unless (eq major-mode 'markdown-mode)
-        (markdown-mode)
+      (unless (eq major-mode 'joshu-mode)
+        (joshu-mode)
         (erase-buffer)
         (insert content)
         (read-only-mode (if read-only 1 0)))
-      (setq display-line-numbers nil)
       (setq indicate-empty-lines nil)
       (setq indicate-unused-lines nil))
 
@@ -58,7 +65,7 @@ If READ-ONLY is non-nil, the buffer will be read-only."
                     `((side . right)
                       (slot . ,slot)
                       (window-resizable . t)
-                      (window-width . ,copilot-chat-window-width))))
+                      (window-width . ,joshu-window-width))))
       ;; The window cannot be selected by commands that select other windows.
       (set-window-parameter window 'no-other-window t)
       ;; The window cannot be deleted by commands that delete other windows.
@@ -68,64 +75,57 @@ If READ-ONLY is non-nil, the buffer will be read-only."
       (set-window-dedicated-p window t)
       (select-window window))))
 
-(defun copilot-chat-create-chat-window ()
+(defun joshu-create-chat-window ()
   "Create a sidebar window on right for chat history."
   (interactive)
   (let ((current-time (format-time-string "%Y-%m-%d %H:%M:%S")))
-    (copilot-chat-create-or-select-window
-     copilot-chat-buffer-name
+    (joshu-create-or-select-window
+     joshu-chat-buffer-name
      0
      (format "# Chat %s\n\n" current-time)
      t)))
 
-(defun copilot-chat-create-input-window ()
+(defun joshu-create-message-window ()
   "Create a writable input window below the chat history window."
   (interactive)
   ;; create the input window with a writable buffer
-  (copilot-chat-create-or-select-window
-   copilot-chat-input-buffer-name
+  (joshu-create-or-select-window
+   joshu-input-buffer-name
    1
    "")
   ;; set the major mode and key bindings for the input buffer
-  (with-current-buffer copilot-chat-input-buffer-name
-    (local-set-key (kbd "C-c C-c") #'copilot-chat-create-completion))
+  (with-current-buffer joshu-input-buffer-name
+    ;; user can use key bindings to send the message
+    (local-set-key (kbd "C-c C-c") #'joshu-create-completion))
   ;; set the window height
-  (let ((input-window (get-buffer-window copilot-chat-input-buffer-name)))
-    (with-selected-window input-window
+  (let ((message-window (get-buffer-window joshu-input-buffer-name)))
+    (with-selected-window message-window
       (window-resize nil (- 8 (window-height)) nil))))
 
 
-(defun copilot-chat-kill-window (buffer-name)
+(defun joshu-kill-window (buffer-name)
   "Kill the window displaying the buffer with the given BUFFER-NAME."
   (let ((window (get-buffer-window buffer-name)))
     (when window
       (delete-window window))))
 
-(defun copilot-chat-kill-chat-window ()
-  "Kill the chat window if it exists."
-  (copilot-chat-kill-window copilot-chat-buffer-name))
-
-(defun copilot-chat-kill-input-window ()
-  "Kill the input window if it exists."
-  (copilot-chat-kill-window copilot-chat-input-buffer-name))
-
-(defun copilot-chat-kill-windows ()
+(defun joshu-kill-windows ()
   "Kill both the chat and input windows."
   (interactive)
-  (copilot-chat-kill-chat-window)
-  (copilot-chat-kill-input-window))
+  (joshu-kill-window joshu-chat-buffer-name)
+  (joshu-kill-window joshu-input-buffer-name))
 
-(defun copilot-chat-create-windows ()
+(defun joshu-create-windows ()
   "Create both the chat and input windows."
   (interactive)
-  (copilot-chat-create-chat-window)
-  (copilot-chat-create-input-window))
+  (joshu-create-chat-window)
+  (joshu-create-message-window))
 
-(defun copilot-chat-send-message ()
+(defun joshu-send-message ()
   "Send the message from the input buffer to the chat buffer."
   (interactive)
-  (let ((input-buffer (get-buffer copilot-chat-input-buffer-name))
-        (chat-buffer (get-buffer copilot-chat-buffer-name)))
+  (let ((input-buffer (get-buffer joshu-input-buffer-name))
+        (chat-buffer (get-buffer joshu-chat-buffer-name)))
     (when (and input-buffer chat-buffer)
       (with-current-buffer input-buffer
         (let ((message (buffer-string)))
@@ -138,22 +138,22 @@ If READ-ONLY is non-nil, the buffer will be read-only."
           (erase-buffer))))))
 
 
-(defun copilot-chat-toggle ()
+(defun joshu-toggle ()
   "Toggle the Copilot chat sidebar."
   (interactive)
-  (let ((chat-window (get-buffer-window copilot-chat-buffer-name))
-        (input-window (get-buffer-window copilot-chat-input-buffer-name)))
+  (let ((chat-window (get-buffer-window joshu-chat-buffer-name))
+        (message-window (get-buffer-window joshu-input-buffer-name)))
 
-    (if (or chat-window input-window)
+    (if (or chat-window message-window)
         (progn
           (when chat-window (delete-window chat-window))
-          (when input-window (delete-window input-window)))
-      (progn (copilot-chat-create-chat-window)
-             (copilot-chat-create-input-window)))))
+          (when message-window (delete-window message-window)))
+      (progn (joshu-create-chat-window)
+             (joshu-create-message-window)))))
 
-(defun copilot-chat-append-message (message)
+(defun joshu-append-message (message)
   "Append a message to the chat buffer."
-  (let ((chat-buffer (get-buffer copilot-chat-buffer-name)))
+  (let ((chat-buffer (get-buffer joshu-chat-buffer-name)))
     (when chat-buffer
       (with-current-buffer chat-buffer
         (let ((inhibit-read-only t))
@@ -163,10 +163,10 @@ If READ-ONLY is non-nil, the buffer will be read-only."
         (goto-char (point-max))))))
 
 
-(defun copilot-chat-send-to-api (message)
+(defun joshu-send-to-api (message)
   "Send MESSAGE to the ChatGPT API asynchronously."
   (let ((api-url "https://api.openai.com/v1/chat/completions")
-        (api-key (copilot-chat-get-api-key)))
+        (api-key (joshu-get-api-key)))
     (request api-url
       :type "POST"
       :headers `(("Authorization" . ,(concat "Bearer " api-key))
@@ -178,14 +178,14 @@ If READ-ONLY is non-nil, the buffer will be read-only."
       :parser 'buffer-string
       :success (cl-function
                 (lambda (&key data &allow-other-keys)
-                  (copilot-chat-openai-stream-callback data)))
+                  (joshu-openai-stream-callback data)))
       :error (cl-function
               (lambda (&key error-thrown &allow-other-keys)
                 (message "Copilot Chat API Error: %S" error-thrown)))
       :sync nil)))
 
 
-(defun copilot-chat-openai-stream-callback (data)
+(defun joshu-openai-stream-callback (data)
   "Process the streamed data from OpenAI API and extract content."
   (run-with-timer
    0 nil
@@ -197,13 +197,13 @@ If READ-ONLY is non-nil, the buffer will be read-only."
          (let ((line (buffer-substring-no-properties (point) (line-end-position))))
            (cond
             ((string= line "[DONE]")
-             (copilot-chat-finalize-stream)
+             (joshu-finalize-stream)
              (goto-char (point-max)))
             (t
-             (copilot-chat-process-content-line line)))))))))
+             (joshu-process-content-line line)))))))))
 
 
-(defun copilot-chat-process-content-line (line)
+(defun joshu-process-content-line (line)
   "Process a single line of content from the stream."
   (let* ((json-object-type 'hash-table)
          (json-array-type 'list)
@@ -216,48 +216,48 @@ If READ-ONLY is non-nil, the buffer will be read-only."
              (delta (and choices (gethash "delta" (car choices))))
              (content (and delta (gethash "content" delta))))
         (when content
-          (copilot-chat-append-message content)
+          (joshu-append-message content)
           (sit-for 0.01))))))
 
 
-(defun copilot-chat-stream-ended-p ()
+(defun joshu-stream-ended-p ()
   "Check if the last processed line indicates the end of the stream."
   (save-excursion
     (forward-line -1)
     (looking-at "^data: \\[DONE\\]")))
 
 
-(defun copilot-chat-finalize-stream ()
+(defun joshu-finalize-stream ()
   "Perform final actions after the stream has ended."
-  (copilot-chat-append-message "\n\n")
+  (joshu-append-message "\n\n")
   (message "Stream ended"))
 
 
-(defun copilot-chat-get-input-content ()
+(defun joshu-get-input-content ()
   "Get the plain text content from the input buffer."
-  (let ((input-buffer (get-buffer copilot-chat-input-buffer-name)))
+  (let ((input-buffer (get-buffer joshu-input-buffer-name)))
     (when input-buffer
       (with-current-buffer input-buffer
         (buffer-substring-no-properties (point-min) (point-max))))))
 
 
-(defun copilot-chat-create-completion ()
+(defun joshu-create-completion ()
   "Create a completion for the user's input."
   (interactive)
-  (let ((user-message (copilot-chat-get-input-content)))
+  (let ((user-message (joshu-get-input-content)))
     (when user-message
       ;; Append user's message to chat buffer
-      (copilot-chat-append-message "## You\n\n")
-      (copilot-chat-append-message user-message)
-      (copilot-chat-append-message "\n\n")
+      (joshu-append-message "## You\n\n")
+      (joshu-append-message user-message)
+      (joshu-append-message "\n\n")
       ;; Append the start of the AI's response to the chat buffer
-      (copilot-chat-append-message "## Assistant\n\n")
+      (joshu-append-message "## Assistant\n\n")
       ;; Clear the input buffer
-      (with-current-buffer (get-buffer copilot-chat-input-buffer-name)
+      (with-current-buffer (get-buffer joshu-input-buffer-name)
         (erase-buffer))
       ;; Send the user's message to the API
-      (copilot-chat-send-to-api user-message))))
+      (joshu-send-to-api user-message))))
 
-(provide 'copilot-chat)
+(provide 'joshu)
 
 ;;; config.el ends here
