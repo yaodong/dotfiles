@@ -90,6 +90,7 @@
 
 ;; format buffer
 (global-set-key (kbd "M-s-l") '+format/buffer)
+(map! :leader :desc "Toggle Joshu" "oj" #'joshu-toggle)
 
 (defun custom|after-switch-project()
   "Auto refresh projectile cache when switching to a project"
