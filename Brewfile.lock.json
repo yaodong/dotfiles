@@ -2,10 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "b82ff8731cffa2725007a2d3907b3c626f954477"
+        "revision": "a882a221ecb33f855f8a0b78adaa525926901a19"
       },
       "homebrew/services": {
-        "revision": "c7f12486d51773c385fd695218d785aa13240a25"
+        "revision": "d5d8a1d4ba61312a490fc818f1f2d733be50a467"
       },
       "oven-sh/bun": {
         "revision": "4ec25049c3af1c494affbda8b13c188402bbca9e"
@@ -14,7 +14,7 @@
         "revision": "cc3280dfdf7562dd69c97d0dfa872b1c3313a18a"
       },
       "hashicorp/tap": {
-        "revision": "cbe6481cc4036ee92b76bedf7aac6d879601aef3"
+        "revision": "7365557f06c53a1e1dce57ee8e562f81201f518d"
       }
     },
     "brew": {
@@ -702,7 +702,7 @@
         }
       },
       "hashicorp/tap/terraform": {
-        "version": "1.5.7",
+        "version": "1.9.6",
         "bottle": false
       },
       "starship": {
@@ -831,11 +831,11 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.3.24-28-g4deb9df",
+        "HOMEBREW_VERSION": "4.3.24",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
-        "Xcode": "15.4",
+        "Xcode": "16.0",
         "macOS": "14.6.1"
       }
     }
