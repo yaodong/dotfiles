@@ -47,3 +47,7 @@ brew 'zellij'
 # Fonts
 cask 'font-jetbrains-mono'
 cask 'font-jetbrains-mono-nerd-font'
+
+# LSP
+brew 'vscode-html-language-server'
+brew 'tailwindcss-language-server'

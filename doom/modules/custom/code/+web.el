@@ -35,3 +35,10 @@
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
   (web-mode-code-indent-offset 2))
+
+(use-package! eglot
+  :config
+  (add-to-list 'eglot-server-programs
+               '((web-mode :language-id "html") . ("tailwindcss-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '((css-mode css-ts-mode) . ("tailwindcss-language-server" "--stdio"))))

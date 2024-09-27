@@ -1,5 +1,6 @@
 ;;; custom/code/+ruby.el -*- lexical-binding: t; -*-
 
+
 (defun custom|ruby-setup-flycheck ()
   "Use ruby-standard as the default checker for ruby-mode."
   (flycheck-select-checker 'ruby-rubocop))
@@ -16,6 +17,7 @@
 ;; Load the snippets
 (after! minitest
   (minitest-install-snippets))
+
 
 ;; Explicitly set the ruby and erb formatters
 (use-package! apheleia
