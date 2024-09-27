@@ -196,9 +196,6 @@
        (default +bindings +smartparens)
 
        :custom
-       web
-       ruby
-       yaml
-       python
+       code
        joshu
        )

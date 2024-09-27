@@ -103,7 +103,7 @@ gem install solargraph
 I enabled the following layers:
 
 #+begin_src elisp
-(python +lsp +pyenv +pyright)
+(python +lsp +pyenv +pyright +tree-sitter)
 #+end_src
 
 To enable debugger, install

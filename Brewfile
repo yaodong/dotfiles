@@ -7,6 +7,7 @@ brew 'ripgrep'
 brew 'coreutils'
 brew 'fd'
 brew 'cmake'
+brew 'tree-sitter'
 
 # Utilities
 brew 'bat'

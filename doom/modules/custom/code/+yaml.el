@@ -1,4 +1,4 @@
-;;; custom/yaml/config.el -*- lexical-binding: t; -*-
+;;; custom/code/+yaml.el -*- lexical-binding: t; -*-
 
 ;; Use yamlfmt to format YAML files
 ;; https://github.com/google/yamlfmt

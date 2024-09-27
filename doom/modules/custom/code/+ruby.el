@@ -1,4 +1,4 @@
-;;; custom/ruby/config.el -*- lexical-binding: t; -*-
+;;; custom/code/+ruby.el -*- lexical-binding: t; -*-
 
 (defun custom|ruby-setup-flycheck ()
   "Use ruby-standard as the default checker for ruby-mode."
@@ -20,9 +20,7 @@
 ;; Explicitly set the ruby and erb formatters
 (use-package! apheleia
   :config
-  ;; ;; https://github.com/standardrb/standard
-  ;; (add-to-list 'apheleia-formatters
-  ;;              '(ruby-standard . ("standardrb" "--stdin" filepath "--fix" "--stderr" "--format" "quiet" "--fail-level" "fatal")))
+  ;; https://github.com/rubocop/rubocop
   (add-to-list 'apheleia-mode-alist
                '(ruby-mode . rubocop))
 

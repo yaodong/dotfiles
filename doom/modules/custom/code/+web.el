@@ -1,4 +1,4 @@
-;;; custom/web/config.el -*- lexical-binding: t; -*-
+;;; custom/code/+web.el -*- lexical-binding: t; -*-
 
 ;; Use stylelint as the default checker for css-mode
 (defun custom|css-setup-stylelint ()

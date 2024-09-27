@@ -1,4 +1,4 @@
-;;; custom/python/config.el -*- lexical-binding: t; -*-
+;;; custom/code/+python.el -*- lexical-binding: t; -*-
 
 (defun setup-python-dev()
   "Prepare Python development environment by install required packages."
@@ -11,3 +11,7 @@
                          "*Python Dev Env Setup Error*")
     (message "Installing Python development packages: %s"
              (string-join packages ", "))))
+
+(map! :map python-mode-map
+      :localleader
+      "c" #'python-pytest-dispatch)
