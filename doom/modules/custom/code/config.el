@@ -4,3 +4,4 @@
 (load! "+ruby")
 (load! "+web")
 (load! "+yaml")
+(load! "+tailwind")
