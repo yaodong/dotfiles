@@ -137,8 +137,7 @@
 
 ;; Accept completion from copilot and fallback to company
 (use-package! copilot
-  :hook ((prog-mode . copilot-mode)
-         (org-mode . copilot-mode))
+  :hook ((prog-mode . copilot-mode))
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
