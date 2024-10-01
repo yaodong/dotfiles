@@ -152,6 +152,8 @@
       :n "s-]" #'evil-jump-forward
       :n "s-[" #'evil-jump-backward)
 
+;; Magit
+(set-default 'magit-log-margin '(t "%Y-%m-%d %H:%M %Z" magit-log-margin-width t 18))
 
 ;; Jenkinsfile
 (use-package! jenkinsfile-mode)
