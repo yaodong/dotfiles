@@ -32,7 +32,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'catppuccin)
-(setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
+(setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -99,17 +99,18 @@
 
 (add-hook 'after-switch-project-project-hook 'custom|after-switch-project)
 
-;; Themes
-(use-package! heaven-and-hell
-  :config
-  (setq heaven-and-hell-theme-type 'dark)
-  (setq heaven-and-hell-themes
-        '((light . doom-one-light)
-          (dark . catppuccin)))
-  (setq heaven-and-hell-load-theme-no-confirm t)
-  :hook (after-init . heaven-and-hell-init-hook)
-  :bind (:map doom-leader-map
-              ("h h" . heaven-and-hell-toggle-theme)))
+;; Switch themes
+(defun toggle-catppuccin-flavor ()
+  "Toggle between Catppuccin Macchiato and Latte flavors."
+  (interactive)
+  (if (eq catppuccin-flavor 'macchiato)
+      (setq catppuccin-flavor 'latte)
+    (setq catppuccin-flavor 'macchiato))
+  (catppuccin-reload))
+
+(map! :leader
+      :desc "Toggle Catppuccin flavor"
+      "h h" #'toggle-catppuccin-flavor)
 
 ;; multi-cursor
 (use-package! evil-mc
