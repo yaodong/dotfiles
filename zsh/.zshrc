@@ -68,7 +68,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby rbenv python pyenv docker yarn fzf zsh-interactive-cd)
+plugins=(starship git ruby rbenv python pyenv docker yarn fzf zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,8 +76,8 @@ source $ZSH/oh-my-zsh.sh
 export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8
 
-# enable starship prompt
-eval "$(/opt/homebrew/bin/starship init zsh)"
+# add doom to the PATH
+export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # enable zoxide
 eval "$(zoxide init zsh)"
