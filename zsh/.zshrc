@@ -77,7 +77,7 @@ export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8
 
 # add doom to the PATH
-export PATH="$PATH:$HOME/.emacs.d/bin"
+export PATH="$PATH:$HOME/.config/emacs/bin"
 
 # enable zoxide
 eval "$(zoxide init zsh)"
