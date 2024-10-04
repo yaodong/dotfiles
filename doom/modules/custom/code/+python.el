@@ -13,5 +13,4 @@
              (string-join packages ", "))))
 
 (map! :map python-mode-map
-      :localleader
-      "c" #'python-pytest-dispatch)
+      "C-c C-c" #'python-pytest-run-def-or-class-at-point-dwim)
