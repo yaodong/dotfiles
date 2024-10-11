@@ -20,7 +20,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 14 :slant 'normal :weight 'normal)
-      doom-font-increment 1)
+      doom-font-increment 1
+      line-spacing 0.1)
 
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
