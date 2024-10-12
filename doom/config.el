@@ -22,7 +22,8 @@
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 14 :slant 'normal :weight 'normal)
       doom-font-increment 1)
 
-(setq-default line-spacing 0.1)
+;; 15% extra spacing
+(setq-default line-spacing 0.15)
 
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
