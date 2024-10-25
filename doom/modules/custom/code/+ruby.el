@@ -12,7 +12,7 @@
 (use-package! web-mode
   :config
   (define-derived-mode erb-mode web-mode "web[erb]")
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . erb-mode)))
+  (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . erb-mode)))
 
 ;; Load the snippets
 (after! minitest

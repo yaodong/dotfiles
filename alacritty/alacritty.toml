@@ -4,7 +4,7 @@ IS_ALACRITTY = "true"
 
 [shell]
 program = "/bin/zsh"
-args = ["-l", "-c", "zellij attach -c Hack || zellij"]
+args = ["-l", "-c", "zellij attach Hack -c"]
 
 [font]
 size = 13
