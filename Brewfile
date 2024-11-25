@@ -31,6 +31,9 @@ brew 'pyenv'
 brew 'rbenv'
 brew 'ruby-build'
 
+# Node
+brew 'nvm'
+
 # Emacs
 tap 'd12frosted/emacs-plus'
 brew 'd12frosted/emacs-plus/emacs-plus@29', args: %w[with-native-comp with-poll]
@@ -42,12 +45,9 @@ brew 'hashicorp/tap/terraform'
 # Applications
 cask 'alacritty', args: { no_quarantine: true }
 brew 'starship'
-brew 'zellij'
+brew 'tmux'
 
 # Fonts
 cask 'font-jetbrains-mono'
 cask 'font-jetbrains-mono-nerd-font'
 
-# LSP
-brew 'vscode-html-language-server'
-brew 'tailwindcss-language-server'

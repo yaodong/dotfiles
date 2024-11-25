@@ -132,8 +132,6 @@
       :n "C-+"    #'text-scale-increase
       :n "C--"    #'text-scale-decrease)
 
-(setq-default indicate-empty-lines nil)
-
 (setq avy-all-windows t)
 (tab-bar-mode -1)
 

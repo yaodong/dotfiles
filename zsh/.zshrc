@@ -68,7 +68,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(starship git ruby rbenv python pyenv docker yarn fzf zsh-interactive-cd)
+plugins=(starship git ruby rbenv nvm python pyenv docker yarn fzf zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 

@@ -1,3 +1,0 @@
-theme "catppuccin-frappe"
-on_force_close "quit"
-copy_command "pbcopy"
