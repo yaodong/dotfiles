@@ -2,10 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "8fb98123dcfd97fa3d3fd85f6b72d634fd285faf"
+        "revision": "8ae4e7f364bf8736e15914a3b6c76cd157deccb8"
       },
       "homebrew/services": {
-        "revision": "70ca91562ef92c2415b2b117015abe310622c342"
+        "revision": "1ba6f5dadcd61ac36f1c7802a4794e785b9af6bd"
       },
       "oven-sh/bun": {
         "revision": "5428264429e88ad55fc0fb60ab48460b076bb9c9"
@@ -705,7 +705,7 @@
         }
       },
       "hashicorp/tap/terraform": {
-        "version": "1.9.8",
+        "version": "1.5.7",
         "bottle": false
       },
       "starship": {
@@ -814,7 +814,7 @@
   "system": {
     "macos": {
       "sequoia": {
-        "HOMEBREW_VERSION": "4.4.6",
+        "HOMEBREW_VERSION": "4.4.7-7-gf94c7d0",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "16.1.0.0.1.1729049160",
