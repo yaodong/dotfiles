@@ -7,7 +7,7 @@ program = "/bin/zsh"
 args = ["-l", "-c", "tmux new-session -A -D -s Hack"]
 
 [font]
-size = 13
+size = 15
 normal = { family = "JetBrainsMono Nerd Font Mono", style = "Light" }
 bold = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
 italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
