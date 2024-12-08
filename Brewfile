@@ -38,9 +38,10 @@ brew 'nvm'
 tap 'd12frosted/emacs-plus'
 brew 'd12frosted/emacs-plus/emacs-plus@29', args: %w[with-native-comp with-poll]
 
-# Sketchybar
-tap 'FelixKratz/formulae'
-brew 'sketchybar'
+# Yabai and skhd
+tap 'koekeishiya/formulae'
+brew 'koekeishiya/formulae/yabai'
+brew 'koekeishiya/formulae/skhd'
 
 # Terraform
 tap 'hashicorp/tap'
