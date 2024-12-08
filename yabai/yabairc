@@ -30,4 +30,4 @@ yabai -m config mouse_action2 resize
 yabai -m mouse_drop_action swap
 
 # leave space for the external bar
-yabai -m config external_bar all:30:0
+yabai -m config external_bar all:35:0
