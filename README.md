@@ -1,9 +1,4 @@
-# macOS Dotfiles
-
-> Personal dotfiles configuration for macOS
-> Last updated: December 8, 2024
-
-## Overview
+# macOS dotfiles
 
 This repository contains my personal dotfiles configuration for macOS. These configuration files help set up and maintain a consistent development environment across different machines.
 
