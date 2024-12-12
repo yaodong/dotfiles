@@ -1,22 +1,40 @@
 #!/usr/bin/env sh
 
-# general space settings
-yabai -m config layout                       bsp
+# Set the default layout to "binary space partitioning",
+# which automatically divides screen space into two parts whenever a new window is created.
+yabai -m config layout bsp
+
+# Controls where new windows appear - places them in the second position of a split
+yabai -m config window_placement second_child
+
+# Padding between windows and screen edge
 yabai -m config top_padding                  3
 yabai -m config bottom_padding               3
 yabai -m config left_padding                 3
 yabai -m config right_padding                3
 yabai -m config window_gap                   5
 
+# leave space for the external bar
+yabai -m config external_bar all:32:0
+
 # float preferences
-yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Preview$" manage=off
-yabai -m rule --add app="^AppCleaner$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Software Update$" manage=off
 yabai -m rule --add app="^Dictionary$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Archive Utility$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="^Font Book$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^AppCleaner$" manage=off
 yabai -m rule --add app="^CleanShot X$" manage=off
 yabai -m rule --add app="^Things$" manage=off
+yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^choose$" manage=off
+yabai -m rule --add app="^Stats$" manage=off
+yabai -m rule --add app="^Raycast Settings$" manage=off
 
 # new window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
@@ -34,5 +52,3 @@ yabai -m config mouse_action2 resize
 # when window is dropped in center of another window, swap them (on edges it will split it)
 yabai -m mouse_drop_action swap
 
-# leave space for the external bar
-yabai -m config external_bar all:32:0
