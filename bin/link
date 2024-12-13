@@ -5,6 +5,7 @@ set -e
 
 ln -sf ~/.local/dots/zsh/.zshrc ~/.zshrc
 ln -sf ~/.local/dots/alacritty ~/.config/
+ln -sf ~/.local/dots/nvim ~/.config/
 ln -sf ~/.local/dots/doom ~/.config/
 ln -sf ~/.local/dots/starship/starship.toml ~/.config/starship.toml
 ln -sf ~/.local/dots/tmux/.tmux.conf ~/.tmux.conf
