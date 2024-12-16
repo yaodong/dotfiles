@@ -41,10 +41,6 @@ brew 'ruby-build'
 # Node
 brew 'nvm'
 
-# Emacs
-# tap 'd12frosted/emacs-plus'
-# brew 'd12frosted/emacs-plus/emacs-plus@29', args: %w[with-native-comp with-poll]
-
 # Wezterm
 cask 'wezterm'
 
