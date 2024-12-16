@@ -44,15 +44,6 @@ brew 'nvm'
 # Wezterm
 cask 'wezterm'
 
-# Yabai and skhd
-# tap 'koekeishiya/formulae'
-# brew 'koekeishiya/formulae/yabai'
-# brew 'koekeishiya/formulae/skhd'
-#
-# tap 'FelixKratz/formulae'
-# brew 'FelixKratz/formulae/sketchybar'
-# brew 'FelixKratz/formulae/borders'
-
 # Terraform
 tap 'hashicorp/tap'
 brew 'hashicorp/tap/terraform'

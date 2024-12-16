@@ -8,7 +8,3 @@ ln -sf ~/.local/dots/nvim ~/.config/
 ln -sf ~/.local/dots/starship/starship.toml ~/.config/starship.toml
 ln -sf ~/.local/dots/tmux/.tmux.conf ~/.tmux.conf
 ln -sf ~/.local/dots/wezterm/.wezterm.lua ~/.wezterm.lua
-# ln -sf ~/.local/dots/sketchybar ~/.config/
-# ln -sf ~/.local/dots/yabai ~/.config/
-# ln -sf ~/.local/dots/skhd ~/.config/
-# ln -sf ~/.local/dots/borders ~/.config/
