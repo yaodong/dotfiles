@@ -72,18 +72,31 @@ plugins=(starship git ruby rbenv nvm python pyenv docker yarn fzf zsh-interactiv
 
 source $ZSH/oh-my-zsh.sh
 
-# common configurations
-export LC_ALL=en_US.utf-8
-export LANG=en_US.utf-8
-
-# add doom to the PATH
-export PATH="$PATH:$HOME/.config/emacs/bin"
-
-# enable zoxide
-eval "$(zoxide init zsh)"
-
+# alias
 alias ls='eza -lh --group-directories-first --icons'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
-alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias vim=nvim
+alias hack='tmux new-session -A -D -s Hack'
+
+# common configurations
+export LC_ALL=en_US.utf-8
+export LANG=en_US.utf-8
+
+# enable zoxide
+eval "$(zoxide init zsh)"
+
+# enbale auto suggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
+bindkey '^[[A' history-search-backward # arrow up
+bindkey '^[[B' history-search-forward  # arrow down
+bindkey '^I^I' autosuggest-accept      # tab + tab
+bindkey '^[[Z' autosuggest-accept      # shift + tab

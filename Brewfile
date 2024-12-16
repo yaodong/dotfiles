@@ -19,6 +19,11 @@ brew 'git'
 brew 'tldr'
 brew 'wget'
 brew 'zoxide'
+brew 'yazi'
+brew 'lazygit'
+
+# Shell
+brew 'zsh-autosuggestions'
 
 # Bun
 tap 'oven-sh/bun'
@@ -52,7 +57,6 @@ tap 'hashicorp/tap'
 brew 'hashicorp/tap/terraform'
 
 # Applications
-cask 'alacritty', args: { no_quarantine: true }
 brew 'starship'
 brew 'tmux'
 
