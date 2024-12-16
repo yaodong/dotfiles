@@ -23,6 +23,8 @@ brew 'yazi'
 brew 'lazygit'
 
 # Shell
+brew 'starship'
+brew 'tmux'
 brew 'zsh-autosuggestions'
 
 # Bun
@@ -40,27 +42,25 @@ brew 'ruby-build'
 brew 'nvm'
 
 # Emacs
-tap 'd12frosted/emacs-plus'
-brew 'd12frosted/emacs-plus/emacs-plus@29', args: %w[with-native-comp with-poll]
+# tap 'd12frosted/emacs-plus'
+# brew 'd12frosted/emacs-plus/emacs-plus@29', args: %w[with-native-comp with-poll]
+
+# Wezterm
+cask 'wezterm'
 
 # Yabai and skhd
-tap 'koekeishiya/formulae'
-brew 'koekeishiya/formulae/yabai'
-brew 'koekeishiya/formulae/skhd'
-
-tap 'FelixKratz/formulae'
-brew 'FelixKratz/formulae/sketchybar'
-brew 'FelixKratz/formulae/borders'
+# tap 'koekeishiya/formulae'
+# brew 'koekeishiya/formulae/yabai'
+# brew 'koekeishiya/formulae/skhd'
+#
+# tap 'FelixKratz/formulae'
+# brew 'FelixKratz/formulae/sketchybar'
+# brew 'FelixKratz/formulae/borders'
 
 # Terraform
 tap 'hashicorp/tap'
 brew 'hashicorp/tap/terraform'
 
-# Applications
-brew 'starship'
-brew 'tmux'
-
 # Fonts
 cask 'font-jetbrains-mono'
 cask 'font-jetbrains-mono-nerd-font'
-cask 'font-hack-nerd-font'
