@@ -41,8 +41,9 @@ brew 'ruby-build'
 # Node
 brew 'nvm'
 
-# Wezterm
+# Apps
 cask 'wezterm'
+cask 'ghostty'
 
 # Terraform
 tap 'hashicorp/tap'
