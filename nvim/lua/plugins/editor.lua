@@ -14,4 +14,16 @@ return {
       require("incline").setup()
     end,
   },
+
+  -- formatters
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters = {
+        erb_format = {
+          prepend_args = { "--print-width", "120" },
+        },
+      },
+    },
+  },
 }
