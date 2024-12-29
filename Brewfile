@@ -42,7 +42,6 @@ brew 'ruby-build'
 brew 'nvm'
 
 # Apps
-cask 'wezterm'
 cask 'ghostty'
 
 # Terraform
