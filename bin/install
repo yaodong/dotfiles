@@ -3,6 +3,8 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+SCRIPT_DIR="$(dirname "$0")"
+
 if command -v brew &>/dev/null; then
   echo "Homebrew is installed"
 else
@@ -12,3 +14,6 @@ fi
 
 brew update
 brew bundle install
+
+# ensure pyenv is up to date
+. "$SCRIPT_DIR/modules/pyenv.sh"
