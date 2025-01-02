@@ -5,12 +5,8 @@ This repository contains my personal dotfiles configuration for macOS. These con
 ## Installation
 
 The configuration includes:
-- [alacritty](https://github.com/alacritty/alacritty): A cross-platform, OpenGL terminal emulator.
-- [JankyBorders](https://github.com/FelixKratz/JankyBorders): A lightweight window border system for macOS.
-- [doom emacs](https://github.com/hlissner/doom-emacs): An Emacs framework for the stubborn martian hacker.
-- [sketchybar](https://github.com/FelixKratz/SketchyBar): A highly customizable macOS status bar replacement.
-- [yabai](https://github.com/koekeishiya/yabai): A tiling window manager for macOS.
-- [skhd](https://github.com/koekeishiya/skhd): A hotkey daemon for macOS.
+- [ghostty](https://github.com/ghostty/ghostty): A terminal emulator.
+- [neovim](https://neovim.io/) with [LazyVim](https://github.com/LazyVim/LazyVim): A modern, extensible Vim-based text editor.
 - [startship](https://github.com/starship/starship): A shell prompt that shows information about your project.
 - [tmux](https://github.com/tmux/tmux): A terminal multiplexer.
 - [oh my zsh](https://ohmyz.sh/): A delightful, open source, community-driven framework for managing your Zsh configuration.
@@ -47,42 +43,18 @@ This will:
 This will:
 - Create necessary config directories
 - Link all configuration files to their appropriate locations
-- Create an Emacs.app alias in the Applications folder (if not already present)
 
 ## Directory Structure
 
 ```
 ~/.local/dots/
-├── alacritty/     # Alacritty terminal configuration
 ├── bin/           # Utility scripts
-├── borders/       # JankyBorders window border configuration
-├── doom/          # Doom Emacs configuration
-├── sketchybar/    # Sketchybar configuration
-├── skhd/          # Simple hotkey daemon configuration
+├── ghostty/       # Ghostty terminal configuration
+├── nvim/          # Neovim configuration
 ├── starship/      # Starship prompt configuration
 ├── tmux/          # Tmux configuration
-├── yabai/         # Yabai window manager configuration
 └── zsh/           # Zsh shell configuration
 ```
-
-## Post-Installation
-
-After installation, you'll need to:
-
-1. Restart your terminal to apply the new Zsh configuration
-2. Start the required services:
-
-```bash
-~/.local/dots/bin/start
-```
-
-This will start:
-- yabai (window manager)
-- skhd (hotkey daemon)
-- sketchybar (status bar)
-- borders (window borders)
-
-3. Grant Accessibility permissions to the newly installed services. You'll be asked to do so on macOS.
 
 ## Customization
 
