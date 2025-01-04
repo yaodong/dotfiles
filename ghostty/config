@@ -1,7 +1,9 @@
 theme = catppuccin-mocha
 
 font-family = JetBrainsMono Nerd Font Mono
-font-size = 16
+font-size = 15
+font-thicken = true
+adjust-cell-height = 20%
 
 cursor-style = block
 cursor-style-blink = false
