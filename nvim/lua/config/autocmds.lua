@@ -25,3 +25,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.wo.conceallevel = 0
   end,
 })
+
+-- Highlight trailing whitespace
+vim.api.nvim_command("match ErrorMsg /\\s\\+$/")
