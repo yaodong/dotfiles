@@ -11,7 +11,11 @@ return {
     "b0o/incline.nvim",
     event = "VeryLazy",
     config = function()
-      require("incline").setup()
+      require("incline").setup({
+        hide = {
+          cursorline = true,
+        },
+      })
     end,
   },
 
@@ -28,21 +32,15 @@ return {
   },
 
   {
-    "nvim-neotest/neotest-plenary",
-  },
-
-  {
     "nvim-neotest/neotest",
     dependencies = {
       "zidhuss/neotest-minitest",
       "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-plenary",
     },
     opts = function(_, opts)
       opts.adapters = {
         require("neotest-minitest"),
         require("neotest-python"),
-        require("neotest-plenary"),
       }
     end,
   },
