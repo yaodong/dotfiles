@@ -21,6 +21,7 @@ brew 'wget'
 brew 'zoxide'
 brew 'yazi'
 brew 'lazygit'
+brew 'lazydocker'
 
 # Shell
 brew 'starship'
