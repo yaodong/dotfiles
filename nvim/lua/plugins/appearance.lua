@@ -1,0 +1,26 @@
+return {
+
+  -- catppuccin: colorscheme
+  {
+    "catppuccin/nvim",
+    lazy = false,
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      colorscheme = "catppuccin-mocha",
+    },
+  },
+
+  -- incline: creating lightweight floating statuslines
+  {
+    "b0o/incline.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("incline").setup({
+        hide = {
+          cursorline = true,
+        },
+      })
+    end,
+  },
+}
