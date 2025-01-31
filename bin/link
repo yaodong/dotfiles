@@ -8,3 +8,4 @@ ln -sf ~/.local/dots/nvim ~/.config/
 ln -sf ~/.local/dots/starship/starship.toml ~/.config/starship.toml
 ln -sf ~/.local/dots/tmux/.tmux.conf ~/.tmux.conf
 ln -sf ~/.local/dots/ghostty ~/.config/ghostty
+ln -sf ~/.local/dots/ideavim/ideavimrc ~/.ideavimrc
