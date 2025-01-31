@@ -1,5 +1,12 @@
 return {
 
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin-mocha",
+    },
+  },
+
   -- catppuccin: colorscheme
   {
     "catppuccin/nvim",
@@ -8,6 +15,7 @@ return {
     priority = 1000,
     opts = {
       colorscheme = "catppuccin-mocha",
+      integrations = { blink_cmp = true },
     },
   },
 

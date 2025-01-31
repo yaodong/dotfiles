@@ -27,32 +27,6 @@ return {
     },
   },
 
-  -- configurate nvim-lspconfig base on then mason configuration
-  {
-    "williamboman/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = {
-        "ruby_lsp",
-        "rubocop",
-      },
-    },
-  },
-
-  -- configurate nvim to use lsp servers
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        ruby_lsp = {
-          enabled = true,
-        },
-        rubocop = {
-          enabled = true,
-        },
-      },
-    },
-  },
-
   {
     "stevearc/conform.nvim",
     opts = {
