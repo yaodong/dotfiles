@@ -11,6 +11,18 @@ return {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = "mono",
       },
+      completion = {
+        documentation = {
+          auto_show_delay_ms = 200,
+          window = {
+            border = "rounded",
+            winhighlight = "Normal:CmpDoc,FloatBorder:CmpBorder",
+          },
+        },
+        ghost_text = {
+          enabled = false,
+        },
+      },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
       },
@@ -33,6 +45,13 @@ return {
           },
         },
       },
+    },
+  },
+
+  -- blink icons
+  {
+    "saghen/blink.cmp",
+    opts = {
       appearance = {
         kind_icons = {
           Copilot = "󱐌",
