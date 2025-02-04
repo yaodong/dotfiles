@@ -15,18 +15,6 @@ return {
     },
   },
 
-  -- install lsp servers, linters, and formatters
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "black",
-        "pyright",
-        "erb-formatter",
-      },
-    },
-  },
-
   {
     "stevearc/conform.nvim",
     opts = {
