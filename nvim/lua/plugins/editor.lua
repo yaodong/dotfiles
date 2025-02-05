@@ -16,21 +16,6 @@ return {
   },
 
   {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        ruby = { "rubocop" },
-        eruby = { "erb_format" },
-      },
-      formatters = {
-        erb_format = {
-          prepend_args = { "--print-width", "120" },
-        },
-      },
-    },
-  },
-
-  {
     "nvim-neotest/neotest",
     event = "VeryLazy",
     dependencies = {

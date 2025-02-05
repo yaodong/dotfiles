@@ -1,18 +1,10 @@
 return {
 
-  -- install lsp servers, linters, and formatters
-  {
-    "williamboman/mason.nvim",
-    opts = {},
-  },
-
   -- configurate nvim-lspconfig base on then mason configuration
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
       ensure_installed = {
-        "black",
-        "erb-formatter",
         "lua_ls",
         "pyright",
         "rubocop",
