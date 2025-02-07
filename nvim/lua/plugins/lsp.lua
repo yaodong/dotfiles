@@ -34,6 +34,9 @@ return {
           enabled = true,
         },
       },
+      diagnostics = {
+        virtual_text = false,
+      },
     },
   },
 }
