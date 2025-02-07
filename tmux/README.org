@@ -1,5 +1,0 @@
-
-** Links
-
-- [[https://builtin.com/articles/tmux-config][Tmux Config: A Guide]]
-- [[https://tao-of-tmux.readthedocs.io/][tao-of-tmux]]

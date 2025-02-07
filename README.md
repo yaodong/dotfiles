@@ -60,6 +60,13 @@ This will:
 
 Feel free to fork this repository and customize the configurations to your liking. Each tool's configuration is stored in its respective directory and can be modified independently.
 
+## References
+
+- [Tmux Config: A Guide](ehttps://builtin.com/articles/tmux-config)
+- [tao-of-tmux](https://tao-of-tmux.readthedocs.io/)
+- [lazyVim/LazyVim](https://github.com/lazyVim/LazyVim/)
+- [adibhanna/nvim](https://github.com/adibhanna/nvim)
+
 ## License
 
 This project is open source and available under the MIT License.

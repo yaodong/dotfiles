@@ -31,4 +31,10 @@ return {
       })
     end,
   },
+
+  -- disable tabs
+  {
+    "akinsho/bufferline.nvim",
+    enabled = false,
+  },
 }
