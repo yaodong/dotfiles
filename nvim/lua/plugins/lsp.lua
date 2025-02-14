@@ -9,7 +9,6 @@ return {
         "pyright",
         "rubocop",
         "ruby_lsp",
-        "stimulus_ls",
         "cssls",
         "tailwindcss",
       },
