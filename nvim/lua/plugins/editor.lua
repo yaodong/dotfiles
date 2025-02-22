@@ -37,4 +37,13 @@ return {
     event = "InsertEnter",
     config = true,
   },
+
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        cssls = { settings = { css = { lint = { unknownAtRules = "ignore" } } } },
+      },
+    },
+  },
 }
