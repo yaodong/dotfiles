@@ -51,4 +51,13 @@ return {
     "echasnovski/mini.trailspace",
     version = "*",
   },
+
+  {
+    "L3MON4D3/LuaSnip",
+    opts = function(_, opts)
+      local ls = require("luasnip")
+      ls.filetype_extend("eruby", { "html" })
+      return opts
+    end,
+  },
 }
