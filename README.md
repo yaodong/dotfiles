@@ -20,13 +20,13 @@ Before installation, ensure you have macOS and an internet connection. The insta
 1. Clone this repository:
 
 ```bash
-git clone --depth=1 https://github.com/yaodong/dots.git ~/.local/dots
+git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
 ```
 
 2. Run the installation script:
 
 ```bash
-~/.local/dots/bin/install
+~/.local/setup/bin/install
 ```
 
 This will:
@@ -37,7 +37,7 @@ This will:
 3. Create symbolic links:
 
 ```bash
-~/.local/dots/bin/link
+~/.local/setup/bin/link
 ```
 
 This will:

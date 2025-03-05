@@ -3,9 +3,9 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-ln -sf ~/.local/dots/zsh/.zshrc ~/.zshrc
-ln -sf ~/.local/dots/nvim ~/.config/
-ln -sf ~/.local/dots/starship/starship.toml ~/.config/starship.toml
-ln -sf ~/.local/dots/tmux/.tmux.conf ~/.tmux.conf
-ln -sf ~/.local/dots/ghostty ~/.config/ghostty
-ln -sf ~/.local/dots/ideavim/ideavimrc ~/.ideavimrc
+ln -sf ~/.local/setup/zsh/.zshrc ~/.zshrc
+ln -sf ~/.local/setup/nvim ~/.config/
+ln -sf ~/.local/setup/starship/starship.toml ~/.config/starship.toml
+ln -sf ~/.local/setup/tmux/.tmux.conf ~/.tmux.conf
+ln -sf ~/.local/setup/ghostty ~/.config/ghostty
+ln -sf ~/.local/setup/ideavim/ideavimrc ~/.ideavimrc
