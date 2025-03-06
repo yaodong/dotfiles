@@ -2,6 +2,15 @@
 
 set -e
 
+# Disable press and hold for key repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Disable auto-correct
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Disable smart quotes
+defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
+
 # Install Homebrew if it's not installed
 if command -v brew &>/dev/null; then
   echo "Homebrew is installed"

@@ -1,8 +1,13 @@
 #!/bin/bash
 
-if ! command -v pyenv &> /dev/null; then
+if ! brew list | grep -q pyenv; then
   echo "pyenv could not be found. Installing..."
   brew install pyenv
+fi
+
+if ! brew list | grep -q pyenv-virtualenv; then
+  echo "pyenv-virtualenv could not be found. Installing..."
+  brew install pyenv-virtualenv
 fi
 
 PYTHON_VERSION=3.12.8
