@@ -1,7 +1,11 @@
 #!/bin/bash
 
-brew install pyenv
+if ! command -v pyenv &> /dev/null; then
+  echo "pyenv could not be found. Installing..."
+  brew install pyenv
+fi
 
+PYTHON_VERSION=3.12.8
 PLUGIN_DIR="$(pyenv root)/plugins/pyenv-update"
 
 # Check if pyenv-update plugin directory exists
@@ -24,6 +28,14 @@ else
     echo "pyenv-update is up to date"
   fi
 fi
+
+if ! pyenv versions | grep -q $PYTHON_VERSION; then
+  echo "Installing Python $PYTHON_VERSION..."
+  pyenv install $PYTHON_VERSION
+fi
+
+pyenv global $PYTHON_VERSION
+echo "Python $PYTHON_VERSION installed and set as global version"
 
 # Update pyenv
 echo "Updating pyenv..."
