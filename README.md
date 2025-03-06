@@ -24,6 +24,8 @@ Before installation, ensure you have macOS and an internet connection. The insta
 git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
 ```
 
+You can clone the repository to any location of your choice, not just `~/.local/setup`. The scripts are designed to work from any location.
+
 2. Run the installation script:
 
 ```bash
@@ -34,7 +36,7 @@ bash bin/install.sh
 This will:
 - Install Homebrew if not already installed
 - Update Homebrew
-- Install all required packages from the Brewfile
+- Install all required packages directly through brew install commands
 
 3. Create symbolic links:
 
@@ -47,6 +49,8 @@ This will:
 - Create necessary config directories
 - Link all configuration files to their appropriate locations
 
+The `link.sh` script automatically detects the repository location, so you can place this repository anywhere on your system, not just at `~/.local/setup`. It will correctly create symbolic links from the actual repository location to the appropriate configuration files in your home directory.
+
 4. Optionally, run the setup script for additional configuration:
 
 ```bash
@@ -54,55 +58,4 @@ cd ~/.local/setup
 bash bin/setup.sh
 ```
 
-## Directory Structure
-
-```
-~/.local/setup/
-├── bin/           # Utility scripts
-│   ├── install.sh # Installation script
-│   ├── link.sh    # Symbolic link creation
-│   └── setup.sh   # Additional setup
-├── apps/          # Configuration files
-│   ├── ghostty/   # Ghostty terminal configuration
-│   ├── ideavim/   # IdeaVim configuration
-│   ├── nvim/      # Neovim configuration
-│   ├── starship/  # Starship prompt configuration
-│   ├── tmux/      # Tmux configuration
-│   └── zsh/       # Zsh shell configuration
-└── extras/        # Development environment setup scripts
-```
-
-## Additional Development Environments
-
-The repository includes extra scripts to set up specific development environments:
-
-```bash
-cd ~/.local/setup
-
-# Setup Node.js environment
-bash extras/node.sh
-
-# Setup Python environment
-bash extras/python.sh
-
-# Setup Ruby environment
-bash extras/ruby.sh
-
-# Setup Terraform environment
-bash extras/terraform.sh
-```
-
-## Customization
-
-Feel free to fork this repository and customize the configurations to your liking. Each tool's configuration is stored in its respective directory under the `apps/` directory and can be modified independently.
-
-## References
-
-- [Tmux Config: A Guide](https://builtin.com/articles/tmux-config)
-- [tao-of-tmux](https://tao-of-tmux.readthedocs.io/)
-- [LazyVim](https://github.com/LazyVim/LazyVim/)
-- [IdeaVim](https://github.com/JetBrains/ideavim)
-
-## License
-
-This project is open source and available under the MIT License.
+// ... existing code ...
