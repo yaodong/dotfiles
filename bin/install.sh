@@ -2,6 +2,8 @@
 
 set -e
 
+BASE_DIR="$(cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd)"
+
 # Disable press and hold for key repeat
 defaults write -g ApplePressAndHoldEnabled -bool false
 
@@ -58,13 +60,19 @@ brew install lazydocker
 echo "Installing applications..."
 brew install neovim
 brew install starship
-brew install tmux
 brew install zsh-autosuggestions
 brew install --cask ghostty
+
+
+bash "$BASE_DIR/apps/tmux/install.sh"
 
 # Install fonts
 echo "Installing fonts..."
 brew install --cask font-jetbrains-mono
 brew install --cask font-jetbrains-mono-nerd-font
+
+# Configure
+mkdir -p ~/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Setup completed successfully!"
