@@ -22,5 +22,5 @@ PreCommit:
     requires_files: false
     required: true
     quiet: true
-    pattern: '^git@yaodong.org$'
+    pattern: '^git@yaodong.dev$'
 

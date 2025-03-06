@@ -1,5 +1,7 @@
 #!/bin/bash
 
+brew install pyenv
+
 PLUGIN_DIR="$(pyenv root)/plugins/pyenv-update"
 
 # Check if pyenv-update plugin directory exists

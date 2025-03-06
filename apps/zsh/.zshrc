@@ -68,7 +68,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(starship git ruby rbenv nvm python pyenv docker yarn fzf zsh-interactive-cd)
+plugins=(starship git ruby rbenv nvm python docker yarn fzf zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,3 +100,15 @@ bindkey '^[[A' history-search-backward # arrow up
 bindkey '^[[B' history-search-forward  # arrow down
 bindkey '^I^I' autosuggest-accept      # tab + tab
 bindkey '^[[Z' autosuggest-accept      # shift + tab
+
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+fi
+
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
