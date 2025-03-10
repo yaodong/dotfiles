@@ -73,6 +73,7 @@ These scripts are optional and can be run at any time after the initial setup. E
 - [tao-of-tmux](https://tao-of-tmux.readthedocs.io/)
 - [LazyVim](https://github.com/LazyVim/LazyVim/)
 - [IdeaVim](https://github.com/JetBrains/ideavim)
+- [macOS Defaults](https://macos-defaults.com/)
 
 ## License
 
