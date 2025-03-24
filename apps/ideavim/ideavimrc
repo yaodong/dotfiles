@@ -1,18 +1,75 @@
 "" Base Settings
 
+" System clipboard integration
+set clipboard+=unnamed
+
+" Line numbers and cursor settings
 set scrolloff=10
-set linenumber
+set relativenumber
+set number
+set cursorline
+set cursorcolumn
 set showmode
 set showcmd
 
+" Search settings
 set smartcase
 set incsearch
 set hlsearch
+set ignorecase
+set inccommand=split
+set grepformat=%f:%l:%c:%m
 
+" Visual feedback
 set visualbell
+set showmatch
+set matchtime=2
+set list
+set listchars=tab:→\ ,space:·,trail:·
 
-" Use system clipboard
-set clipboard+=unnamed
+" Indentation settings
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set autoindent
+set smartindent
+set breakindent
+set showbreak=..
+
+" Performance optimizations
+set lazyredraw
+set ttyfast
+set timeoutlen=500
+set ttimeoutlen=0
+
+" File handling
+set hidden
+set nobackup
+set nowritebackup
+set noswapfile
+set undofile
+set undodir=~/.vim/undodir
+
+" Completion settings
+set completeopt=menu,menuone,noselect
+set shortmess+=c
+set pumheight=10
+
+" Error handling
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Scrolling settings
+set scrolloff=8
+set sidescrolloff=8
+set nowrap
+
+" Status line
+set laststatus=2
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 
 let mapleader = " "
 
@@ -21,6 +78,11 @@ set surround
 set highlightedyank
 set sneak
 set nerdtree
+set multiple-cursors
+set commentary
+set auto-pairs
+set matchit
+set matchparen
 
 " Easymotion settings
 set easymotion
@@ -51,7 +113,10 @@ let g:WhichKeyDesc_window_split_vertically = "<leader>wv Split vertically"
 let g:WhichKeyDesc_window_split_horizontally = "<leader>wh Split horizontally"
 let g:WhichKeyDesc_window_split_unsplit = "<leader>wu Unsplit"
 let g:WhichKeyDesc_window_split_move_editor = "<leader>wm Move editor to opposite tab group"
-
+let g:WhichKeyDesc_window_left = "<leader>wh Move to left window"
+let g:WhichKeyDesc_window_right = "<leader>wl Move to right window"
+let g:WhichKeyDesc_window_up = "<leader>wk Move to upper window"
+let g:WhichKeyDesc_window_down = "<leader>wj Move to lower window"
 
 let g:WhichKeyDesc_display = "<leader>d Display options"
 let g:WhichKeyDesc_zen_mode = "<leader>dz Toggle Zen mode"
@@ -101,25 +166,50 @@ let g:WhichKeyDesc_errors_prev = "<leader>ep Go to previous error in solution"
 
 "" Key mappings
 
-inoremap jk <Esc>
+" Window navigation using Space
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>wl <C-w>l
+
+" Better tab navigation
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-w> :tabclose<CR>
+
+" Better indentation with visual selection
+vnoremap < <gv
+vnoremap > >gv
+
+" Keep selection after indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Quick save and quit
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" Better search
+nnoremap <leader>/ :noh<CR>
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+
+" Quick buffer navigation
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
+nnoremap <leader>bd :bdelete<CR>
+
+" Quick window resizing
+nnoremap <leader>wh :resize +5<CR>
+nnoremap <leader>wl :resize -5<CR>
+nnoremap <leader>wj :vertical resize +5<CR>
+nnoremap <leader>wk :vertical resize -5<CR>
 
 " Tab navigation
 nnoremap <A-n> :tabnext<CR>
 nnoremap <A-p> :tabprev<CR>
 
 " Pane navigation
-nnoremap <A-h> <C-w>h
-nnoremap <A-l> <C-w>l
-nnoremap <A-k> <C-w>k
-nnoremap <A-j> <C-w>j
-
-" Jump between methods
 nnoremap [[ <Action>(MethodUp)
 nnoremap ]] <Action>(MethodDown)
-
-" Easy visual indentation
-vnoremap < <gv
-vnoremap > >gv
 
 " Execute macro saved in 'q' register
 nnoremap qj @q
