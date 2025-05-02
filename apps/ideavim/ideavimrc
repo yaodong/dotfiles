@@ -1,7 +1,7 @@
 "" Base Settings
 
 " System clipboard integration
-set clipboard+=unnamed
+"set clipboard+=unnamed
 
 " Line numbers and cursor settings
 set scrolloff=10
