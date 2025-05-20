@@ -1,47 +1,23 @@
 #!/bin/bash
 
-if ! brew list | grep -q pyenv; then
-  echo "pyenv could not be found. Installing..."
-  brew install pyenv
-fi
-
-if ! brew list | grep -q pyenv-virtualenv; then
-  echo "pyenv-virtualenv could not be found. Installing..."
-  brew install pyenv-virtualenv
-fi
-
-PYTHON_VERSION=3.12.8
-PLUGIN_DIR="$(pyenv root)/plugins/pyenv-update"
-
-# Check if pyenv-update plugin directory exists
-if [ ! -d "$PLUGIN_DIR" ]; then
-  echo "pyenv-update plugin not found. Installing..."
-  git clone https://github.com/pyenv/pyenv-update.git "$PLUGIN_DIR"
+# Check for uv installation
+if ! command -v uv &> /dev/null; then
+  echo "uv could not be found. Installing..."
+  brew install uv
+  echo "uv has been installed successfully!"
 else
-  echo "pyenv-update plugin found. Checking for updates..."
-  cd "$PLUGIN_DIR"
-
-  # Check if there are any changes to pull
-  git remote update
-  LOCAL=$(git rev-parse @)
-  REMOTE=$(git rev-parse @{u})
-
-  if [ "$LOCAL" != "$REMOTE" ]; then
-    echo "Updates available. Pulling latest changes..."
-    git pull
-  else
-    echo "pyenv-update is up to date"
-  fi
+  echo "uv is already installed"
 fi
 
-if ! pyenv versions | grep -q $PYTHON_VERSION; then
-  echo "Installing Python $PYTHON_VERSION..."
-  pyenv install $PYTHON_VERSION
+PYTHON_VERSION=3.12
+
+# Install Python if needed
+if ! uv python list | grep -q "${PYTHON_VERSION}"; then
+  echo "Installing Python ${PYTHON_VERSION}..."
+  uv python install ${PYTHON_VERSION}
+  echo "Python ${PYTHON_VERSION} has been installed successfully!"
+else
+  echo "Python ${PYTHON_VERSION} is already installed"
 fi
 
-pyenv global $PYTHON_VERSION
-echo "Python $PYTHON_VERSION installed and set as global version"
-
-# Update pyenv
-echo "Updating pyenv..."
-pyenv update
+echo "Setup complete! Python ${PYTHON_VERSION} is ready to use with uv"
