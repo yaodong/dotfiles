@@ -5,7 +5,6 @@
 
 " Line numbers and cursor settings
 set scrolloff=10
-set relativenumber
 set number
 set cursorline
 set cursorcolumn
