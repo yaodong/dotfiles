@@ -19,6 +19,8 @@ return {
     "nvim-neotest/neotest",
     event = "VeryLazy",
     dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/nvim-nio",
       "nvim-neotest/neotest-python",
       "zidhuss/neotest-minitest",
     },
