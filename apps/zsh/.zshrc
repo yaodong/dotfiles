@@ -116,3 +116,7 @@ if [ -d "$HOME/.nvm" ]; then
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
+
+if [ -d "$HOME/.bun" ]; then
+  export PATH="$HOME/.bun/bin:$PATH"
+fi
