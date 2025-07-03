@@ -14,7 +14,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      colorscheme = "catppuccin-mocha",
+      flavour = "catppuccin-mocha",
       integrations = { blink_cmp = true },
     },
   },
