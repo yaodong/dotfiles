@@ -30,7 +30,6 @@ fi
 # Update Homebrew and add required taps
 echo "Updating Homebrew and adding required taps..."
 brew update
-brew tap homebrew/bundle
 brew tap homebrew/services
 
 # Install essential packages
