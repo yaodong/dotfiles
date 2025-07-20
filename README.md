@@ -5,7 +5,6 @@ This repository contains my personal dotfiles configuration for macOS. These con
 ## Overview
 
 The configuration includes:
-- [ghostty](https://github.com/ghostty/ghostty): A terminal emulator.
 - [neovim](https://neovim.io/) with [LazyVim](https://github.com/LazyVim/LazyVim): A modern, extensible Vim-based text editor.
 - [starship](https://github.com/starship/starship): A shell prompt that shows information about your project.
 - [tmux](https://github.com/tmux/tmux): A terminal multiplexer.

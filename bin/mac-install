@@ -30,7 +30,6 @@ fi
 # Update Homebrew and add required taps
 echo "Updating Homebrew and adding required taps..."
 brew update
-brew tap homebrew/services
 
 # Install essential packages
 echo "Installing essential packages..."
@@ -48,27 +47,40 @@ brew install btop
 brew install eza
 brew install fzf
 brew install git
-brew install tldr
 brew install wget
 brew install zoxide
-brew install yazi
 brew install lazygit
 brew install lazydocker
+brew install mise
 
 # Install applications
 echo "Installing applications..."
+brew install --cask --no-quarantine alacritty
+brew install tmux
 brew install neovim
 brew install starship
 brew install zsh-autosuggestions
-brew install --cask ghostty
+brew install --cask 1password
+brew install --cask betterdisplay
+brew install hashicorp/tap/terraform
+
+# Install docker or orbstack depending on the user
+if echo "$(whoami)" | grep -q "\."; then
+  brew install --cask docker # for work
+else
+  brew install --cask orbstack # for personal
+fi
 
 
-bash "$BASE_DIR/apps/tmux/install.sh"
 
 # Install fonts
 echo "Installing fonts..."
 brew install --cask font-jetbrains-mono
 brew install --cask font-jetbrains-mono-nerd-font
+
+# Install tiling window manager
+brew install --cask nikitabobko/tap/aerospace
+brew install FelixKratz/formulae/sketchybar
 
 # Configure
 mkdir -p ~/.tmux/plugins

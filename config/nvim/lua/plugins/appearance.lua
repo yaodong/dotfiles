@@ -3,7 +3,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "catppuccin-macchiato",
     },
   },
 
@@ -14,7 +14,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "catppuccin-mocha",
+      flavour = "catppuccin-macchiato",
       integrations = { blink_cmp = true },
     },
   },

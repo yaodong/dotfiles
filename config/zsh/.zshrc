@@ -68,7 +68,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(starship git ruby rbenv nvm python docker yarn fzf zsh-interactive-cd)
+plugins=(starship git zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -77,9 +77,8 @@ alias ls='eza -lh --group-directories-first --icons'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
-alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
-alias vim=nvim
-alias hack='tmux new-session -A -D -s Hack'
+alias n=nvim
+alias t='tmux new-session -A -D -s Today'
 
 # common configurations
 export LC_ALL=en_US.utf-8
@@ -101,22 +100,6 @@ bindkey '^[[B' history-search-forward  # arrow down
 bindkey '^I^I' autosuggest-accept      # tab + tab
 bindkey '^[[Z' autosuggest-accept      # shift + tab
 
-if [ -d "/usr/local/opt/openjdk" ]; then
-  export PATH="/usr/local/opt/openjdk/bin:$PATH"
-fi
-
-if [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-fi
-
-if [ -d "$HOME/.nvm" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-fi
-
-if [ -d "$HOME/.bun" ]; then
-  export PATH="$HOME/.bun/bin:$PATH"
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate bash)"
 fi

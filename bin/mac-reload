@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -e
+
+echo "Reloading configurations..."
+
+echo "Restarting sketchybar..."
+brew services restart sketchybar
+
+echo "Reloading aerospace config..."
+aerospace reload-config 2>/dev/null || echo "Note: aerospace not running or not found"
+
+echo "Configuration reload completed!"
