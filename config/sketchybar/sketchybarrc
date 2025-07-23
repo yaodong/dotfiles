@@ -54,6 +54,12 @@ for sid in $(aerospace list-workspaces --all); do
         background.corner_radius=5 \
         background.height=20 \
         background.drawing=off \
+        label.padding_left=5 \
+        label.padding_right=7 \
+        icon.padding_left=0 \
+        icon.padding_right=0 \
+        background.padding_left=0 \
+        background.padding_right=0 \
         label="$sid" \
         click_script="aerospace workspace $sid" \
         script="$CONFIG_DIR/plugins/aerospace.sh $sid"
@@ -120,3 +126,7 @@ sketchybar --add item slack right \
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
+
+##### Set initial workspace background #####
+CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
+FOCUSED_WORKSPACE="$CURRENT_WORKSPACE" NAME="space.$CURRENT_WORKSPACE" $CONFIG_DIR/plugins/aerospace.sh "$CURRENT_WORKSPACE"
