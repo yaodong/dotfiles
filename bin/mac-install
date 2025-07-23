@@ -79,6 +79,7 @@ brew install --cask font-jetbrains-mono-nerd-font
 # Install tiling window manager
 brew install --cask nikitabobko/tap/aerospace
 brew install FelixKratz/formulae/sketchybar
+brew install FelixKratz/formulae/borders
 
 # Configure
 mkdir -p ~/.tmux/plugins
