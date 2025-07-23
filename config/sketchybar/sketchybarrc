@@ -65,6 +65,9 @@ for sid in $(aerospace list-workspaces --all); do
         script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
 
+CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
+sketchybar --set space.$CURRENT_WORKSPACE background.drawing=on
+
 # SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
 # for i in "${!SPACE_ICONS[@]}"
 # do
