@@ -56,11 +56,18 @@ automatically-unhide-macos-hidden-apps = false
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
     inner.horizontal = 3
-    inner.vertical =   3
-    outer.left =       3
-    outer.bottom =     3
-    outer.top =        [{ monitor.main = 35 }, 35]
-    outer.right =      3
+    inner.vertical   = 3
+    outer.left       = 3
+    outer.bottom     = 3
+    outer.right      = 3
+    # Adaptive top gap for monitors with and without notches
+    # Built-in displays (like MacBook Pro with notch) need more space
+    # External monitors without notches need less space
+    outer.top =        [
+        { monitor."Built-in Retina Display" = 3 },   # For MacBook Pro with notch
+        { monitor.main = 35 },                       # Main monitor (could be external)
+        35                                           # Default for other external monitors
+    ]
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

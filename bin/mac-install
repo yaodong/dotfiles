@@ -66,12 +66,10 @@ brew install hashicorp/tap/terraform
 
 # Install docker or orbstack depending on the user
 if echo "$(whoami)" | grep -q "\."; then
-  brew install --cask docker # for work
+  echo "Skipping orbstack installation"
 else
-  brew install --cask orbstack # for personal
+  brew install --cask orbstack
 fi
-
-
 
 # Install fonts
 echo "Installing fonts..."
