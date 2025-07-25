@@ -1,0 +1,12 @@
+{
+    "window.commandCenter": true,
+    "git.autofetch": true,
+    "workbench.iconTheme": "catppuccin-macchiato",
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "vim.handleKeys": {
+        "<C-s>": false,
+        "<C-z>": false,
+        "<C-p>": false,
+        "<C-w>": false
+    }
+}
