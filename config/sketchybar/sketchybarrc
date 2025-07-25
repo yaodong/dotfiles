@@ -4,7 +4,7 @@
 # https://github.com/FelixKratz/dotfiles
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
-FONT_NAME="JetBrainsMono Nerd Font"
+FONT_NAME="Hack Nerd Font"
 FONT_SIZE_NORMAL=14
 FONT_SIZE_SMALL=12
 FONT_SIZE_LARGE=17
