@@ -134,18 +134,24 @@ sketchybar --add item front_app left \
 # https://felixkratz.github.io/SketchyBar/config/events
 
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh"
+           --set clock update_freq=10 icon=  \
+           script="$PLUGIN_DIR/clock.sh"
 
 sketchybar --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change
+
+sketchybar --add item cpu right \
+           --set cpu update_freq=5 icon=  \
+           script="$PLUGIN_DIR/cpu.sh"
 
 sketchybar --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change
 
 sketchybar --add item keyboard right \
-           --set keyboard icon= script="$PLUGIN_DIR/keyboard.sh" \
+           --set keyboard icon=  \
+           script="$PLUGIN_DIR/keyboard.sh" \
            --add event keyboard_change "AppleSelectedInputSourcesChangedNotification" \
            --subscribe keyboard keyboard_change
 
