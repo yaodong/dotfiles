@@ -78,6 +78,8 @@ alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 alias n=nvim
+alias vi=nvim
+alias vim=nvim
 alias t='tmux new-session -A -D -s Today'
 
 # common configurations
