@@ -96,14 +96,10 @@ automatically-unhide-macos-hidden-apps = false
     # Application launching hotkeys (moved from Hammerspoon)
     alt-enter = 'exec-and-forget /opt/homebrew/bin/alacritty'
     alt-w = 'close'
+    # Quick launch hotkeys for frequently used applications
     alt-b = 'exec-and-forget open -n -a "Google Chrome"'
-
-    # Special workspaces for specific apps
-    alt-c = ['exec-and-forget open -n -a Cursor', 'workspace C']
+    # Assign some frequently used applications to dedicated workspaces for quick access
     alt-s = ['exec-and-forget open -n -a Slack', 'workspace S']
-    alt-r = ['exec-and-forget open -n -a RubyMine', 'workspace R']
-    alt-p = ['exec-and-forget open -n -a PyCharm', 'workspace P']
-    alt-i = ['exec-and-forget open -n -a "Intellij IDEA"', 'workspace I']
     alt-m = ['exec-and-forget open -n -a "Google Meet"', 'workspace M']
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
@@ -132,6 +128,11 @@ automatically-unhide-macos-hidden-apps = false
     alt-3 = 'workspace 3'
     alt-4 = 'workspace 4'
     alt-5 = 'workspace 5'
+    alt-c = 'workspace C'
+    alt-n = 'workspace N'
+    alt-p = 'workspace P'
+    alt-j = 'workspace J'
+    alt-r = 'workspace R'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -139,6 +140,13 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-c = 'move-node-to-workspace C'
+    alt-shift-s = 'move-node-to-workspace S'
+    alt-shift-m = 'move-node-to-workspace M'
+    alt-shift-n = 'move-node-to-workspace N'
+    alt-shift-p = 'move-node-to-workspace P'
+    alt-shift-j = 'move-node-to-workspace J'
+    alt-shift-r = 'move-node-to-workspace R'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
@@ -151,6 +159,37 @@ automatically-unhide-macos-hidden-apps = false
     # Disable "hide application"
     cmd-h = []
     cmd-alt-h = []
+
+# Automatic app assignments to workspaces
+# To find app IDs, run: aerospace list-apps
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Cursor'
+run = "move-node-to-workspace C"
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = "move-node-to-workspace S"
+
+[[on-window-detected]]
+if.app-id = 'inc.tana.desktop'
+run = "move-node-to-workspace N"
+
+[[on-window-detected]]
+if.app-id = 'notion.id'
+run = "move-node-to-workspace N"
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.pycharm'
+run = "move-node-to-workspace P"
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij'
+run = "move-node-to-workspace J"
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.rubymine'
+run = "move-node-to-workspace R"
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
