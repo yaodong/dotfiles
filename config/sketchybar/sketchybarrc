@@ -142,8 +142,9 @@ sketchybar --add item volume right \
            --subscribe volume volume_change
 
 sketchybar --add item cpu right \
-           --set cpu update_freq=5 icon=  \
-           script="$PLUGIN_DIR/cpu.sh"
+           --set cpu update_freq=5 icon=  \
+           script="$PLUGIN_DIR/cpu.sh" \
+           click_script="/opt/homebrew/bin/alacritty -e btop"
 
 sketchybar --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \

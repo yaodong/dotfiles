@@ -4,7 +4,7 @@
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-    'exec-and-forget sketchybar',
+    'exec-and-forget sketchybar --reload', # Reload sketchybar after startup
     'workspace E', 'layout accordion horizontal',  # Set workspace E to accordion for IDEs
     'workspace 1' # Back to the first workspace
 ]
@@ -103,7 +103,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-b = 'exec-and-forget open -n -a "Google Chrome"'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    alt-slash = 'layout tiles horizontal vertical'
+    alt-slash = 'layout tiles horizontal vertical'  # Simple test: alt+L for layout
     alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
