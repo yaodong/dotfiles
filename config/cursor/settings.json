@@ -8,5 +8,6 @@
         "<C-z>": false,
         "<C-p>": false,
         "<C-w>": false
-    }
+    },
+    "editor.fontFamily": "'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace"
 }
