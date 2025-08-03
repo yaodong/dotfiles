@@ -22,6 +22,7 @@ background-blur = true
 
 copy-on-select = clipboard
 clipboard-trim-trailing-spaces = true
+quit-after-last-window-closed = true
 
 # Disable all tab-related shortcuts because it doesn't work well with yabai
 keybind = super+physical:four=unbind
