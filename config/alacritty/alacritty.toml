@@ -1,9 +1,0 @@
-[env]
-TERM = "xterm-256color"
-
-[general]
-import = [
-    "appearance.toml",
-    "theme.toml",
-    "~/.local/alacritty/alacritty.toml"
-]

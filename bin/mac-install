@@ -4,6 +4,24 @@ set -e
 
 BASE_DIR="$(cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd)"
 
+# Helper function for cask installations
+brew_cask() {
+  brew install --cask "$1" || echo "$1 already installed"
+}
+
+# Get list of installed packages once
+INSTALLED_PACKAGES=$(brew list)
+
+# Helper function to check if package is installed and install if not
+brew_install() {
+  if echo "$INSTALLED_PACKAGES" | grep -q "^$1$"; then
+    echo "$1 is already installed"
+  else
+    echo "Installing $1..."
+    brew install "$1"
+  fi
+}
+
 # Disable press and hold for key repeat
 defaults write -g ApplePressAndHoldEnabled -bool false
 
@@ -33,55 +51,54 @@ brew update
 
 # Install essential packages
 echo "Installing essential packages..."
-brew install gcc
-brew install ripgrep
-brew install coreutils
-brew install fd
-brew install cmake
-brew install tree-sitter
+brew_install gcc
+brew_install ripgrep
+brew_install coreutils
+brew_install fd
+brew_install cmake
+brew_install tree-sitter
 
 # Install utilities
 echo "Installing utilities..."
-brew install bat
-brew install btop
-brew install fastfetch
-brew install eza
-brew install fzf
-brew install git
-brew install wget
-brew install zoxide
-brew install lazygit
-brew install lazydocker
-brew install mise
+brew_install bat
+brew_install btop
+brew_install fastfetch
+brew_install eza
+brew_install fzf
+brew_install git
+brew_install wget
+brew_install zoxide
+brew_install lazygit
+brew_install lazydocker
+brew_install mise
 
 # Install applications
 echo "Installing applications..."
-brew install --cask --no-quarantine alacritty
-brew install tmux
-brew install neovim
-brew install starship
-brew install zsh-autosuggestions
-brew install --cask 1password
-brew install --cask betterdisplay
-brew install hashicorp/tap/terraform
+brew_cask ghostty
+brew_install tmux
+brew_install neovim
+brew_install starship
+brew_install zsh-autosuggestions
+brew_install hashicorp/tap/terraform
 
 # Install docker or orbstack depending on the user
 if echo "$(whoami)" | grep -q "\."; then
   echo "Skipping orbstack installation"
 else
-  brew install --cask orbstack
+  brew_cask orbstack
 fi
 
 # Install fonts
 echo "Installing fonts..."
-brew install --cask font-jetbrains-mono
-brew install --cask font-jetbrains-mono-nerd-font
-brew install --cask font-hack-nerd-font
+brew_cask font-jetbrains-mono
+brew_cask font-jetbrains-mono-nerd-font
+brew_cask font-hack-nerd-font
+brew_cask 1password
+brew_cask betterdisplay
+brew_cask nikitabobko/tap/aerospace
 
-# Install tiling window manager
-brew install --cask nikitabobko/tap/aerospace
-brew install FelixKratz/formulae/sketchybar
-brew install FelixKratz/formulae/borders
+brew_install FelixKratz/formulae/sketchybar
+brew_install FelixKratz/formulae/borders
 
 # Configure
 mkdir -p ~/.tmux/plugins
