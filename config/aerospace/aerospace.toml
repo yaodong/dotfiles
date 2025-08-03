@@ -73,6 +73,11 @@ automatically-unhide-macos-hidden-apps = false
         35                                           # Default for other external monitors
     ]
 
+# Force workspace X to always appear on external monitor
+# To find monitor names, run: aerospace list-monitors
+[workspace-to-monitor-force-assignment]
+X = "BenQ RD280U"
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -123,11 +128,9 @@ automatically-unhide-macos-hidden-apps = false
     alt-equal = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
+    alt-1 = 'workspace 1' # General workspace
+    alt-2 = 'workspace 2' # Secondary workspace
+    alt-3 = 'workspace 3' # Temporary workspace
     # Dedicated workspace for Cursor
     alt-c = 'workspace C'
     # Dedicated workspace for IDEs: RubyMine, PyCharm, IntelliJ, etc.
@@ -135,21 +138,22 @@ automatically-unhide-macos-hidden-apps = false
     # Dedicated workspace for note taking: Notion, Tana, etc.
     alt-n = 'workspace N'
     # Dedicated workspace for Slack
-    alt-s = ['exec-and-forget open -n -a Slack', 'workspace S']
+    alt-s = ['exec-and-forget open -a Slack', 'workspace S']
     # Dedicated workspace for Google Meet
-    alt-m = ['exec-and-forget open -n -a "Google Meet"', 'workspace M']
+    alt-m = ['exec-and-forget open -a "Google Meet"', 'workspace M']
+    # Dedicated workspace for external monitor
+    alt-x = 'workspace X'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
     alt-shift-2 = 'move-node-to-workspace 2'
     alt-shift-3 = 'move-node-to-workspace 3'
-    alt-shift-4 = 'move-node-to-workspace 4'
-    alt-shift-5 = 'move-node-to-workspace 5'
     alt-shift-c = 'move-node-to-workspace C'
     alt-shift-e = 'move-node-to-workspace E'
     alt-shift-s = 'move-node-to-workspace S'
     alt-shift-m = 'move-node-to-workspace M'
     alt-shift-n = 'move-node-to-workspace N'
+    alt-shift-x = 'move-node-to-workspace X'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
