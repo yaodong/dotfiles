@@ -59,11 +59,11 @@ automatically-unhide-macos-hidden-apps = false
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 3
-    inner.vertical   = 3
-    outer.left       = 3
-    outer.bottom     = 3
-    outer.right      = 3
+    inner.horizontal = 7
+    inner.vertical   = 7
+    outer.left       = 7
+    outer.bottom     = 7
+    outer.right      = 7
     # Adaptive top gap for monitors with and without notches
     # Built-in displays (like MacBook Pro with notch) need more space
     # External monitors without notches need less space
