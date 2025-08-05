@@ -127,21 +127,21 @@ X = "BenQ RD280U"
     alt-minus = 'resize smart -50'
     alt-equal = 'resize smart +50'
 
+    # See: https://nikitabobko.github.io/AeroSpace/commands#join-with
+    alt-ctrl-right = 'join-with right'
+    alt-ctrl-left = 'join-with left'
+    alt-ctrl-down = 'join-with down'
+    alt-ctrl-up = 'join-with up'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     alt-1 = 'workspace 1' # General workspace
     alt-2 = 'workspace 2' # Secondary workspace
     alt-3 = 'workspace 3' # Temporary workspace
-    # Dedicated workspace for Cursor
     alt-c = 'workspace C'
-    # Dedicated workspace for IDEs: RubyMine, PyCharm, IntelliJ, etc.
     alt-e = 'workspace E'
-    # Dedicated workspace for note taking: Notion, Tana, etc.
+    alt-m = 'workspace M'
     alt-n = 'workspace N'
-    # Dedicated workspace for Slack
-    alt-s = ['exec-and-forget open -a Slack', 'workspace S']
-    # Dedicated workspace for Google Meet
-    alt-m = ['exec-and-forget open -a "Google Meet"', 'workspace M']
-    # Dedicated workspace for external monitor
+    alt-s = 'workspace S'
     alt-x = 'workspace X'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
