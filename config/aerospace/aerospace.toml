@@ -103,7 +103,7 @@ X = "BenQ RD280U"
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
     # Application launching hotkeys (moved from Hammerspoon)
-    alt-enter = 'exec-and-forget open -n -a Ghostty'
+    alt-enter = 'exec-and-forget /opt/homebrew/bin/alacritty'
     alt-w = 'close'
     alt-b = 'exec-and-forget open -n -a "Google Chrome"'
 

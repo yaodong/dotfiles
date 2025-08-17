@@ -6,7 +6,14 @@ BASE_DIR="$(cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd)"
 
 # Helper function for cask installations
 brew_cask() {
-  brew install --cask "$1" || echo "$1 already installed"
+  local package="$1"
+  local quarantine_flag=""
+
+  if [ "$2" = "--no-quarantine" ]; then
+    quarantine_flag="--no-quarantine"
+  fi
+
+  brew install --cask $quarantine_flag "$package" || echo "$package already installed"
 }
 
 # Get list of installed packages once
@@ -74,7 +81,7 @@ brew_install mise
 
 # Install applications
 echo "Installing applications..."
-brew_cask ghostty
+brew_cask alacritty --no-quarantine
 brew_install tmux
 brew_install neovim
 brew_install starship
