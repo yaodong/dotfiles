@@ -5,8 +5,6 @@
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
     'exec-and-forget sketchybar --reload', # Reload sketchybar after startup
-    'workspace E', 'layout accordion horizontal',  # Set workspace E to accordion for IDEs
-    'workspace 1' # Back to the first workspace
 ]
 
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -73,11 +71,6 @@ automatically-unhide-macos-hidden-apps = false
         35                                           # Default for other external monitors
     ]
 
-# Force workspace X to always appear on external monitor
-# To find monitor names, run: aerospace list-monitors
-[workspace-to-monitor-force-assignment]
-X = "BenQ RD280U"
-
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -134,26 +127,18 @@ X = "BenQ RD280U"
     alt-ctrl-up = 'join-with up'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-1 = 'workspace 1' # General workspace
-    alt-2 = 'workspace 2' # Secondary workspace
-    alt-3 = 'workspace 3' # Temporary workspace
-    alt-c = 'workspace C'
-    alt-e = 'workspace E'
-    alt-m = 'workspace M'
-    alt-n = 'workspace N'
-    alt-s = 'workspace S'
-    alt-x = 'workspace X'
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
     alt-shift-2 = 'move-node-to-workspace 2'
     alt-shift-3 = 'move-node-to-workspace 3'
-    alt-shift-c = 'move-node-to-workspace C'
-    alt-shift-e = 'move-node-to-workspace E'
-    alt-shift-s = 'move-node-to-workspace S'
-    alt-shift-m = 'move-node-to-workspace M'
-    alt-shift-n = 'move-node-to-workspace N'
-    alt-shift-x = 'move-node-to-workspace X'
+    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-5 = 'move-node-to-workspace 5'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
@@ -172,39 +157,23 @@ X = "BenQ RD280U"
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Cursor'
-run = "move-node-to-workspace C"
+run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = "move-node-to-workspace S"
-
-[[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
-run = "move-node-to-workspace S"
-
-[[on-window-detected]]
-if.app-id = 'inc.tana.desktop'
-run = "move-node-to-workspace N"
-
-[[on-window-detected]]
-if.app-id = 'notion.id'
-run = "move-node-to-workspace N"
+run = "move-node-to-workspace 4"
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.pycharm'
-run = "move-node-to-workspace E"
+run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.intellij'
-run = "move-node-to-workspace E"
+run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.rubymine'
-run = "move-node-to-workspace E"
-
-[[on-window-detected]]
-if.app-id = 'com.todoist.mac.Todoist'
-run = "layout floating"
+run = "move-node-to-workspace 2"
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
