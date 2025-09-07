@@ -175,6 +175,10 @@ run = "move-node-to-workspace 2"
 if.app-id = 'com.jetbrains.rubymine'
 run = "move-node-to-workspace 2"
 
+[[on-window-detected]]
+if.app-id = 'de.zettelkasten.TheArchive'
+run = "layout floating"
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]

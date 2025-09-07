@@ -102,6 +102,7 @@ brew_cask font-jetbrains-mono-nerd-font
 brew_cask font-hack-nerd-font
 brew_cask 1password
 brew_cask betterdisplay
+brew_cask the-archive
 brew_cask nikitabobko/tap/aerospace
 
 brew_install FelixKratz/formulae/sketchybar
