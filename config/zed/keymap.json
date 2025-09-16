@@ -1,0 +1,8 @@
+[
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "h": "project_panel::ToggleHideGitIgnore"
+    }
+  }
+]
