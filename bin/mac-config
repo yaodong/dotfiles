@@ -36,6 +36,7 @@ create_symlink "$REPO_DIR/config/tmux/.tmux.conf" ~/.tmux.conf
 create_symlink "$REPO_DIR/config/ideavim/ideavimrc" ~/.ideavimrc
 create_symlink "$REPO_DIR/config/alacritty" ~/.config/alacritty
 create_symlink "$REPO_DIR/config/ghostty" ~/.config/ghostty
+create_symlink "$REPO_DIR/config/zed/settings.json" ~/.config/zed/settings.json
 create_symlink "$REPO_DIR/config/aerospace" ~/.config/aerospace
 create_symlink "$REPO_DIR/config/sketchybar" ~/.config/sketchybar
 
