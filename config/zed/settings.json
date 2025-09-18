@@ -35,6 +35,7 @@
   },
   "hide_mouse": "on_typing",
   "icon_theme": "Catppuccin Macchiato",
+  "preferred_line_length": 120,
   "languages": {
     "Python": {
       "formatter": {
@@ -46,6 +47,12 @@
     },
     "Ruby": {
       "language_servers": ["ruby-lsp", "!solargraph"]
+    },
+    "HTML": {
+      "tab_size": 2
+    },
+    "CSS": {
+      "tab_size": 2
     }
   },
   "file_types": {

@@ -96,7 +96,7 @@ automatically-unhide-macos-hidden-apps = false
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
     # Application launching hotkeys (moved from Hammerspoon)
-    alt-enter = 'exec-and-forget /opt/homebrew/bin/alacritty'
+    alt-enter = 'exec-and-forget open -a "Ghostty"'
     alt-w = 'close'
     alt-b = 'exec-and-forget open -n -a "Google Chrome"'
 
