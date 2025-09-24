@@ -1,6 +1,6 @@
 theme = Catppuccin Mocha
 
-font-family = "CaskaydiaMono Nerd Font"
+font-family = "JetBrainsMono Nerd Font"
 font-style = Regular
 font-size = 13
 font-thicken = true
