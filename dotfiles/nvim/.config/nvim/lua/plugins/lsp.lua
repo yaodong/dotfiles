@@ -2,7 +2,7 @@ return {
 
   -- configurate nvim-lspconfig base on then mason configuration
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     opts = {
       ensure_installed = {
         "lua_ls",

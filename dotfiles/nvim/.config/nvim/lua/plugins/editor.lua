@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.comment",
+    "nvim-mini/mini.comment",
     event = "VeryLazy",
   },
 
@@ -74,7 +74,7 @@ return {
   },
 
   {
-    "echasnovski/mini.trailspace",
+    "nvim-mini/mini.trailspace",
     version = "*",
   },
 
