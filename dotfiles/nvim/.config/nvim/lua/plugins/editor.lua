@@ -59,12 +59,6 @@ return {
   },
 
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
-  },
-
-  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
@@ -76,6 +70,10 @@ return {
   {
     "nvim-mini/mini.trailspace",
     version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("mini.trailspace").setup()
+    end,
   },
 
   {

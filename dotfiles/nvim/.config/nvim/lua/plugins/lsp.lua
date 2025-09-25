@@ -32,6 +32,9 @@ return {
         pyright = {
           enabled = true,
         },
+        stylua = {
+          enabled = false,
+        },
       },
       diagnostics = {
         virtual_text = false,
