@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -64,6 +64,7 @@ brew_install coreutils
 brew_install fd
 brew_install cmake
 brew_install tree-sitter
+brew_install libyaml
 
 # Install utilities
 echo "Installing utilities..."
@@ -81,7 +82,6 @@ brew_install mise
 
 # Install applications
 echo "Installing applications..."
-brew_cask alacritty --no-quarantine
 brew_install tmux
 brew_install neovim
 brew_install starship
@@ -102,14 +102,6 @@ brew_cask font-jetbrains-mono-nerd-font
 brew_cask font-hack-nerd-font
 brew_cask 1password
 brew_cask betterdisplay
-brew_cask the-archive
-brew_cask nikitabobko/tap/aerospace
-
-brew_install FelixKratz/formulae/sketchybar
-brew_install FelixKratz/formulae/borders
-
-# Configure
-mkdir -p ~/.tmux/plugins
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+brew_cask ghostty
 
 echo "Setup completed successfully!"
