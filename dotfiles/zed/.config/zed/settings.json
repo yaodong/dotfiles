@@ -1,5 +1,4 @@
-// Zed settings
-//
+// Zed setting//
 // For information on how to configure Zed, see the Zed
 // documentation: https://zed.dev/docs/configuring-zed
 //
@@ -8,25 +7,28 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "agent": {
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
+    },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-3.7-sonnet"
-    }
+      "model": "claude-sonnet-4"
+    },
+    "model_parameters": []
   },
   "features": {
     "edit_prediction_provider": "copilot"
-  },
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
   },
   "vim_mode": true,
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "buffer_font_family": "JetBrainsMono Nerd Font",
+  "agent_ui_font_size": 16,
+  "agent_buffer_font_size": 15,
   "theme": {
     "mode": "system",
-    "light": "Catppuccin Frappé",
+    "light": "Catppuccin Macchiato",
     "dark": "One Dark"
   },
   "terminal": {
@@ -36,6 +38,7 @@
   "hide_mouse": "on_typing",
   "icon_theme": "Catppuccin Macchiato",
   "preferred_line_length": 120,
+  "show_whitespaces": "all",
   "languages": {
     "Python": {
       "formatter": {
@@ -59,6 +62,7 @@
     "Dockerfile": ["Dockerfile.*"]
   },
   "project_panel": {
+    "hide_hidden": false,
     "hide_gitignore": true
   },
   "auto_install_extensions": {
@@ -72,5 +76,23 @@
     "terraform": true,
     "catppuccin": true,
     "catppuccin-icons": true
+  },
+  "toolbar": {
+    "quick_actions": false,
+    "breadcrumbs": false
+  },
+  "title_bar": {
+    "show_sign_in": false
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "notification_panel": {
+    "button": false
+  },
+  "auto_signature_help": false,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
   }
 }
