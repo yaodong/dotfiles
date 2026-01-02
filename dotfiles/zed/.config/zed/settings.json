@@ -9,31 +9,27 @@
   "agent": {
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "gpt-4.1",
     },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
+      "model": "claude-sonnet-4",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "vim_mode": true,
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
   "buffer_font_family": "JetBrainsMono Nerd Font",
-  "agent_ui_font_size": 16,
-  "agent_buffer_font_size": 15,
   "theme": {
-    "mode": "system",
-    "light": "Catppuccin Macchiato",
-    "dark": "One Dark"
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Macchiato",
   },
   "terminal": {
     "toolbar": { "breadcrumbs": false },
-    "line_height": { "custom": 1.5 }
+    "line_height": { "custom": 1.5 },
   },
   "hide_mouse": "on_typing",
   "icon_theme": "Catppuccin Macchiato",
@@ -44,26 +40,26 @@
       "formatter": {
         "external": {
           "command": "black",
-          "arguments": ["--stdin-filename", "{buffer_path}", "-"]
-        }
-      }
+          "arguments": ["--stdin-filename", "{buffer_path}", "-"],
+        },
+      },
     },
     "Ruby": {
-      "language_servers": ["ruby-lsp", "!solargraph"]
+      "language_servers": ["ruby-lsp", "!solargraph"],
     },
     "HTML": {
-      "tab_size": 2
+      "tab_size": 2,
     },
     "CSS": {
-      "tab_size": 2
-    }
+      "tab_size": 2,
+    },
   },
   "file_types": {
-    "Dockerfile": ["Dockerfile.*"]
+    "Dockerfile": ["Dockerfile.*"],
   },
   "project_panel": {
     "hide_hidden": false,
-    "hide_gitignore": true
+    "hide_gitignore": false,
   },
   "auto_install_extensions": {
     "html": true,
@@ -75,24 +71,24 @@
     "dockerfile": true,
     "terraform": true,
     "catppuccin": true,
-    "catppuccin-icons": true
+    "catppuccin-icons": true,
   },
   "toolbar": {
     "quick_actions": false,
-    "breadcrumbs": false
+    "breadcrumbs": false,
   },
   "title_bar": {
-    "show_sign_in": false
+    "show_sign_in": false,
   },
   "collaboration_panel": {
-    "button": false
+    "button": false,
   },
   "notification_panel": {
-    "button": false
+    "button": false,
   },
   "auto_signature_help": false,
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
-  }
+    "metrics": false,
+  },
 }
