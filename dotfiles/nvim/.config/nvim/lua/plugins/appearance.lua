@@ -22,7 +22,12 @@ return {
     priority = 1000,
     opts = {
       flavour = "mocha",
-      integrations = { blink_cmp = true },
+      integrations = {
+        blink_cmp = true,
+        -- Explicitly disable bufferline integration to avoid missing module error
+        native_lsp = { enabled = true },
+        bufferline = false,
+      },
     },
   },
 
