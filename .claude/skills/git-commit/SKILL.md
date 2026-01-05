@@ -33,9 +33,9 @@ Review the diff output to understand:
 - The nature of changes (new feature, bug fix, refactor, docs, etc.)
 - The scope of impact
 
-### Step 3: Generate Commit Message
+### Step 3: Generate Commit Message and Ask for Confirmation
 
-Write a commit message following these rules:
+Write a commit message following these rules, then **ask the user to confirm before committing**:
 
 **Style: Simple Imperative**
 - Start with a verb: Add, Fix, Update, Remove, Refactor, Improve
@@ -53,30 +53,34 @@ Write a commit message following these rules:
 ```
 <subject line>
 
-<optional body - 1-2 sentences if needed>
-
-Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
+- <change 1>
+- <change 2>
 ```
 
-### Step 4: Create Commit
+Keep it concise. Only include the bullet list if there are multiple distinct changes.
+
+### Step 4: Ask for Confirmation
+
+Before committing, present the proposed commit message and files to the user. Use AskUserQuestion to confirm:
+- Show the commit message
+- List files to be committed
+- Ask "Proceed with this commit?"
+
+**Only proceed if the user confirms.**
+
+### Step 5: Create Commit and Push
+
+After user confirmation:
 
 ```bash
 git add <relevant files>
-git commit -m "$(cat <<'EOF'
-<commit message here>
-
-Generated with [Claude Code](https://claude.ai/code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-EOF
-)"
+git commit -m "<commit message>"
+git push
 ```
 
-### Step 5: Verify
+### Step 6: Verify
 
-Run `git status` to confirm the commit succeeded.
+Run `git status` to confirm the commit and push succeeded.
 
 ## Safety Rules
 
