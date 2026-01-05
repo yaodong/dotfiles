@@ -10,13 +10,13 @@ Personal macOS development environment setup containing dotfiles and installatio
 
 ```bash
 # Full installation (Homebrew packages, apps, fonts)
-./machines/mac/0-install.sh
+./scripts/install.sh
 
 # Link dotfiles to home directory
-./machines/mac/1-link-dotfiles.sh
+./scripts/link-dotfiles.sh
 
 # Apply macOS system defaults
-./machines/mac/2-better-defaults.sh
+./scripts/macos-defaults.sh
 ```
 
 ## Structure
@@ -24,11 +24,9 @@ Personal macOS development environment setup containing dotfiles and installatio
 - `dotfiles/` - Tool configurations, each subdirectory mirrors XDG paths for stow
   - `nvim/` - Neovim with LazyVim framework
   - `zsh/` - Zsh + Oh My Zsh configuration
-  - `aerospace/` - Tiling window manager
-  - `sketchybar/` - Status bar with shell plugins
-  - `ghostty/`, `tmux/`, `starship/` - Terminal tools
+  - `ghostty/`, `starship/` - Terminal tools
   - `zed/`, `cursor/`, `ideavim/` - Editor configs
-- `machines/` - Platform-specific install scripts (mac/, arch/)
+- `scripts/` - macOS install scripts
 
 ## Dotfile Management
 

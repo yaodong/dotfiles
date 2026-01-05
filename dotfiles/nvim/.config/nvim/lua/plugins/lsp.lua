@@ -11,6 +11,7 @@ return {
         "ruby_lsp",
         "cssls",
         "tailwindcss",
+        "yamlls",
       },
     },
   },

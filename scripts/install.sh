@@ -2,8 +2,6 @@
 
 set -e
 
-BASE_DIR="$(cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd)"
-
 # Helper function for cask installations
 brew_cask() {
   local package="$1"
@@ -82,7 +80,6 @@ brew_install mise
 
 # Install applications
 echo "Installing applications..."
-brew_install tmux
 brew_install neovim
 brew_install starship
 brew_install zsh-autosuggestions

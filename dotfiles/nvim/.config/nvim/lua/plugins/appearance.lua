@@ -1,6 +1,13 @@
 return {
 
   {
+    "folke/noice.nvim",
+    opts = {
+      cmdline = { format = { cmdline = { lang = "" } } },
+    },
+  },
+
+  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "catppuccin-mocha",
@@ -30,11 +37,5 @@ return {
         },
       })
     end,
-  },
-
-  -- disable tabs
-  {
-    "akinsho/bufferline.nvim",
-    enabled = false,
   },
 }

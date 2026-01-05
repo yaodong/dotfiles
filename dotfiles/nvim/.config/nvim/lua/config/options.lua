@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 vim.opt.relativenumber = false
+vim.opt.undofile = true
 
 vim.opt.list = true
 vim.opt.listchars = {
