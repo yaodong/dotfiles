@@ -8,10 +8,11 @@ STATE_FILE="$STATE_DIR/current"
 # Ensure state directory exists
 mkdir -p "$STATE_DIR"
 
-# Read current theme (default to dark)
-current="dark"
-if [ -f "$STATE_FILE" ]; then
-  current=$(cat "$STATE_FILE")
+# Detect current theme from macOS appearance (source of truth)
+if defaults read -g AppleInterfaceStyle &>/dev/null; then
+  current="dark"
+else
+  current="light"
 fi
 
 # Determine target theme
