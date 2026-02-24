@@ -112,7 +112,7 @@ bindkey '^[[Z' autosuggest-accept      # shift + tab
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 
 # Source machine-local overrides
 [ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"

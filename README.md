@@ -9,9 +9,9 @@ Clone this repo and run the platform-specific setup scripts. Detect the platform
 ```bash
 git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
 cd ~/.local/dotfiles
-./scripts/install-macos.sh   # Install Homebrew, CLI tools, apps, fonts
-./scripts/link-macos.sh      # Symlink all dotfiles to home directory
-./scripts/macos-defaults.sh  # Apply macOS system preferences
+./utils/install-macos   # Install Homebrew, CLI tools, apps, fonts
+./utils/link-macos      # Symlink all dotfiles to home directory
+./utils/macos-defaults  # Apply macOS system preferences
 ```
 
 ### Linux (headless server)
@@ -19,8 +19,8 @@ cd ~/.local/dotfiles
 ```bash
 git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
 cd ~/.local/dotfiles
-./scripts/install-linux.sh   # Install cross-platform packages via apt/dnf
-./scripts/link-linux.sh      # Symlink cross-platform dotfiles only
+./utils/install-linux   # Install cross-platform packages via apt/dnf
+./utils/link-linux      # Symlink cross-platform dotfiles only
 ```
 
 ### Verification
@@ -33,7 +33,7 @@ starship --version
 zsh --version
 ```
 
-If any script fails, read `packages.yaml` for per-package install notes and platform-specific alternatives.
+If any script fails, read `utils/packages.yaml` for per-package install notes and platform-specific alternatives.
 
 ## Overview
 
@@ -72,21 +72,21 @@ cd ~/.local/dotfiles
 #### macOS
 
 ```bash
-./scripts/install-macos.sh   # Install Homebrew packages, apps, fonts
-./scripts/link-macos.sh      # Link all dotfiles to home directory
-./scripts/macos-defaults.sh  # Apply macOS system defaults
+./utils/install-macos   # Install Homebrew packages, apps, fonts
+./utils/link-macos      # Link all dotfiles to home directory
+./utils/macos-defaults  # Apply macOS system defaults
 ```
 
 #### Linux
 
 ```bash
-./scripts/install-linux.sh   # Install cross-platform packages via apt/dnf
-./scripts/link-linux.sh      # Link cross-platform dotfiles only
+./utils/install-linux   # Install cross-platform packages via apt/dnf
+./utils/link-linux      # Link cross-platform dotfiles only
 ```
 
 ### Cross-Platform Support
 
-Most CLI tools and dotfiles work on both macOS and Linux. See `packages.yaml` for the full package manifest with platform tags and Linux install notes. macOS-specific items (Ghostty, Cursor, Zed configs, cask apps) are excluded from the Linux scripts.
+Most CLI tools and dotfiles work on both macOS and Linux. See `utils/packages.yaml` for the full package manifest with platform tags and Linux install notes. macOS-specific items (Ghostty, Cursor, Zed configs, cask apps) are excluded from the Linux utils.
 
 ## Keybindings
 

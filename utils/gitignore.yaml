@@ -1,0 +1,34 @@
+# Git global ignore patterns — ensure these exist in ~/.config/git/ignore.
+# Run utils/ensure-gitignore to merge missing patterns into existing file.
+# Does not overwrite; only appends patterns that are not already present.
+
+patterns:
+  # OS
+  - .DS_Store
+  - Thumbs.db
+  - Desktop.ini
+  # IDEs / editors
+  - .idea
+  - .vscode
+  - "*.swp"
+  - "*.swo"
+  - "*~"
+  # Build / dependencies
+  - node_modules/
+  - __pycache__/
+  - "*.pyc"
+  - .pytest_cache/
+  - .terraform/
+  - dist/
+  - build/
+  - target/
+  - vendor/
+  # Local / misc
+  - .bloop
+  - .metals
+  - metals.sbt
+  - mise.toml
+  - .env
+  - .env.local
+  - "*.log"
+  - .cache/

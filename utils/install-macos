@@ -94,4 +94,13 @@ brew_cask font-hack-nerd-font
 brew_cask 1password
 brew_cask ghostty
 
+# Configure npm global prefix to ~/.npm-global (no sudo needed)
+echo "Configuring npm global prefix..."
+mkdir -p "$HOME/.npm-global/bin"
+if command -v npm &>/dev/null; then
+  npm config set prefix "$HOME/.npm-global"
+else
+  echo "prefix=$HOME/.npm-global" > "$HOME/.npmrc"
+fi
+
 echo "Setup completed successfully!"

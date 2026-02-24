@@ -8,7 +8,7 @@ Personal development environment setup containing dotfiles and installation scri
 
 ## Source of Truth for AI Agents
 
-**`packages.yaml`** is the structured package manifest. It lists every package with `platform` tags (`[macos, linux]` or `[macos]`), install methods, and notes on Linux-specific alternatives. Read this file first when setting up a new machine.
+**`utils/packages.yaml`** is the structured package manifest. It lists every package with `platform` tags (`[macos, linux]` or `[macos]`), install methods, and notes on Linux-specific alternatives. Read this file first when setting up a new machine.
 
 ## Platform Support
 
@@ -40,22 +40,22 @@ Personal development environment setup containing dotfiles and installation scri
 ### macOS
 
 ```bash
-./scripts/install-macos.sh   # Install Homebrew packages, apps, fonts
-./scripts/link-macos.sh      # Link all dotfiles (all 7 packages)
-./scripts/macos-defaults.sh  # Apply macOS system defaults
+./utils/install-macos   # Install Homebrew packages, apps, fonts
+./utils/link-macos      # Link all dotfiles (all 7 packages)
+./utils/macos-defaults  # Apply macOS system defaults
 ```
 
 ### Linux
 
 ```bash
-./scripts/install-linux.sh   # Install cross-platform packages via apt/dnf
-./scripts/link-linux.sh      # Link cross-platform dotfiles (nvim, starship, zsh, ideavim)
+./utils/install-linux   # Install cross-platform packages via apt/dnf
+./utils/link-linux      # Link cross-platform dotfiles (nvim, starship, zsh, ideavim)
 ```
 
 ## Structure
 
-- `packages.yaml` - Structured package manifest for AI agents (source of truth)
-- `dotfiles/` - Tool configurations, each subdirectory mirrors XDG paths for stow
+- `utils/packages.yaml` - Structured package manifest for AI agents (source of truth)
+- Stow packages at repo root (each subdirectory mirrors XDG paths):
   - `nvim/` - Neovim with LazyVim framework (cross-platform)
   - `zsh/` - Zsh + Oh My Zsh configuration (cross-platform)
   - `starship/` - Starship prompt (cross-platform)
@@ -63,17 +63,19 @@ Personal development environment setup containing dotfiles and installation scri
   - `ghostty/` - Ghostty terminal (macOS)
   - `cursor/` - Cursor editor (macOS)
   - `zed/` - Zed editor (macOS)
-- `scripts/` - Platform-specific install and link scripts
+- `utils/` - Platform-specific install and link scripts
+  - `gitignore.yaml` - Patterns to ensure in git global ignore (merged, not overwritten)
+  - `ensure-gitignore` - Merges missing patterns from gitignore.yaml into ~/.config/git/ignore
 
 ## Dotfile Management
 
-Configs use GNU Stow - each `dotfiles/<tool>/` directory structure maps to `$HOME/`. Running `stow --target=$HOME <tool>` from `dotfiles/` creates symlinks.
+Configs use GNU Stow - each `<tool>/` directory structure maps to `$HOME/`. Running `stow --target=$HOME <tool>` from repo root creates symlinks.
 
-Example: `dotfiles/nvim/.config/nvim/init.lua` -> `~/.config/nvim/init.lua`
+Example: `nvim/.config/nvim/init.lua` -> `~/.config/nvim/init.lua`
 
 ## Neovim Configuration
 
-Uses LazyVim framework with Lua config in `dotfiles/nvim/.config/nvim/`:
+Uses LazyVim framework with Lua config in `nvim/.config/nvim/`:
 - `lua/config/` - Core settings (keymaps, options, autocmds)
 - `lua/plugins/` - Plugin specs (appearance, completion, copilot, editor, formatting, lsp)
 - Plugin lock file: `lazy-lock.json`

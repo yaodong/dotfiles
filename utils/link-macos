@@ -14,8 +14,8 @@ if ! command -v stow &>/dev/null; then
   exit 1
 fi
 
-# Change to config directory
-cd "$REPO_DIR/dotfiles"
+# Change to repo root (stow packages are at top level)
+cd "$REPO_DIR"
 
 # Stow all packages (hardcoded list)
 packages=(
@@ -35,6 +35,9 @@ done
 
 # Symlink theme-toggle script
 mkdir -p "$HOME/.local/bin"
-ln -sf "$REPO_DIR/scripts/theme-toggle" "$HOME/.local/bin/theme-toggle"
+ln -sf "$REPO_DIR/utils/theme-toggle" "$HOME/.local/bin/theme-toggle"
+
+# Ensure git global ignore has required patterns (merge, don't overwrite)
+"$REPO_DIR/utils/ensure-gitignore"
 
 echo "All dotfiles stowed successfully!"

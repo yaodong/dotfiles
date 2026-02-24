@@ -3,7 +3,7 @@
 set -e
 
 # Linux installer for cross-platform packages.
-# See packages.yaml for the full package manifest and platform tags.
+# See utils/packages.yaml for the full package manifest and platform tags.
 
 # Install oh-my-zsh if it's not installed
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -102,6 +102,16 @@ if ! command -v fzf &>/dev/null; then
   ~/.fzf/install --all
 fi
 
+# Configure npm global prefix to ~/.npm-global (no sudo needed)
+echo ""
+echo "Configuring npm global prefix..."
+mkdir -p "$HOME/.npm-global/bin"
+if command -v npm &>/dev/null; then
+  npm config set prefix "$HOME/.npm-global"
+else
+  echo "prefix=$HOME/.npm-global" > "$HOME/.npmrc"
+fi
+
 echo ""
 echo "Linux setup completed successfully!"
-echo "Run scripts/link-linux.sh to link dotfiles."
+echo "Run utils/link-linux to link dotfiles."

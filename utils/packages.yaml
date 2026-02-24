@@ -1,4 +1,4 @@
-# packages.yaml — Source of truth for AI agents setting up this environment.
+# utils/packages.yaml — Source of truth for AI agents setting up this environment.
 #
 # This file is a DATA/REFERENCE file. It is NOT parsed by shell scripts at runtime.
 # AI agents should read this to determine what to install on each platform.
