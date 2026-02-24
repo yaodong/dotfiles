@@ -1,4 +1,39 @@
-# My macOS Setup
+# My Dev Setup
+
+## Agent Setup Instructions
+
+Clone this repo and run the platform-specific setup scripts. Detect the platform first, then follow the corresponding steps.
+
+### macOS
+
+```bash
+git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
+cd ~/.local/setup
+./scripts/install-macos.sh   # Install Homebrew, CLI tools, apps, fonts
+./scripts/link-macos.sh      # Symlink all dotfiles to home directory
+./scripts/macos-defaults.sh  # Apply macOS system preferences
+```
+
+### Linux (headless server)
+
+```bash
+git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
+cd ~/.local/setup
+./scripts/install-linux.sh   # Install cross-platform packages via apt/dnf
+./scripts/link-linux.sh      # Symlink cross-platform dotfiles only
+```
+
+### Verification
+
+After setup, verify key tools are working:
+
+```bash
+nvim --version
+starship --version
+zsh --version
+```
+
+If any script fails, read `packages.yaml` for per-package install notes and platform-specific alternatives.
 
 ## Overview
 
@@ -34,13 +69,24 @@ git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
 cd ~/.local/setup
 ```
 
-Run the setup scripts:
+#### macOS
 
 ```bash
-./scripts/install.sh        # Install Homebrew packages, apps, fonts
-./scripts/link-dotfiles.sh  # Link dotfiles to home directory
-./scripts/macos-defaults.sh # Apply macOS system defaults
+./scripts/install-macos.sh   # Install Homebrew packages, apps, fonts
+./scripts/link-macos.sh      # Link all dotfiles to home directory
+./scripts/macos-defaults.sh  # Apply macOS system defaults
 ```
+
+#### Linux
+
+```bash
+./scripts/install-linux.sh   # Install cross-platform packages via apt/dnf
+./scripts/link-linux.sh      # Link cross-platform dotfiles only
+```
+
+### Cross-Platform Support
+
+Most CLI tools and dotfiles work on both macOS and Linux. See `packages.yaml` for the full package manifest with platform tags and Linux install notes. macOS-specific items (Ghostty, Cursor, Zed configs, cask apps) are excluded from the Linux scripts.
 
 ## Keybindings
 

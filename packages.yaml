@@ -1,0 +1,179 @@
+# packages.yaml — Source of truth for AI agents setting up this environment.
+#
+# This file is a DATA/REFERENCE file. It is NOT parsed by shell scripts at runtime.
+# AI agents should read this to determine what to install on each platform.
+#
+# Platform tags:
+#   [macos, linux] — works on both platforms
+#   [macos]        — macOS only
+
+cli_tools:
+  - name: ripgrep
+    brew: ripgrep
+    platform: [macos, linux]
+    notes: "apt: ripgrep; dnf: ripgrep"
+
+  - name: fd
+    brew: fd
+    platform: [macos, linux]
+    notes: "apt: fd-find (binary is fdfind); dnf: fd-find"
+
+  - name: bat
+    brew: bat
+    platform: [macos, linux]
+    notes: "apt: bat (binary may be batcat); dnf: bat"
+
+  - name: btop
+    brew: btop
+    platform: [macos, linux]
+    notes: "apt: btop; dnf: btop"
+
+  - name: eza
+    brew: eza
+    platform: [macos, linux]
+    notes: "Install from https://github.com/eza-community/eza or cargo install eza"
+
+  - name: fzf
+    brew: fzf
+    platform: [macos, linux]
+    notes: "apt: fzf; dnf: fzf"
+
+  - name: git
+    brew: git
+    platform: [macos, linux]
+    notes: "apt: git; dnf: git"
+
+  - name: wget
+    brew: wget
+    platform: [macos, linux]
+    notes: "apt: wget; dnf: wget"
+
+  - name: zoxide
+    brew: zoxide
+    platform: [macos, linux]
+    notes: "Install from https://github.com/ajeetdsouza/zoxide#installation"
+
+  - name: lazygit
+    brew: lazygit
+    platform: [macos, linux]
+    notes: "Install from https://github.com/jesseduffield/lazygit#installation"
+
+  - name: lazydocker
+    brew: lazydocker
+    platform: [macos, linux]
+    notes: "Install from https://github.com/jesseduffield/lazydocker#installation"
+
+  - name: mise
+    brew: mise
+    platform: [macos, linux]
+    notes: "Install from https://mise.jdx.dev/getting-started.html"
+
+  - name: gcc
+    brew: gcc
+    platform: [macos, linux]
+    notes: "apt: build-essential; dnf: gcc"
+
+  - name: cmake
+    brew: cmake
+    platform: [macos, linux]
+    notes: "apt: cmake; dnf: cmake"
+
+  - name: tree-sitter
+    brew: tree-sitter
+    platform: [macos, linux]
+    notes: "cargo install tree-sitter-cli or npm install -g tree-sitter-cli"
+
+  - name: libyaml
+    brew: libyaml
+    platform: [macos, linux]
+    notes: "apt: libyaml-dev; dnf: libyaml-devel"
+
+  - name: stow
+    brew: stow
+    platform: [macos, linux]
+    notes: "apt: stow; dnf: stow"
+
+  - name: coreutils
+    brew: coreutils
+    platform: [macos]
+    notes: "Linux has GNU coreutils natively; this is only needed on macOS"
+
+  - name: fastfetch
+    brew: fastfetch
+    platform: [macos, linux]
+    notes: "Install from https://github.com/fastfetch-cli/fastfetch"
+
+applications:
+  - name: neovim
+    brew: neovim
+    platform: [macos, linux]
+    notes: "apt: neovim (may be outdated — prefer AppImage or build from source); dnf: neovim"
+
+  - name: starship
+    brew: starship
+    platform: [macos, linux]
+    notes: "Install from https://starship.rs — curl -sS https://starship.rs/install.sh | sh"
+
+  - name: zsh-autosuggestions
+    brew: zsh-autosuggestions
+    platform: [macos, linux]
+    notes: "apt: zsh-autosuggestions; or clone to ~/.oh-my-zsh/custom/plugins/"
+
+  - name: terraform
+    brew: hashicorp/tap/terraform
+    platform: [macos, linux]
+    notes: "Install from https://developer.hashicorp.com/terraform/install"
+
+macos_casks:
+  - name: ghostty
+    brew_cask: ghostty
+    platform: [macos]
+    notes: "macOS GUI app; Linux builds available at https://github.com/mitchellh/ghostty"
+
+  - name: orbstack
+    brew_cask: orbstack
+    platform: [macos]
+    notes: "macOS-only Docker/Linux VM manager"
+
+  - name: 1password
+    brew_cask: 1password
+    platform: [macos]
+    notes: "macOS GUI app"
+
+  - name: font-jetbrains-mono
+    brew_cask: font-jetbrains-mono
+    platform: [macos, linux]
+    notes: "Linux: download from https://www.jetbrains.com/lp/mono/ and install to ~/.local/share/fonts/"
+
+  - name: font-jetbrains-mono-nerd-font
+    brew_cask: font-jetbrains-mono-nerd-font
+    platform: [macos, linux]
+    notes: "Linux: download from https://www.nerdfonts.com/font-downloads and install to ~/.local/share/fonts/"
+
+  - name: font-hack-nerd-font
+    brew_cask: font-hack-nerd-font
+    platform: [macos, linux]
+    notes: "Linux: download from https://www.nerdfonts.com/font-downloads and install to ~/.local/share/fonts/"
+
+shell_setup:
+  - name: oh-my-zsh
+    install: "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+    platform: [macos, linux]
+
+dotfiles:
+  # Cross-platform dotfiles — stow on both macOS and Linux
+  - name: nvim
+    platform: [macos, linux]
+  - name: starship
+    platform: [macos, linux]
+  - name: zsh
+    platform: [macos, linux]
+  - name: ideavim
+    platform: [macos, linux]
+  # macOS-only dotfiles
+  - name: ghostty
+    platform: [macos]
+  - name: cursor
+    platform: [macos]
+  - name: zed
+    platform: [macos]

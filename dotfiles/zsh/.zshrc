@@ -81,6 +81,7 @@ alias n=nvim
 alias vi=nvim
 alias vim=nvim
 alias t='tmux new-session -A -D -s Today'
+alias tt='theme-toggle'
 
 # common configurations
 export LC_ALL=en_US.utf-8
@@ -89,8 +90,14 @@ export LANG=en_US.utf-8
 # enable zoxide
 eval "$(zoxide init zsh)"
 
-# enbale auto suggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# enable auto suggestions
+if command -v brew &>/dev/null && [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+elif [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 SAVEHIST=1000
 HISTSIZE=999
 setopt share_history
@@ -103,6 +110,9 @@ bindkey '^I^I' autosuggest-accept      # tab + tab
 bindkey '^[[Z' autosuggest-accept      # shift + tab
 
 if command -v mise >/dev/null 2>&1; then
-  eval "$(mise activate bash)"
+  eval "$(mise activate zsh)"
 fi
 export PATH="$HOME/.local/bin:$PATH"
+
+# Source machine-local overrides
+[ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"

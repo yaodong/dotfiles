@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Linux installer for cross-platform packages.
+# See packages.yaml for the full package manifest and platform tags.
+
+# Install oh-my-zsh if it's not installed
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing oh-my-zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# Detect package manager
+if command -v apt-get &>/dev/null; then
+  PM="apt"
+elif command -v dnf &>/dev/null; then
+  PM="dnf"
+else
+  echo "Error: No supported package manager found (apt or dnf)."
+  exit 1
+fi
+
+echo "Using package manager: $PM"
+
+# Essential packages
+echo "Installing essential packages..."
+if [ "$PM" = "apt" ]; then
+  sudo apt-get update
+  sudo apt-get install -y build-essential cmake git wget stow libyaml-dev
+  sudo apt-get install -y ripgrep fd-find bat btop fzf zsh-autosuggestions
+else
+  sudo dnf install -y gcc cmake git wget stow libyaml-devel
+  sudo dnf install -y ripgrep fd-find bat btop fzf zsh-autosuggestions
+fi
+
+# Tools that may need manual/alternative install
+echo ""
+echo "Installing tools from GitHub/official sources..."
+
+# Neovim — apt version is often outdated
+if ! command -v nvim &>/dev/null; then
+  echo "Installing Neovim from GitHub releases..."
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+  sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+  sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+  rm nvim-linux-x86_64.tar.gz
+fi
+
+# Starship prompt
+if ! command -v starship &>/dev/null; then
+  echo "Installing Starship..."
+  curl -sS https://starship.rs/install.sh | sh -s -- -y
+fi
+
+# Zoxide
+if ! command -v zoxide &>/dev/null; then
+  echo "Installing Zoxide..."
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+fi
+
+# Eza
+if ! command -v eza &>/dev/null; then
+  echo "Installing Eza..."
+  if [ "$PM" = "apt" ]; then
+    sudo mkdir -p /etc/apt/keyrings
+    wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+    sudo apt-get update
+    sudo apt-get install -y eza
+  else
+    sudo dnf install -y eza 2>/dev/null || echo "eza: install manually from https://github.com/eza-community/eza"
+  fi
+fi
+
+# Lazygit
+if ! command -v lazygit &>/dev/null; then
+  echo "Installing Lazygit..."
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf lazygit.tar.gz lazygit
+  sudo install lazygit /usr/local/bin
+  rm lazygit lazygit.tar.gz
+fi
+
+# Lazydocker
+if ! command -v lazydocker &>/dev/null; then
+  echo "Installing Lazydocker..."
+  curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+fi
+
+# Mise
+if ! command -v mise &>/dev/null; then
+  echo "Installing Mise..."
+  curl https://mise.jdx.dev/install.sh | sh
+fi
+
+# FZF (if not installed via package manager)
+if ! command -v fzf &>/dev/null; then
+  echo "Installing FZF..."
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install --all
+fi
+
+echo ""
+echo "Linux setup completed successfully!"
+echo "Run scripts/link-linux.sh to link dotfiles."

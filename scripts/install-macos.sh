@@ -2,6 +2,12 @@
 
 set -e
 
+# Detect work machine (username contains a dot, e.g. first.last)
+IS_WORK=false
+if echo "$(whoami)" | grep -q "\."; then
+  IS_WORK=true
+fi
+
 # Helper function for cask installations
 brew_cask() {
   local package="$1"
@@ -26,15 +32,6 @@ brew_install() {
     brew install "$1"
   fi
 }
-
-# Disable press and hold for key repeat
-defaults write -g ApplePressAndHoldEnabled -bool false
-
-# Disable auto-correct
-defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
-
-# Disable smart quotes
-defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Install Homebrew if it's not installed
 if command -v brew &>/dev/null; then
@@ -85,10 +82,7 @@ brew_install starship
 brew_install zsh-autosuggestions
 brew_install hashicorp/tap/terraform
 
-# Install docker or orbstack depending on the user
-if echo "$(whoami)" | grep -q "\."; then
-  echo "Skipping orbstack installation"
-else
+if [ "$IS_WORK" = false ]; then
   brew_cask orbstack
 fi
 
@@ -98,7 +92,6 @@ brew_cask font-jetbrains-mono
 brew_cask font-jetbrains-mono-nerd-font
 brew_cask font-hack-nerd-font
 brew_cask 1password
-brew_cask betterdisplay
 brew_cask ghostty
 
 echo "Setup completed successfully!"

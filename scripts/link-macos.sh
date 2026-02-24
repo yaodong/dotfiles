@@ -33,4 +33,8 @@ for package in "${packages[@]}"; do
   stow --target="$HOME" --restow "$package"
 done
 
+# Symlink theme-toggle script
+mkdir -p "$HOME/.local/bin"
+ln -sf "$REPO_DIR/scripts/theme-toggle" "$HOME/.local/bin/theme-toggle"
+
 echo "All dotfiles stowed successfully!"

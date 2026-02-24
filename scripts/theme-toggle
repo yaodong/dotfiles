@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -e
+
+STATE_DIR="$HOME/.config/theme"
+STATE_FILE="$STATE_DIR/current"
+
+# Ensure state directory exists
+mkdir -p "$STATE_DIR"
+
+# Read current theme (default to dark)
+current="dark"
+if [ -f "$STATE_FILE" ]; then
+  current=$(cat "$STATE_FILE")
+fi
+
+# Determine target theme
+if [ -n "$1" ]; then
+  target="$1"
+else
+  if [ "$current" = "dark" ]; then
+    target="light"
+  else
+    target="dark"
+  fi
+fi
+
+# Map theme to flavours
+if [ "$target" = "light" ]; then
+  ghostty_theme="Catppuccin Latte"
+  nvim_flavour="latte"
+  macos_dark="false"
+else
+  ghostty_theme="Catppuccin Mocha"
+  nvim_flavour="mocha"
+  macos_dark="true"
+fi
+
+# 1. Save state
+echo "$target" > "$STATE_FILE"
+
+# 2. Update Ghostty config and reload all instances
+ghostty_config="$HOME/.config/ghostty/config"
+if [ -f "$ghostty_config" ]; then
+  tmp=$(mktemp)
+  sed "s/^theme = .*/theme = $ghostty_theme/" "$ghostty_config" > "$tmp"
+  cat "$tmp" > "$ghostty_config"
+  rm "$tmp"
+  osascript -e 'tell application "System Events" to tell process "ghostty" to keystroke "," using {command down, shift down}' 2>/dev/null || true
+fi
+
+# 3. Update running Neovim instances
+for sock in "$TMPDIR"nvim.*/0; do
+  if [ -S "$sock" ]; then
+    nvim --server "$sock" --remote-send "<Cmd>colorscheme catppuccin-${nvim_flavour}<CR>" 2>/dev/null || true
+  fi
+done
+
+# 4. Toggle macOS appearance
+osascript -e "tell application \"System Events\" to tell appearance preferences to set dark mode to $macos_dark"
+
+echo "Switched to $target mode"

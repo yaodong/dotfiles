@@ -1,4 +1,15 @@
 return {
+  -- Keybinding cheatsheet: press <leader>? to show all keymaps
+  {
+    "folke/which-key.nvim",
+    opts = {
+      delay = 200,
+      spec = {
+        { "<leader>?", function() require("which-key").show({ global = true }) end, desc = "All Keymaps" },
+      },
+    },
+  },
+
   {
     "nvim-mini/mini.comment",
     event = "VeryLazy",

@@ -1,3 +1,17 @@
+local function get_theme()
+  local f = io.open(os.getenv("HOME") .. "/.config/theme/current", "r")
+  if f then
+    local theme = f:read("*l")
+    f:close()
+    if theme == "light" then
+      return "latte"
+    end
+  end
+  return "mocha"
+end
+
+local flavour = get_theme()
+
 return {
 
   {
@@ -10,7 +24,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "catppuccin-" .. flavour,
     },
   },
 
@@ -21,7 +35,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "mocha",
+      flavour = flavour,
       integrations = {
         blink_cmp = true,
         -- Explicitly disable bufferline integration to avoid missing module error
