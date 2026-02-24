@@ -7,8 +7,8 @@ Clone this repo and run the platform-specific setup scripts. Detect the platform
 ### macOS
 
 ```bash
-git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
-cd ~/.local/setup
+git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
+cd ~/.local/dotfiles
 ./scripts/install-macos.sh   # Install Homebrew, CLI tools, apps, fonts
 ./scripts/link-macos.sh      # Symlink all dotfiles to home directory
 ./scripts/macos-defaults.sh  # Apply macOS system preferences
@@ -17,8 +17,8 @@ cd ~/.local/setup
 ### Linux (headless server)
 
 ```bash
-git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
-cd ~/.local/setup
+git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
+cd ~/.local/dotfiles
 ./scripts/install-linux.sh   # Install cross-platform packages via apt/dnf
 ./scripts/link-linux.sh      # Symlink cross-platform dotfiles only
 ```
@@ -65,8 +65,8 @@ The configuration includes:
 Clone this repository:
 
 ```bash
-git clone --depth=1 https://github.com/yaodong/setup.git ~/.local/setup
-cd ~/.local/setup
+git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
+cd ~/.local/dotfiles
 ```
 
 #### macOS
