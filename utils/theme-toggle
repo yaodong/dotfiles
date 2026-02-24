@@ -8,11 +8,10 @@ STATE_FILE="$STATE_DIR/current"
 # Ensure state directory exists
 mkdir -p "$STATE_DIR"
 
-# Detect current theme from macOS appearance (source of truth)
-if defaults read -g AppleInterfaceStyle &>/dev/null; then
-  current="dark"
-else
-  current="light"
+# Read current theme from state file (default to light)
+current="light"
+if [ -f "$STATE_FILE" ]; then
+  current=$(cat "$STATE_FILE")
 fi
 
 # Determine target theme
@@ -30,11 +29,9 @@ fi
 if [ "$target" = "light" ]; then
   ghostty_theme="Catppuccin Latte"
   nvim_flavour="latte"
-  macos_dark="false"
 else
   ghostty_theme="Catppuccin Mocha"
   nvim_flavour="mocha"
-  macos_dark="true"
 fi
 
 # 1. Save state
@@ -56,8 +53,5 @@ for sock in "$TMPDIR"nvim.*/0; do
     nvim --server "$sock" --remote-send "<Cmd>colorscheme catppuccin-${nvim_flavour}<CR>" 2>/dev/null || true
   fi
 done
-
-# 4. Toggle macOS appearance
-osascript -e "tell application \"System Events\" to tell appearance preferences to set dark mode to $macos_dark"
 
 echo "Switched to $target mode"
