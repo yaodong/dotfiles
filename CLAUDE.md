@@ -73,6 +73,10 @@ Configs use GNU Stow - each `<tool>/` directory structure maps to `$HOME/`. Runn
 
 Example: `nvim/.config/nvim/init.lua` -> `~/.config/nvim/init.lua`
 
+## Keybind Conventions
+
+- **Avoid conflicts across layers.** When adding or updating keybinds in any config, check that they don't shadow keybinds in tools that run inside it (e.g., terminal keybinds must not conflict with Neovim keybinds, since Neovim runs inside the terminal).
+
 ## Neovim Configuration
 
 Uses LazyVim framework with Lua config in `nvim/.config/nvim/`:
