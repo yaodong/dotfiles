@@ -25,33 +25,23 @@ else
   fi
 fi
 
-# Map theme to flavours
+# Map theme to app-specific values
 if [ "$target" = "light" ]; then
-  ghostty_theme="Catppuccin Latte"
-  nvim_flavour="latte"
+  zed_mode="light"
 else
-  ghostty_theme="Catppuccin Mocha"
-  nvim_flavour="mocha"
+  zed_mode="dark"
 fi
 
 # 1. Save state
 echo "$target" > "$STATE_FILE"
 
-# 2. Update Ghostty config and reload all instances
-ghostty_config="$HOME/.config/ghostty/config"
-if [ -f "$ghostty_config" ]; then
+# 2. Update Zed theme mode
+zed_config="$HOME/.config/zed/settings.json"
+if [ -f "$zed_config" ]; then
   tmp=$(mktemp)
-  sed "s/^theme = .*/theme = $ghostty_theme/" "$ghostty_config" > "$tmp"
-  cat "$tmp" > "$ghostty_config"
+  sed "s/\"mode\": \"[^\"]*\"/\"mode\": \"$zed_mode\"/" "$zed_config" > "$tmp"
+  cat "$tmp" > "$zed_config"
   rm "$tmp"
-  osascript -e 'tell application "System Events" to tell process "ghostty" to keystroke "," using {command down, shift down}' 2>/dev/null || true
 fi
-
-# 3. Update running Neovim instances
-for sock in "$TMPDIR"nvim.*/0; do
-  if [ -S "$sock" ]; then
-    nvim --server "$sock" --remote-send "<Cmd>colorscheme catppuccin-${nvim_flavour}<CR>" 2>/dev/null || true
-  fi
-done
 
 echo "Switched to $target mode"

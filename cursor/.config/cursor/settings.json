@@ -1,8 +1,8 @@
 {
     "window.commandCenter": true,
     "git.autofetch": true,
-    "workbench.iconTheme": "catppuccin-macchiato",
-    "workbench.colorTheme": "Catppuccin Macchiato",
+    "workbench.iconTheme": "catppuccin-latte",
+    "workbench.colorTheme": "Alabaster",
     "vim.handleKeys": {
         "<C-s>": false,
         "<C-z>": false,

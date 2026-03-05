@@ -1,16 +1,16 @@
-local function is_light()
-  local f = io.open(os.getenv("HOME") .. "/.config/theme/current", "r")
-  if f then
-    local theme = f:read("*l")
-    f:close()
-    return theme == "light"
+local function is_dark()
+  local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+  if handle then
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("Dark") ~= nil
   end
   return false
 end
 
-local light = is_light()
+local dark = is_dark()
 
-if light then
+if not dark then
   vim.o.background = "light"
 end
 
@@ -26,16 +26,15 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = light and "solarized" or "catppuccin-mocha",
+      colorscheme = dark and "catppuccin-mocha" or "alabaster",
     },
   },
 
-  -- solarized: light colorscheme
+  -- alabaster: light colorscheme
   {
-    "maxmx03/solarized.nvim",
+    "p00f/alabaster.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
   },
 
   -- catppuccin: dark colorscheme
@@ -52,6 +51,19 @@ return {
         bufferline = false,
       },
     },
+  },
+
+  -- dark-notify: auto-switch colorscheme with macOS appearance
+  {
+    "cormacrelf/dark-notify",
+    config = function()
+      require("dark_notify").run({
+        schemes = {
+          dark = "catppuccin-mocha",
+          light = "alabaster",
+        },
+      })
+    end,
   },
 
   -- incline: creating lightweight floating statuslines
