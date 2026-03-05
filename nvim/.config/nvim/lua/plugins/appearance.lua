@@ -1,16 +1,18 @@
-local function get_theme()
+local function is_light()
   local f = io.open(os.getenv("HOME") .. "/.config/theme/current", "r")
   if f then
     local theme = f:read("*l")
     f:close()
-    if theme == "light" then
-      return "latte"
-    end
+    return theme == "light"
   end
-  return "mocha"
+  return false
 end
 
-local flavour = get_theme()
+local light = is_light()
+
+if light then
+  vim.o.background = "light"
+end
 
 return {
 
@@ -24,21 +26,28 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-" .. flavour,
+      colorscheme = light and "solarized" or "catppuccin-mocha",
     },
   },
 
-  -- catppuccin: colorscheme
+  -- solarized: light colorscheme
+  {
+    "maxmx03/solarized.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+
+  -- catppuccin: dark colorscheme
   {
     "catppuccin/nvim",
     lazy = false,
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = flavour,
+      flavour = "mocha",
       integrations = {
         blink_cmp = true,
-        -- Explicitly disable bufferline integration to avoid missing module error
         native_lsp = { enabled = true },
         bufferline = false,
       },
