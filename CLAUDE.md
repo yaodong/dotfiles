@@ -10,39 +10,13 @@ Personal development environment setup containing dotfiles and installation scri
 
 **`utils/packages.yaml`** is the structured package manifest. It lists every package with `platform` tags (`[macos, linux]` or `[macos]`), install methods, and notes on Linux-specific alternatives. Read this file first when setting up a new machine.
 
-## Platform Support
-
-| Component | macOS | Linux |
-|-----------|-------|-------|
-| CLI tools (ripgrep, fd, bat, fzf, etc.) | Yes | Yes |
-| Neovim + LazyVim | Yes | Yes |
-| Starship prompt | Yes | Yes |
-| Zsh + Oh My Zsh | Yes | Yes |
-| Mise (runtime manager) | Yes | Yes |
-| Ghostty, Cursor, Zed configs | Yes | No |
-| macOS casks (1Password, OrbStack, etc.) | Yes | No |
-| macOS system defaults | Yes | No |
-
-## Dotfiles Platform Map
-
-| Dotfile | Platform | Description |
-|---------|----------|-------------|
-| `nvim` | macOS, Linux | Neovim with LazyVim framework |
-| `starship` | macOS, Linux | Starship prompt config |
-| `zsh` | macOS, Linux | Zsh + Oh My Zsh configuration |
-| `ideavim` | macOS, Linux | IdeaVim (JetBrains) config |
-| `lazygit` | macOS, Linux | Lazygit Git UI config |
-| `ghostty` | macOS | Ghostty terminal config |
-| `cursor` | macOS | Cursor editor config |
-| `zed` | macOS | Zed editor config |
-
 ## Setup Commands
 
 ### macOS
 
 ```bash
 ./utils/install-macos   # Install Homebrew packages, apps, fonts
-./utils/link-macos      # Link all dotfiles (all 8 packages)
+./utils/link-macos      # Link all dotfiles (all 8 packages) + theme-toggle to ~/.local/bin
 ./utils/macos-defaults  # Apply macOS system defaults
 ```
 
@@ -53,27 +27,36 @@ Personal development environment setup containing dotfiles and installation scri
 ./utils/link-linux      # Link cross-platform dotfiles (nvim, starship, zsh, ideavim, lazygit)
 ```
 
-## Structure
-
-- `utils/packages.yaml` - Structured package manifest for AI agents (source of truth)
-- Stow packages at repo root (each subdirectory mirrors XDG paths):
-  - `nvim/` - Neovim with LazyVim framework (cross-platform)
-  - `zsh/` - Zsh + Oh My Zsh configuration (cross-platform)
-  - `starship/` - Starship prompt (cross-platform)
-  - `ideavim/` - IdeaVim for JetBrains (cross-platform)
-  - `lazygit/` - Lazygit Git UI (cross-platform)
-  - `ghostty/` - Ghostty terminal (macOS)
-  - `cursor/` - Cursor editor (macOS)
-  - `zed/` - Zed editor (macOS)
-- `utils/` - Platform-specific install and link scripts
-  - `gitignore.yaml` - Patterns to ensure in git global ignore (merged, not overwritten)
-  - `ensure-gitignore` - Merges missing patterns from gitignore.yaml into ~/.config/git/ignore
+Link scripts use `stow --target=$HOME --restow <package>` and also run `utils/ensure-gitignore` to merge patterns from `utils/gitignore.yaml` into `~/.config/git/ignore`.
 
 ## Dotfile Management
 
-Configs use GNU Stow - each `<tool>/` directory structure maps to `$HOME/`. Running `stow --target=$HOME <tool>` from repo root creates symlinks.
+Each `<tool>/` directory at repo root mirrors `$HOME/` via GNU Stow.
+Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
-Example: `nvim/.config/nvim/init.lua` -> `~/.config/nvim/init.lua`
+| Dotfile | Platform | Notes |
+|---------|----------|-------|
+| `nvim` | macOS, Linux | Neovim with LazyVim framework |
+| `starship` | macOS, Linux | Starship prompt config |
+| `zsh` | macOS, Linux | Zsh + Oh My Zsh; supports `~/.zshrc_local` for machine-local overrides |
+| `ideavim` | macOS, Linux | IdeaVim (JetBrains) config |
+| `lazygit` | macOS, Linux | Lazygit Git UI config |
+| `ghostty` | macOS | Ghostty terminal config |
+| `cursor` | macOS | Cursor editor config |
+| `zed` | macOS | Zed editor config |
+
+## Theme System (macOS)
+
+A unified dark/light theme toggle spans multiple configs. Understanding this requires reading several files together:
+
+- **`utils/theme-toggle`** — orchestrator script (aliased as `tt` in zsh). Toggles macOS system appearance and updates Zed, Cursor, and Lazygit configs via sed. Linked to `~/.local/bin/theme-toggle` by `link-macos`.
+- **Ghostty** — uses native `theme = light:Alabaster,dark:Catppuccin Mocha` syntax; follows macOS appearance automatically.
+- **Neovim** — `appearance.lua` reads `AppleInterfaceStyle` at startup to pick colorscheme (Alabaster light / Catppuccin Mocha dark). The `dark-notify` plugin auto-switches at runtime when macOS appearance changes.
+- **Cursor** — Alabaster (light) / Catppuccin Mocha (dark), updated by `theme-toggle`.
+- **Zed** — mode field toggled by `theme-toggle`.
+- **Lazygit** — Catppuccin Latte (light) / Catppuccin Mocha (dark) color values, updated by `theme-toggle`.
+
+When modifying theme colors: update `theme-toggle` for Cursor/Zed/Lazygit, `appearance.lua` for Neovim, and Ghostty's `config` for the terminal.
 
 ## Keybind Conventions
 
@@ -82,6 +65,13 @@ Example: `nvim/.config/nvim/init.lua` -> `~/.config/nvim/init.lua`
 ## Neovim Configuration
 
 Uses LazyVim framework with Lua config in `nvim/.config/nvim/`:
-- `lua/config/` - Core settings (keymaps, options, autocmds)
-- `lua/plugins/` - Plugin specs (appearance, completion, copilot, editor, formatting, lsp, navigation)
+- `lua/config/` — Core settings (keymaps, options, autocmds)
+- `lua/plugins/` — Plugin specs organized by concern: appearance, completion, copilot, editor, formatting, lsp, navigation
 - Plugin lock file: `lazy-lock.json`
+
+Key customizations on top of LazyVim defaults:
+- Neotest with minitest (Rails) and Python adapters (`editor.lua`)
+- Harpoon 2 for file bookmarks (`navigation.lua`)
+- vim-rails for Rails-aware navigation (`navigation.lua`)
+- Custom `<leader>tR`/`<leader>tL` for Rails test runner fallback (`keymaps.lua`)
+- Custom snippets: `bp` → `binding.irb` (Ruby), `bp` → `breakpoint()` (Python)
