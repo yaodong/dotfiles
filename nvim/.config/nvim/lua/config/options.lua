@@ -7,7 +7,6 @@ vim.opt.undofile = true
 
 vim.opt.list = true
 vim.opt.listchars = {
-  space = "·",
   tab = "→ ",
   trail = "·",
   extends = "»",

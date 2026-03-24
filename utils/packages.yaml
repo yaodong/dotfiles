@@ -170,6 +170,8 @@ dotfiles:
     platform: [macos, linux]
   - name: ideavim
     platform: [macos, linux]
+  - name: lazygit
+    platform: [macos, linux]
   # macOS-only dotfiles
   - name: ghostty
     platform: [macos]

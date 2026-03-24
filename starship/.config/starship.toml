@@ -9,5 +9,23 @@ success_symbol = '[➜](bold green)'
 error_symbol = "[x](bold red)"
 vimcmd_symbol = "[<](bold green)"
 
+[directory]
+truncation_length = 3
+
+[cmd_duration]
+min_time = 3000
+format = "took [$duration]($style) "
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+[ruby]
+detect_files = ["Gemfile", ".ruby-version"]
+format = "[$symbol($version)]($style) "
+
+[python]
+detect_files = ["pyproject.toml", "requirements.txt", ".python-version"]
+format = "[$symbol($version)]($style) "
+
 [docker_context]
 disabled = true

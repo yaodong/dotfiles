@@ -2,7 +2,7 @@ theme = light:Alabaster,dark:Catppuccin Mocha
 
 font-family = "JetBrainsMono Nerd Font"
 font-style = Regular
-font-size = 13
+font-size = 13.5
 font-thicken = true
 adjust-cell-height = 20%
 
@@ -22,3 +22,4 @@ copy-on-select = clipboard
 clipboard-trim-trailing-spaces = true
 quit-after-last-window-closed = true
 keybind = shift+enter=text:\x1b\r
+unfocused-split-opacity = 0.85

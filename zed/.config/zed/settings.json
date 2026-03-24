@@ -23,9 +23,9 @@
   "vim_mode": true,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "theme": {
-    "mode": "light",
+    "mode": "dark",
     "light": "One Light",
-    "dark": "Catppuccin Macchiato",
+    "dark": "Catppuccin Mocha",
   },
   "terminal": {
     "toolbar": { "breadcrumbs": false },

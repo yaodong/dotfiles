@@ -31,6 +31,7 @@ Personal development environment setup containing dotfiles and installation scri
 | `starship` | macOS, Linux | Starship prompt config |
 | `zsh` | macOS, Linux | Zsh + Oh My Zsh configuration |
 | `ideavim` | macOS, Linux | IdeaVim (JetBrains) config |
+| `lazygit` | macOS, Linux | Lazygit Git UI config |
 | `ghostty` | macOS | Ghostty terminal config |
 | `cursor` | macOS | Cursor editor config |
 | `zed` | macOS | Zed editor config |
@@ -41,7 +42,7 @@ Personal development environment setup containing dotfiles and installation scri
 
 ```bash
 ./utils/install-macos   # Install Homebrew packages, apps, fonts
-./utils/link-macos      # Link all dotfiles (all 7 packages)
+./utils/link-macos      # Link all dotfiles (all 8 packages)
 ./utils/macos-defaults  # Apply macOS system defaults
 ```
 
@@ -49,7 +50,7 @@ Personal development environment setup containing dotfiles and installation scri
 
 ```bash
 ./utils/install-linux   # Install cross-platform packages via apt/dnf
-./utils/link-linux      # Link cross-platform dotfiles (nvim, starship, zsh, ideavim)
+./utils/link-linux      # Link cross-platform dotfiles (nvim, starship, zsh, ideavim, lazygit)
 ```
 
 ## Structure
@@ -60,6 +61,7 @@ Personal development environment setup containing dotfiles and installation scri
   - `zsh/` - Zsh + Oh My Zsh configuration (cross-platform)
   - `starship/` - Starship prompt (cross-platform)
   - `ideavim/` - IdeaVim for JetBrains (cross-platform)
+  - `lazygit/` - Lazygit Git UI (cross-platform)
   - `ghostty/` - Ghostty terminal (macOS)
   - `cursor/` - Cursor editor (macOS)
   - `zed/` - Zed editor (macOS)
@@ -81,5 +83,5 @@ Example: `nvim/.config/nvim/init.lua` -> `~/.config/nvim/init.lua`
 
 Uses LazyVim framework with Lua config in `nvim/.config/nvim/`:
 - `lua/config/` - Core settings (keymaps, options, autocmds)
-- `lua/plugins/` - Plugin specs (appearance, completion, copilot, editor, formatting, lsp)
+- `lua/plugins/` - Plugin specs (appearance, completion, copilot, editor, formatting, lsp, navigation)
 - Plugin lock file: `lazy-lock.json`

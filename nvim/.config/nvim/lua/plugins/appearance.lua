@@ -78,4 +78,7 @@ return {
       })
     end,
   },
+
+  -- Disable unused default theme
+  { "folke/tokyonight.nvim", enabled = false },
 }

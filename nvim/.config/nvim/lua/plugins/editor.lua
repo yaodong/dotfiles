@@ -91,7 +91,18 @@ return {
     "L3MON4D3/LuaSnip",
     opts = function(_, opts)
       local ls = require("luasnip")
+      local s = ls.snippet
+      local t = ls.text_node
+
       ls.filetype_extend("eruby", { "html" })
+
+      ls.add_snippets("ruby", {
+        s("bp", { t("binding.irb") }),
+      })
+      ls.add_snippets("python", {
+        s("bp", { t("breakpoint()") }),
+      })
+
       return opts
     end,
   },

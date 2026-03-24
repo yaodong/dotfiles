@@ -21,6 +21,7 @@ cd "$REPO_DIR"
 # Cross-platform dotfiles only (see utils/packages.yaml)
 packages=(
   "ideavim"
+  "lazygit"
   "nvim"
   "starship"
   "zsh"

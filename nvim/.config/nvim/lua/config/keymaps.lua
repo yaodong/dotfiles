@@ -25,3 +25,11 @@ vim.keymap.set("n", "<leader>tL", function()
   local line = vim.fn.line(".")
   run_rails_test(string.format("%s:%d", file, line))
 end, { desc = "Run Rails test at line" })
+
+-- Buffer picker (fuzzy search open buffers)
+vim.keymap.set("n", "<leader>bb", function()
+  require("telescope.builtin").buffers({ sort_mru = true, ignore_current_buffer = true })
+end, { desc = "Buffer picker" })
+
+-- Window management
+vim.keymap.set("n", "<leader>wm", "<cmd>only<cr>", { desc = "Maximize window (close others)" })

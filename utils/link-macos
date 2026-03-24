@@ -22,6 +22,7 @@ packages=(
   "cursor"
   "ghostty"
   "ideavim"
+  "lazygit"
   "nvim"
   "starship"
   "zed"
