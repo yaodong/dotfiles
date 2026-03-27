@@ -112,6 +112,14 @@ else
   echo "prefix=$HOME/.npm-global" > "$HOME/.npmrc"
 fi
 
+# Install TPM (Tmux Plugin Manager)
+if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+  echo "Installing TPM..."
+  git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+else
+  echo "TPM is already installed"
+fi
+
 echo ""
 echo "Linux setup completed successfully!"
 echo "Run utils/link-linux to link dotfiles."
