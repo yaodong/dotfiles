@@ -111,12 +111,12 @@ tmux_config="$HOME/.config/tmux/tmux.conf"
 if [ -f "$tmux_config" ]; then
   if [ "$target" = "dark" ]; then
     tmux_flavor="mocha"
-    tmux_bg="#1e1e2e"
     tmux_theme_comment="# Dark: Catppuccin Mocha"
+    tmux_bg="#1e1e2e"
   else
     tmux_flavor="latte"
-    tmux_bg="#eff1f5"
     tmux_theme_comment="# Light: Catppuccin Latte"
+    tmux_bg="#f7f7f7"
   fi
   tmp=$(mktemp)
   sed \
@@ -127,8 +127,15 @@ if [ -f "$tmux_config" ]; then
   cat "$tmp" > "$tmux_config"
   rm "$tmp"
 
-  # Reload tmux config if tmux is running
-  tmux source-file "$tmux_config" 2>/dev/null || true
+  # Build a temp config that unsets all catppuccin/theme options
+  # and re-sources tmux.conf in a single atomic operation
+  tmp_conf=$(mktemp)
+  tmux show -g 2>/dev/null | grep -oE '^@(thm_|catppuccin_|_ctp_)\S+' | while read -r opt; do
+    echo "set -gu $opt"
+  done > "$tmp_conf"
+  echo "source-file $tmux_config" >> "$tmp_conf"
+  tmux source-file "$tmp_conf" 2>/dev/null || true
+  rm -f "$tmp_conf"
 fi
 
 # 6. Update Claude Code theme
