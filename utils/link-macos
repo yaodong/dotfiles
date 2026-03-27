@@ -25,6 +25,7 @@ packages=(
   "lazygit"
   "nvim"
   "starship"
+  "tmux"
   "zed"
   "zsh"
 )

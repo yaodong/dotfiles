@@ -28,10 +28,10 @@ echo "Installing essential packages..."
 if [ "$PM" = "apt" ]; then
   sudo apt-get update
   sudo apt-get install -y build-essential cmake git wget stow libyaml-dev
-  sudo apt-get install -y ripgrep fd-find bat btop fzf zsh-autosuggestions
+  sudo apt-get install -y ripgrep fd-find bat btop fzf tmux zsh-autosuggestions
 else
   sudo dnf install -y gcc cmake git wget stow libyaml-devel
-  sudo dnf install -y ripgrep fd-find bat btop fzf zsh-autosuggestions
+  sudo dnf install -y ripgrep fd-find bat btop fzf tmux zsh-autosuggestions
 fi
 
 # Tools that may need manual/alternative install

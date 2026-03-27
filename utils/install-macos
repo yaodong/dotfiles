@@ -74,6 +74,7 @@ brew_install zoxide
 brew_install lazygit
 brew_install lazydocker
 brew_install mise
+brew_install tmux
 
 # Install applications
 echo "Installing applications..."

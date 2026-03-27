@@ -106,7 +106,32 @@ if [ -f "$lazygit_config" ]; then
   rm "$tmp"
 fi
 
-# 5. Clean up orphaned state file from old toggle mechanism
+# 5. Update tmux Catppuccin theme
+tmux_config="$HOME/.config/tmux/tmux.conf"
+if [ -f "$tmux_config" ]; then
+  if [ "$target" = "dark" ]; then
+    tmux_flavor="mocha"
+    tmux_bg="#1e1e2e"
+    tmux_theme_comment="# Dark: Catppuccin Mocha"
+  else
+    tmux_flavor="latte"
+    tmux_bg="#eff1f5"
+    tmux_theme_comment="# Light: Catppuccin Latte"
+  fi
+  tmp=$(mktemp)
+  sed \
+    -e "s/@catppuccin_flavor '[^']*'/@catppuccin_flavor '$tmux_flavor'/" \
+    -e "s/@catppuccin_status_background \"#[a-f0-9]*\"/@catppuccin_status_background \"$tmux_bg\"/" \
+    -e '/# Active theme/{n;s/.*/'"$tmux_theme_comment"'/;}' \
+    "$tmux_config" > "$tmp"
+  cat "$tmp" > "$tmux_config"
+  rm "$tmp"
+
+  # Reload tmux config if tmux is running
+  tmux source-file "$tmux_config" 2>/dev/null || true
+fi
+
+# 6. Clean up orphaned state file from old toggle mechanism
 rm -f "$HOME/.config/theme/current"
 rmdir "$HOME/.config/theme" 2>/dev/null || true
 

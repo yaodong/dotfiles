@@ -41,6 +41,7 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 | `zsh` | macOS, Linux | Zsh + Oh My Zsh; supports `~/.zshrc_local` for machine-local overrides |
 | `ideavim` | macOS, Linux | IdeaVim (JetBrains) config |
 | `lazygit` | macOS, Linux | Lazygit Git UI config |
+| `tmux` | macOS, Linux | Tmux terminal multiplexer config |
 | `ghostty` | macOS | Ghostty terminal config |
 | `cursor` | macOS | Cursor editor config |
 | `zed` | macOS | Zed editor config |
@@ -49,14 +50,15 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
 A unified dark/light theme toggle spans multiple configs. Understanding this requires reading several files together:
 
-- **`utils/theme-toggle`** — orchestrator script (aliased as `tt` in zsh). Toggles macOS system appearance and updates Zed, Cursor, and Lazygit configs via sed. Linked to `~/.local/bin/theme-toggle` by `link-macos`.
+- **`utils/theme-toggle`** — orchestrator script (aliased as `tt` in zsh). Toggles macOS system appearance and updates Zed, Cursor, Lazygit, and Tmux configs via sed. Linked to `~/.local/bin/theme-toggle` by `link-macos`.
 - **Ghostty** — uses native `theme = light:Alabaster,dark:Catppuccin Mocha` syntax; follows macOS appearance automatically.
 - **Neovim** — `appearance.lua` reads `AppleInterfaceStyle` at startup to pick colorscheme (Alabaster light / Catppuccin Mocha dark). The `dark-notify` plugin auto-switches at runtime when macOS appearance changes.
 - **Cursor** — Alabaster (light) / Catppuccin Mocha (dark), updated by `theme-toggle`.
 - **Zed** — mode field toggled by `theme-toggle`.
 - **Lazygit** — Catppuccin Latte (light) / Catppuccin Mocha (dark) color values, updated by `theme-toggle`.
+- **Tmux** — Catppuccin Latte (light) / Catppuccin Mocha (dark) via catppuccin/tmux plugin, updated by `theme-toggle`. Auto-reloads config on toggle.
 
-When modifying theme colors: update `theme-toggle` for Cursor/Zed/Lazygit, `appearance.lua` for Neovim, and Ghostty's `config` for the terminal.
+When modifying theme colors: update `theme-toggle` for Cursor/Zed/Lazygit/Tmux, `appearance.lua` for Neovim, and Ghostty's `config` for the terminal.
 
 ## Keybind Conventions
 

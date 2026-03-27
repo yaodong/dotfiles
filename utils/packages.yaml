@@ -98,6 +98,11 @@ cli_tools:
     platform: [macos]
     notes: "Linux has GNU coreutils natively; this is only needed on macOS"
 
+  - name: tmux
+    brew: tmux
+    platform: [macos, linux]
+    notes: "apt: tmux; dnf: tmux"
+
   - name: fastfetch
     brew: fastfetch
     platform: [macos, linux]
@@ -171,6 +176,8 @@ dotfiles:
   - name: ideavim
     platform: [macos, linux]
   - name: lazygit
+    platform: [macos, linux]
+  - name: tmux
     platform: [macos, linux]
   # macOS-only dotfiles
   - name: ghostty
