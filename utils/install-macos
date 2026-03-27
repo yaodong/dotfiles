@@ -104,4 +104,12 @@ else
   echo "prefix=$HOME/.npm-global" > "$HOME/.npmrc"
 fi
 
+# Install TPM (Tmux Plugin Manager)
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  echo "Installing TPM..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+else
+  echo "TPM is already installed"
+fi
+
 echo "Setup completed successfully!"
