@@ -22,4 +22,11 @@ copy-on-select = clipboard
 clipboard-trim-trailing-spaces = true
 quit-after-last-window-closed = true
 keybind = shift+enter=text:\x1b\r
-unfocused-split-opacity = 0.85
+
+# Disable split keybindings (using tmux instead)
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+keybind = super+shift+enter=unbind
+keybind = super+[=unbind
+keybind = super+]=unbind
+keybind = super+ctrl+==unbind

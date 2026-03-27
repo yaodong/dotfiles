@@ -131,7 +131,15 @@ if [ -f "$tmux_config" ]; then
   tmux source-file "$tmux_config" 2>/dev/null || true
 fi
 
-# 6. Clean up orphaned state file from old toggle mechanism
+# 6. Update Claude Code theme
+claude_config="$HOME/.claude.json"
+if [ -f "$claude_config" ]; then
+  tmp=$(mktemp)
+  jq --arg theme "$target" '.theme = $theme' "$claude_config" > "$tmp" && cat "$tmp" > "$claude_config"
+  rm "$tmp"
+fi
+
+# 7. Clean up orphaned state file from old toggle mechanism
 rm -f "$HOME/.config/theme/current"
 rmdir "$HOME/.config/theme" 2>/dev/null || true
 
