@@ -9,7 +9,7 @@ readonly MAGENTA='\033[35m' BLUE='\033[34m' GRAY='\033[90m' NC='\033[0m'
 readonly BAR_WIDTH=10 BAR_FILLED="█" BAR_EMPTY="░"
 
 # Cache
-readonly CACHE_FILE="/tmp/claude-statusline-git-cache"
+readonly CACHE_DIR="/tmp/claude-statusline-cache"
 readonly CACHE_MAX_AGE=5
 
 # ── JSON parsing (no jq dependency) ──────────────────────────
@@ -66,30 +66,36 @@ parse_input() {
 get_git_info() {
   local dir="$1"
 
+  # Per-directory cache file
+  mkdir -p "$CACHE_DIR"
+  local dir_hash
+  dir_hash=$(echo -n "$dir" | md5 2>/dev/null || echo -n "$dir" | md5sum 2>/dev/null | cut -d' ' -f1)
+  local cache_file="${CACHE_DIR}/${dir_hash}"
+
   # Check cache freshness
-  if [[ -f "$CACHE_FILE" ]]; then
+  if [[ -f "$cache_file" ]]; then
     local now age mtime
     now=$(date +%s)
-    mtime=$(stat -f %m "$CACHE_FILE" 2>/dev/null || stat -c %Y "$CACHE_FILE" 2>/dev/null || echo 0)
+    mtime=$(stat -f %m "$cache_file" 2>/dev/null || stat -c %Y "$cache_file" 2>/dev/null || echo 0)
     age=$((now - mtime))
     if [[ $age -le $CACHE_MAX_AGE ]]; then
-      cat "$CACHE_FILE"
+      cat "$cache_file"
       return
     fi
   fi
 
   # Not a repo
   if ! git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    echo "|||0|0" > "$CACHE_FILE"
-    cat "$CACHE_FILE"
+    echo "|||0|0" > "$cache_file"
+    cat "$cache_file"
     return
   fi
 
   # Single git status call (porcelain v2)
   local output branch="" ahead="0" behind="0" changes=0
   output=$(git -C "$dir" status --porcelain=v2 --branch --untracked-files=all 2>/dev/null) || {
-    echo "|||0|0" > "$CACHE_FILE"
-    cat "$CACHE_FILE"
+    echo "|||0|0" > "$cache_file"
+    cat "$cache_file"
     return
   }
 
@@ -106,8 +112,8 @@ get_git_info() {
     esac
   done <<< "$output"
 
-  echo "${branch}|${changes}|${ahead}|${behind}" > "$CACHE_FILE"
-  cat "$CACHE_FILE"
+  echo "${branch}|${changes}|${ahead}|${behind}" > "$cache_file"
+  cat "$cache_file"
 }
 
 # ── Progress bar ─────────────────────────────────────────────
