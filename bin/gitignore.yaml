@@ -1,5 +1,5 @@
 # Git global ignore patterns — ensure these exist in ~/.config/git/ignore.
-# Run utils/ensure-gitignore to merge missing patterns into existing file.
+# Run bin/ensure-gitignore to merge missing patterns into existing file.
 # Does not overwrite; only appends patterns that are not already present.
 
 patterns:

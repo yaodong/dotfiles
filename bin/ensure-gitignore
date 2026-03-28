@@ -2,11 +2,11 @@
 
 set -e
 
-# Ensure ~/.config/git/ignore contains all patterns from utils/gitignore.yaml.
+# Ensure ~/.config/git/ignore contains all patterns from bin/gitignore.yaml.
 # Merges missing patterns only; does not overwrite existing file.
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-GITIGNORE_YAML="$REPO_DIR/utils/gitignore.yaml"
+GITIGNORE_YAML="$REPO_DIR/bin/gitignore.yaml"
 TARGET="$HOME/.config/git/ignore"
 
 if [ ! -f "$GITIGNORE_YAML" ]; then

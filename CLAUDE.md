@@ -8,26 +8,26 @@ Personal development environment setup containing dotfiles and installation scri
 
 ## Source of Truth for AI Agents
 
-**`utils/packages.yaml`** is the structured package manifest. It lists every package with `platform` tags (`[macos, linux]` or `[macos]`), install methods, and notes on Linux-specific alternatives. Read this file first when setting up a new machine.
+**`bin/packages.yaml`** is the structured package manifest. It lists every package with `platform` tags (`[macos, linux]` or `[macos]`), install methods, and notes on Linux-specific alternatives. Read this file first when setting up a new machine.
 
 ## Setup Commands
 
 ### macOS
 
 ```bash
-./utils/install-macos   # Install Homebrew packages, apps, fonts
-./utils/link-macos      # Link all dotfiles (all 8 packages) + theme-toggle to ~/.local/bin
-./utils/macos-defaults  # Apply macOS system defaults
+./bin/install-macos   # Install Homebrew packages, apps, fonts
+./bin/link-macos      # Link all dotfiles + theme-toggle to ~/.local/bin
+./bin/macos-defaults  # Apply macOS system defaults
 ```
 
 ### Linux
 
 ```bash
-./utils/install-linux   # Install cross-platform packages via apt/dnf
-./utils/link-linux      # Link cross-platform dotfiles (nvim, starship, zsh, ideavim, lazygit)
+./bin/install-linux   # Install cross-platform packages via apt/dnf
+./bin/link-linux      # Link cross-platform dotfiles only
 ```
 
-Link scripts use `stow --target=$HOME --restow <package>` and also run `utils/ensure-gitignore` to merge patterns from `utils/gitignore.yaml` into `~/.config/git/ignore`.
+Link scripts use `stow --target=$HOME --restow <package>` and also run `bin/ensure-gitignore` to merge patterns from `bin/gitignore.yaml` into `~/.config/git/ignore`.
 
 ## Dotfile Management
 
@@ -36,29 +36,24 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
 | Dotfile | Platform | Notes |
 |---------|----------|-------|
-| `nvim` | macOS, Linux | Neovim with LazyVim framework |
-| `starship` | macOS, Linux | Starship prompt config |
-| `zsh` | macOS, Linux | Zsh + Oh My Zsh; supports `~/.zshrc_local` for machine-local overrides |
-| `ideavim` | macOS, Linux | IdeaVim (JetBrains) config |
-| `lazygit` | macOS, Linux | Lazygit Git UI config |
-| `tmux` | macOS, Linux | Tmux terminal multiplexer config |
-| `ghostty` | macOS | Ghostty terminal config |
-| `cursor` | macOS | Cursor editor config |
-| `zed` | macOS | Zed editor config |
+| `nvim` | macOS, Linux | LazyVim framework |
+| `starship` | macOS, Linux | |
+| `zsh` | macOS, Linux | Supports `~/.zshrc_local` for machine-local overrides |
+| `ideavim` | macOS, Linux | |
+| `lazygit` | macOS, Linux | |
+| `tmux` | macOS, Linux | |
+| `ghostty` | macOS | |
+| `cursor` | macOS | |
+| `zed` | macOS | |
 
 ## Theme System (macOS)
 
-A unified dark/light theme toggle spans multiple configs. Understanding this requires reading several files together:
+A unified dark/light toggle spans multiple configs. Themes: **Catppuccin Mocha** (dark), **Alabaster** or **Catppuccin Latte** (light).
 
-- **`utils/theme-toggle`** — orchestrator script (aliased as `tt` in zsh). Toggles macOS system appearance and updates Zed, Cursor, Lazygit, and Tmux configs via sed. Linked to `~/.local/bin/theme-toggle` by `link-macos`.
-- **Ghostty** — uses native `theme = light:Alabaster,dark:Catppuccin Mocha` syntax; follows macOS appearance automatically.
-- **Neovim** — `appearance.lua` reads `AppleInterfaceStyle` at startup to pick colorscheme (Alabaster light / Catppuccin Mocha dark). The `dark-notify` plugin auto-switches at runtime when macOS appearance changes.
-- **Cursor** — Alabaster (light) / Catppuccin Mocha (dark), updated by `theme-toggle`.
-- **Zed** — mode field toggled by `theme-toggle`.
-- **Lazygit** — Catppuccin Latte (light) / Catppuccin Mocha (dark) color values, updated by `theme-toggle`.
-- **Tmux** — Catppuccin Latte (light) / Catppuccin Mocha (dark) via catppuccin/tmux plugin, updated by `theme-toggle`. Auto-reloads config on toggle.
+- **`bin/theme-toggle`** — orchestrator (aliased `tt`). Updates macOS appearance, Zed, Cursor, Lazygit, Tmux, and Claude Code. Read this script to see exactly what it changes.
+- **Ghostty** and **Neovim** — follow macOS appearance automatically (Ghostty natively, Neovim via `dark-notify` plugin + `appearance.lua`).
 
-When modifying theme colors: update `theme-toggle` for Cursor/Zed/Lazygit/Tmux, `appearance.lua` for Neovim, and Ghostty's `config` for the terminal.
+When modifying themes: `theme-toggle` is the source of truth for most tools; `appearance.lua` for Neovim; Ghostty's `config` for the terminal.
 
 ## Keybind Conventions
 

@@ -3,7 +3,7 @@
 set -e
 
 # Linux installer for cross-platform packages.
-# See utils/packages.yaml for the full package manifest and platform tags.
+# See bin/packages.yaml for the full package manifest and platform tags.
 
 # Install oh-my-zsh if it's not installed
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -122,4 +122,4 @@ fi
 
 echo ""
 echo "Linux setup completed successfully!"
-echo "Run utils/link-linux to link dotfiles."
+echo "Run bin/link-linux to link dotfiles."

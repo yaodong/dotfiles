@@ -37,9 +37,9 @@ done
 
 # Symlink theme-toggle script
 mkdir -p "$HOME/.local/bin"
-ln -sf "$REPO_DIR/utils/theme-toggle" "$HOME/.local/bin/theme-toggle"
+ln -sf "$REPO_DIR/bin/theme-toggle" "$HOME/.local/bin/theme-toggle"
 
 # Ensure git global ignore has required patterns (merge, don't overwrite)
-"$REPO_DIR/utils/ensure-gitignore"
+"$REPO_DIR/bin/ensure-gitignore"
 
 echo "All dotfiles stowed successfully!"

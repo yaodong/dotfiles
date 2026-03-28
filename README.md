@@ -1,154 +1,73 @@
 # My Dev Setup
 
-## Agent Setup Instructions
+Personal development environment managed with [GNU Stow](https://www.gnu.org/software/stow/). Supports **macOS** and **Linux**.
 
-Clone this repo and run the platform-specific setup scripts. Detect the platform first, then follow the corresponding steps.
+## Setup
+
+```bash
+git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
+cd ~/.local/dotfiles
+```
 
 ### macOS
 
 ```bash
-git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
-cd ~/.local/dotfiles
-./utils/install-macos   # Install Homebrew, CLI tools, apps, fonts
-./utils/link-macos      # Symlink all dotfiles to home directory
-./utils/macos-defaults  # Apply macOS system preferences
+./bin/install-macos   # Install Homebrew packages, apps, fonts
+./bin/link-macos      # Symlink all dotfiles + theme-toggle to ~/.local/bin
+./bin/macos-defaults  # Apply macOS system preferences
 ```
 
-### Linux (headless server)
+### Linux
 
 ```bash
-git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
-cd ~/.local/dotfiles
-./utils/install-linux   # Install cross-platform packages via apt/dnf
-./utils/link-linux      # Symlink cross-platform dotfiles only
+./bin/install-linux   # Install cross-platform packages via apt/dnf
+./bin/link-linux      # Symlink cross-platform dotfiles only
 ```
 
-### Verification
+If any script fails, see `bin/packages.yaml` for per-package install notes and platform alternatives.
 
-After setup, verify key tools are working:
+## What's Included
 
-```bash
-nvim --version
-starship --version
-zsh --version
-```
+### Dotfiles
 
-If any script fails, read `utils/packages.yaml` for per-package install notes and platform-specific alternatives.
+Each `<tool>/` directory at repo root mirrors `$HOME/` via Stow. Example: `nvim/.config/nvim/init.lua` becomes `~/.config/nvim/init.lua`.
 
-## Overview
+| Dotfile | Platform | Description |
+|---------|----------|-------------|
+| `nvim` | macOS, Linux | Neovim with [LazyVim](https://github.com/LazyVim/LazyVim) framework |
+| `tmux` | macOS, Linux | Tmux with [Catppuccin](https://github.com/catppuccin/tmux) theme |
+| `zsh` | macOS, Linux | Zsh + [Oh My Zsh](https://ohmyz.sh/); supports `~/.zshrc_local` for machine-local overrides |
+| `starship` | macOS, Linux | [Starship](https://starship.rs/) prompt config |
+| `lazygit` | macOS, Linux | [Lazygit](https://github.com/jesseduffield/lazygit) Git UI config |
+| `ideavim` | macOS, Linux | [IdeaVim](https://github.com/JetBrains/ideavim) config for JetBrains IDEs |
+| `ghostty` | macOS | [Ghostty](https://ghostty.org/) terminal config |
+| `cursor` | macOS | [Cursor](https://cursor.sh/) editor config |
+| `zed` | macOS | [Zed](https://zed.dev/) editor config |
 
-The configuration includes:
+### CLI Tools
 
-### Core Development Tools
-- **[Neovim](https://neovim.io/) with [LazyVim](https://github.com/LazyVim/LazyVim)**: A modern, extensible Vim-based text editor with a comprehensive plugin ecosystem
-- **[Cursor](https://cursor.sh/)**: AI-powered code editor with custom keybindings and settings
-- **[Ghostty](https://github.com/mitchellh/ghostty)**: Fast, cross-platform terminal emulator
-- **[IdeaVim](https://github.com/JetBrains/ideavim)**: Vim emulation plugin for JetBrains IDEs
+Installed via Homebrew (macOS) or system package manager (Linux). Full manifest in `bin/packages.yaml`.
 
-### Shell & Prompt
-- **[Zsh](https://www.zsh.org/) with [Oh My Zsh](https://ohmyz.sh/)**: Enhanced shell with community-driven framework
-- **[Starship](https://github.com/starship/starship)**: Fast, customizable shell prompt that shows project information
-- **[Zoxide](https://github.com/ajeetdsouza/zoxide)**: Smart directory navigation
-- **[FZF](https://github.com/junegunn/fzf)**: Fuzzy finder for command line
+[ripgrep](https://github.com/BurntSushi/ripgrep) | [fd](https://github.com/sharkdp/fd) | [bat](https://github.com/sharkdp/bat) | [eza](https://github.com/eza-community/eza) | [fzf](https://github.com/junegunn/fzf) | [zoxide](https://github.com/ajeetdsouza/zoxide) | [btop](https://github.com/aristocratos/btop) | [fastfetch](https://github.com/fastfetch-cli/fastfetch) | [mise](https://github.com/jdx/mise) | [lazydocker](https://github.com/jesseduffield/lazydocker)
 
-### Development Utilities
-- **[Lazygit](https://github.com/jesseduffield/lazygit)**: Simple terminal UI for git commands
-- **[Lazydocker](https://github.com/jesseduffield/lazydocker)**: Simple terminal UI for docker
-- **[Mise](https://github.com/jdx/mise)**: Polyglot runtime manager
-- **[Ripgrep](https://github.com/BurntSushi/ripgrep)**: Fast line-oriented search tool
-- **[FD](https://github.com/sharkdp/fd)**: Fast, user-friendly alternative to find
-- **[Bat](https://github.com/sharkdp/bat)**: Cat clone with syntax highlighting
-- **[Eza](https://github.com/eza-community/eza)**: Modern replacement for ls
+## Theme System (macOS)
 
-### Quick Setup
+A unified dark/light toggle (`bin/theme-toggle`, aliased as `tt`) switches between **Catppuccin Mocha** (dark) and **Alabaster/Catppuccin Latte** (light) across all tools:
 
-Clone this repository:
+| Tool | Dark | Light | Mechanism |
+|------|------|-------|-----------|
+| macOS | System dark mode | System light mode | `osascript` |
+| Ghostty | Catppuccin Mocha | Alabaster | Follows macOS automatically |
+| Neovim | Catppuccin Mocha | Alabaster | `dark-notify` plugin follows macOS |
+| Cursor | Catppuccin Mocha | Alabaster | Updated by `theme-toggle` |
+| Zed | dark mode | light mode | Updated by `theme-toggle` |
+| Lazygit | Catppuccin Mocha | Catppuccin Latte | Updated by `theme-toggle` |
+| Tmux | Catppuccin Mocha | Catppuccin Latte | Updated by `theme-toggle` |
+| Claude Code | dark | light | Updated by `theme-toggle` |
 
-```bash
-git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
-cd ~/.local/dotfiles
-```
+## Cross-Platform Support
 
-#### macOS
-
-```bash
-./utils/install-macos   # Install Homebrew packages, apps, fonts
-./utils/link-macos      # Link all dotfiles to home directory
-./utils/macos-defaults  # Apply macOS system defaults
-```
-
-#### Linux
-
-```bash
-./utils/install-linux   # Install cross-platform packages via apt/dnf
-./utils/link-linux      # Link cross-platform dotfiles only
-```
-
-### Cross-Platform Support
-
-Most CLI tools and dotfiles work on both macOS and Linux. See `utils/packages.yaml` for the full package manifest with platform tags and Linux install notes. macOS-specific items (Ghostty, Cursor, Zed configs, cask apps) are excluded from the Linux utils.
-
-## Keybindings
-
-### IdeaVim (JetBrains IDEs)
-**Leader Key:** `Space`
-
-**File Navigation:**
-- `<leader>ff` - Go to file
-- `<leader>fr` - Recent files
-- `<leader>fc` - Find in path
-- `<leader>fl` - Recent locations
-- `<leader><leader>` - Recent files
-
-**Window Management:**
-- `<leader>wv` - Split vertically
-- `<leader>ws` - Split horizontally
-- `<leader>wu` - Unsplit
-- `<leader>wm` - Move editor to opposite tab group
-- `<leader>wh/wj/wk/wl` - Navigate between windows
-
-**Code Navigation:**
-- `<leader>gd` - Go to declaration
-- `<leader>gy` - Go to type declaration
-- `<leader>gi` - Go to implementation
-- `<leader>gu` - Show usages
-- `<leader>gt` - Go to test
-- `<leader>gf/gb` - Go forward/back
-
-**Refactoring:**
-- `<leader>rn` - Rename element
-- `<leader>rm` - Extract method
-- `<leader>rv` - Introduce variable
-- `<leader>rf` - Introduce field
-- `<leader>rs` - Change signature
-- `<leader>rr` - Open refactorings list
-
-**Git Operations:**
-- `<leader>gc` - Git commit
-- `<leader>gs` - Git status
-- `<leader>gb` - Git branches
-
-**Display Options:**
-- `<leader>dd` - Toggle distraction-free mode
-- `<leader>dz` - Toggle zen mode
-- `<leader>df` - Toggle full screen
-
-### Cursor Editor
-- `Ctrl + W` - Close active editor
-- `Ctrl + I` - Toggle AI agent mode
-
-### Neovim (LazyVim)
-**Rails Testing (Custom):**
-- `<leader>tR` - Run Rails test for current file
-- `<leader>tL` - Run Rails test at current line
-
-**Note:** LazyVim provides extensive default keybindings. See [LazyVim documentation](https://github.com/LazyVim/LazyVim) for complete reference.
-
-## References
-
-- [LazyVim Documentation](https://github.com/LazyVim/LazyVim)
-- [Ghostty Documentation](https://github.com/mitchellh/ghostty)
-- [macOS Defaults](https://macos-defaults.com/)
+Most CLI tools and dotfiles work on both macOS and Linux. macOS-specific items (Ghostty, Cursor, Zed configs, cask apps, theme-toggle) are excluded from the Linux scripts. See `bin/packages.yaml` for the full package manifest with platform tags and Linux install notes.
 
 ## License
 

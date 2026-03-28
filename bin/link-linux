@@ -3,7 +3,7 @@
 set -e
 
 # Link cross-platform dotfiles on Linux.
-# See utils/packages.yaml `dotfiles` section for platform tags.
+# See bin/packages.yaml `dotfiles` section for platform tags.
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -18,7 +18,7 @@ fi
 
 cd "$REPO_DIR"
 
-# Cross-platform dotfiles only (see utils/packages.yaml)
+# Cross-platform dotfiles only (see bin/packages.yaml)
 packages=(
   "ideavim"
   "lazygit"
@@ -34,6 +34,6 @@ for package in "${packages[@]}"; do
 done
 
 # Ensure git global ignore has required patterns (merge, don't overwrite)
-"$REPO_DIR/utils/ensure-gitignore"
+"$REPO_DIR/bin/ensure-gitignore"
 
 echo "All cross-platform dotfiles stowed successfully!"
