@@ -30,7 +30,7 @@ packages=(
 
 for package in "${packages[@]}"; do
   echo "Stowing $package..."
-  stow --target="$HOME" --restow "$package"
+  stow --target="$HOME" --adopt --restow "$package"
 done
 
 # Ensure git global ignore has required patterns (merge, don't overwrite)
