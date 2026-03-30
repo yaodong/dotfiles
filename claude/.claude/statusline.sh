@@ -5,9 +5,9 @@ set -euo pipefail
 readonly CYAN='\033[36m' GREEN='\033[32m' YELLOW='\033[33m' RED='\033[31m'
 readonly MAGENTA='\033[35m' BLUE='\033[34m' GRAY='\033[90m' NC='\033[0m'
 
-# Context bar appearance: 6-char wide, thin horizontal stroke characters.
+# Context bar appearance: 5-char wide, thin horizontal stroke characters.
 # BAR_FILLED uses a heavy horizontal line (━); BAR_EMPTY uses a dashed line (╌).
-readonly BAR_WIDTH=6 BAR_FILLED="━" BAR_EMPTY="╌"
+readonly BAR_WIDTH=5 BAR_FILLED="━" BAR_EMPTY="╌"
 
 # Git info is cached per-directory for CACHE_MAX_AGE seconds to avoid
 # running git on every statusline refresh.
