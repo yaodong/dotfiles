@@ -1,18 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Colors
+# ANSI escape codes for terminal colors. NC resets to default.
 readonly CYAN='\033[36m' GREEN='\033[32m' YELLOW='\033[33m' RED='\033[31m'
 readonly MAGENTA='\033[35m' BLUE='\033[34m' GRAY='\033[90m' NC='\033[0m'
 
-# Progress bar
-readonly BAR_WIDTH=10 BAR_FILLED="█" BAR_EMPTY="░"
+# Context bar appearance: 6-char wide, thin horizontal stroke characters.
+# BAR_FILLED uses a heavy horizontal line (━); BAR_EMPTY uses a dashed line (╌).
+readonly BAR_WIDTH=6 BAR_FILLED="━" BAR_EMPTY="╌"
 
-# Cache
+# Git info is cached per-directory for CACHE_MAX_AGE seconds to avoid
+# running git on every statusline refresh.
 readonly CACHE_DIR="/tmp/claude-statusline-cache"
 readonly CACHE_MAX_AGE=5
 
 # ── JSON parsing (no jq dependency) ──────────────────────────
+# Reads stdin JSON from Claude Code's hook payload and prints three lines:
+#   1. model display name
+#   2. current working directory
+#   3. context window used_percentage (integer)
+# Pure-awk implementation so the script has no external dependencies beyond
+# standard POSIX tools.
 parse_input() {
   echo "$1" | awk '
     { doc = (NR == 1) ? $0 : doc "\n" $0 }
@@ -24,6 +32,8 @@ parse_input() {
       print (d != "" ? d : ".")
       print num(obj(doc,"context_window"), "used_percentage") + 0
     }
+    # obj(s, k) — extract the JSON object value for key k from string s.
+    # Handles nested braces and quoted strings; returns the raw inner content.
     function obj(s,k,  p,i,d,r,ch,q,e) {
       p="\"" k "\"[[:space:]]*:[[:space:]]*{"
       if (!match(s,p)) return ""
@@ -38,6 +48,7 @@ parse_input() {
       }
       return r
     }
+    # str(s, k) — extract a JSON string value for key k from string s.
     function str(s,k,  p,i,ch,v,e) {
       p="\"" k "\"[[:space:]]*:[[:space:]]*\""
       if (!match(s,p)) return ""
@@ -51,6 +62,7 @@ parse_input() {
       }
       return v
     }
+    # num(s, k) — extract a JSON numeric value for key k from string s.
     function num(s,k,  p,r) {
       if (s=="") return ""
       p="\"" k "\"[[:space:]]*:[[:space:]]*"
@@ -63,16 +75,18 @@ parse_input() {
 }
 
 # ── Git info (single call, cached) ───────────────────────────
+# Returns a pipe-separated string: branch|changes|ahead|behind
+# Uses a per-directory MD5 cache file under CACHE_DIR, refreshed every
+# CACHE_MAX_AGE seconds, so repeated statusline renders stay cheap.
 get_git_info() {
   local dir="$1"
 
-  # Per-directory cache file
   mkdir -p "$CACHE_DIR"
   local dir_hash
   dir_hash=$(echo -n "$dir" | md5 2>/dev/null || echo -n "$dir" | md5sum 2>/dev/null | cut -d' ' -f1)
   local cache_file="${CACHE_DIR}/${dir_hash}"
 
-  # Check cache freshness
+  # Serve from cache if fresh enough
   if [[ -f "$cache_file" ]]; then
     local now age mtime
     now=$(date +%s)
@@ -84,14 +98,15 @@ get_git_info() {
     fi
   fi
 
-  # Not a repo
+  # Not a git repo — write empty sentinel and return
   if ! git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     echo "|||0|0" > "$cache_file"
     cat "$cache_file"
     return
   fi
 
-  # Single git status call (porcelain v2)
+  # One `git status --porcelain=v2` call gives us branch, ahead/behind, and
+  # changed-file count all at once.
   local output branch="" ahead="0" behind="0" changes=0
   output=$(git -C "$dir" status --porcelain=v2 --branch --untracked-files=all 2>/dev/null) || {
     echo "|||0|0" > "$cache_file"
@@ -107,8 +122,8 @@ get_git_info() {
         ahead="${ab%% *}"; ahead="${ahead#+}"
         behind="${ab##* }"; behind="${behind#-}"
         ;;
-      "#"*) ;;
-      *) [[ -n "$line" ]] && ((changes++)) ;;
+      "#"*) ;;                                    # other header lines — skip
+      *) [[ -n "$line" ]] && ((changes++)) ;;    # any non-header line = a change
     esac
   done <<< "$output"
 
@@ -117,6 +132,8 @@ get_git_info() {
 }
 
 # ── Progress bar ─────────────────────────────────────────────
+# Builds a colored BAR_WIDTH-character bar from pct (0–100).
+# Color thresholds: <40% green, <60% cyan, <80% yellow, ≥80% red.
 build_bar() {
   local pct=$1 filled=$((pct * BAR_WIDTH / 100)) empty color
   empty=$((BAR_WIDTH - filled))
@@ -135,11 +152,12 @@ build_bar() {
 }
 
 # ── Main ─────────────────────────────────────────────────────
+# Reads the Claude Code hook JSON payload from stdin and writes the
+# formatted statusline to stdout. Sections: dir | branch | model | context.
 main() {
   local input
   input=$(cat)
 
-  # Parse JSON
   local model dir pct
   {
     read -r model
@@ -160,10 +178,10 @@ main() {
   icon_model=$'\xf3\xb0\xad\x89'   # nf-md-robot           U+F0B49
   icon_gauge=$'\xf3\xb0\xa1\x94'   # nf-md-gauge           U+F0854
 
-  # Directory
+  # Directory (basename only)
   local output="${icon_dir} ${BLUE}${dir##*/}${NC}"
 
-  # Git
+  # Git branch + divergence indicators
   local git_data branch changes ahead behind
   git_data=$(get_git_info "$dir")
   IFS='|' read -r branch changes ahead behind <<< "$git_data"
@@ -175,10 +193,10 @@ main() {
     [[ "${changes:-0}" -gt 0 ]] && output+=" ${YELLOW}~${changes}${NC}"
   fi
 
-  # Model
+  # Active model name
   output+="${sep}${icon_model} ${CYAN}${model}${NC}"
 
-  # Context bar
+  # Context window usage: compact bar + percentage
   local bar
   bar=$(build_bar "$pct")
   output+="${sep}${icon_gauge} ${bar} ${pct}%"
