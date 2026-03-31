@@ -16,7 +16,6 @@ alias lta='lt -a'
 alias n=nvim
 alias vi=nvim
 alias vim=nvim
-alias t='tmux new-session -A -D -s Today'
 alias tt='theme-toggle'
 
 # common configurations
@@ -55,10 +54,10 @@ export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 
 # use Tmux only if current term program is Apple Terminal
 if [ "$TERM_PROGRAM" = 'Apple_Terminal' ] || [ "$TERM_PROGRAM" = 'ghostty' ]; then
-  tmux has -t hack &> /dev/null
+  tmux has -t scratch &> /dev/null
   if [ $? -ne 0 ]; then
-    tmux new -s hack
+    tmux new -s scratch
   elif [ -z $TMUX ]; then
-    tmux attach -t hack
+    tmux attach -t scratch
   fi
 fi
