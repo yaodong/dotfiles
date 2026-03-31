@@ -175,8 +175,8 @@ main() {
   local icon_dir icon_branch icon_model icon_gauge
   icon_dir=$'\xef\x81\xbb'         # nf-fa-folder          U+F07B
   icon_branch=$'\xee\x82\xa0'      # nf-pl-branch          U+E0A0
-  icon_model=$'\xf3\xb0\xad\x89'   # nf-md-robot           U+F0B49
-  icon_gauge=$'\xf3\xb0\xa1\x94'   # nf-md-gauge           U+F0854
+  icon_model=$'\xf3\xb0\xa7\x91'   # nf-md-brain           U+F09D1
+  icon_gauge=$'\xf3\xb0\x8d\x9b'   # nf-md-memory          U+F035B
 
   # Directory (basename only)
   local output="${icon_dir} ${BLUE}${dir##*/}${NC}"
@@ -196,10 +196,13 @@ main() {
   # Active model name
   output+="${sep}${icon_model} ${CYAN}${model}${NC}"
 
-  # Context window usage: compact bar + percentage
-  local bar
-  bar=$(build_bar "$pct")
-  output+="${sep}${icon_gauge} ${bar} ${pct}%"
+  # Context window usage: colored percentage only
+  local color
+  if   [[ $pct -ge 80 ]]; then color=$RED
+  elif [[ $pct -ge 60 ]]; then color=$YELLOW
+  elif [[ $pct -ge 40 ]]; then color=$CYAN
+  else color=$GREEN; fi
+  output+="${sep}${icon_gauge} ${color}${pct}%${NC}"
 
   echo -e "$output"
 }
