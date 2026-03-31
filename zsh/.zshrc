@@ -52,3 +52,13 @@ export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 
 # Source machine-local overrides
 [ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"
+
+# use Tmux only if current term program is Apple Terminal
+if [ "$TERM_PROGRAM" = 'Apple_Terminal' ] || [ "$TERM_PROGRAM" = 'ghostty' ]; then
+  tmux has -t hack &> /dev/null
+  if [ $? -ne 0 ]; then
+    tmux new -s hack
+  elif [ -z $TMUX ]; then
+    tmux attach -t hack
+  fi
+fi
