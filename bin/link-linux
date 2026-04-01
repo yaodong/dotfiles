@@ -20,6 +20,7 @@ cd "$REPO_DIR"
 
 # Cross-platform dotfiles only (see bin/packages.yaml)
 packages=(
+  "cli"
   "ideavim"
   "lazygit"
   "nvim"

@@ -20,6 +20,7 @@ cd "$REPO_DIR"
 # Stow all packages (hardcoded list)
 packages=(
   "claude"
+  "cli"
   "cursor"
   "ghostty"
   "ideavim"
@@ -35,10 +36,6 @@ for package in "${packages[@]}"; do
   echo "Stowing $package..."
   stow --target="$HOME" --adopt --restow "$package"
 done
-
-# Symlink theme-toggle script
-mkdir -p "$HOME/.local/bin"
-ln -sf "$REPO_DIR/bin/theme-toggle" "$HOME/.local/bin/theme-toggle"
 
 # Ensure git global ignore has required patterns (merge, don't overwrite)
 "$REPO_DIR/bin/ensure-gitignore"

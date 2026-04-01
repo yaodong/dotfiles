@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ -z "$1" ]; then
+  echo "Usage: ticket <ticket-id>" >&2
+  exit 1
+fi
+
+ticket="$1"
+
+git_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+  echo "Error: not inside a git repository" >&2
+  exit 1
+}
+
+worktree_path="$git_root/.worktrees/$ticket"
+
+if git show-ref --verify --quiet "refs/heads/$ticket"; then
+  printf "Branch '%s' already exists. Use it anyway? [y/N] " "$ticket" >&2
+  read -r answer
+  if [[ "$answer" != [yY] ]]; then
+    exit 0
+  fi
+  git worktree add "$worktree_path" "$ticket" >&2
+else
+  git worktree add "$worktree_path" -b "$ticket" >&2
+fi
+
+echo "$worktree_path"

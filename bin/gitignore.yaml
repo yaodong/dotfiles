@@ -23,6 +23,8 @@ patterns:
   - build/
   - target/
   - vendor/
+  # Worktrees
+  - .worktrees/
   # Local / misc
   - .bloop
   - .metals
