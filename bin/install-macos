@@ -92,6 +92,7 @@ echo "Installing fonts..."
 brew_cask font-jetbrains-mono
 brew_cask font-jetbrains-mono-nerd-font
 brew_cask font-hack-nerd-font
+brew_cask font-noto-sans-mono-cjk-sc
 brew_cask 1password
 brew_cask ghostty
 

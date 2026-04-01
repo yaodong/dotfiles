@@ -1,6 +1,7 @@
 theme = light:Alabaster,dark:Catppuccin Mocha
 
 font-family = "JetBrainsMono Nerd Font"
+font-family = "Noto Sans Mono CJK SC"
 font-style = Regular
 font-size = 13.5
 font-thicken = true
