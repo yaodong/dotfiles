@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
 # ANSI escape codes for terminal colors. NC resets to default.
 readonly CYAN='\033[36m' GREEN='\033[32m' YELLOW='\033[33m' RED='\033[31m'
 readonly MAGENTA='\033[35m' BLUE='\033[34m' GRAY='\033[90m' NC='\033[0m'
@@ -11,7 +9,7 @@ readonly BAR_WIDTH=5 BAR_FILLED="━" BAR_EMPTY="╌"
 
 # Git info is cached per-directory for CACHE_MAX_AGE seconds to avoid
 # running git on every statusline refresh.
-readonly CACHE_DIR="/tmp/claude-statusline-cache"
+readonly CACHE_DIR="${TMPDIR:-/tmp}/claude-statusline-cache"
 readonly CACHE_MAX_AGE=5
 
 # ── JSON parsing (no jq dependency) ──────────────────────────

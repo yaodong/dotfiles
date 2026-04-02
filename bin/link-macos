@@ -40,4 +40,7 @@ done
 # Ensure git global ignore has required patterns (merge, don't overwrite)
 "$REPO_DIR/bin/ensure-gitignore"
 
+# Wire up Claude Code hooks (idempotent)
+"$REPO_DIR/bin/ensure-claude-hooks"
+
 echo "All dotfiles stowed successfully!"

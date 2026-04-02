@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+"""Ensure ~/.claude/settings.json contains required hooks. Idempotent."""
+
+import json
+import os
+import tempfile
+
+SETTINGS = os.path.expanduser("~/.claude/settings.json")
+
+HOOKS = [
+    {
+        "event": "Stop",
+        "matcher": "",
+        "command": os.path.expanduser("~/.claude/statusline.sh"),
+    },
+]
+
+
+def hook_exists(stop_hooks, command):
+    for entry in stop_hooks:
+        # flat format: {"type": "command", "command": "..."}
+        if entry.get("command") == command:
+            return True
+        # nested format: {"matcher": "...", "hooks": [...]}
+        if any(h.get("command") == command for h in entry.get("hooks", [])):
+            return True
+    return False
+
+
+def remove_duplicates(stop_hooks, command):
+    """Remove any flat-format entries for command, keeping only nested ones."""
+    return [e for e in stop_hooks if e.get("command") != command]
+
+
+def main():
+    if os.path.exists(SETTINGS):
+        with open(SETTINGS) as f:
+            settings = json.load(f)
+    else:
+        settings = {}
+
+    settings.setdefault("hooks", {})
+    added = []
+
+    for hook in HOOKS:
+        event = hook["event"]
+        settings["hooks"].setdefault(event, [])
+        settings["hooks"][event] = remove_duplicates(settings["hooks"][event], hook["command"])
+        if not hook_exists(settings["hooks"][event], hook["command"]):
+            settings["hooks"][event].append(
+                {"matcher": hook["matcher"], "hooks": [{"type": "command", "command": hook["command"]}]}
+            )
+            added.append(f"{event}: {hook['command']}")
+
+    # Atomic write
+    dir_ = os.path.dirname(SETTINGS)
+    os.makedirs(dir_, exist_ok=True)
+    with tempfile.NamedTemporaryFile("w", dir=dir_, delete=False, suffix=".tmp") as f:
+        json.dump(settings, f, indent=2)
+        f.write("\n")
+        tmp = f.name
+    os.replace(tmp, SETTINGS)
+
+    if added:
+        for entry in added:
+            print(f"Claude hooks: added {entry}")
+    else:
+        print("Claude hooks: all hooks already present.")
+
+
+if __name__ == "__main__":
+    main()
