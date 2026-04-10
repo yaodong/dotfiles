@@ -27,5 +27,11 @@ format = "[$symbol($version)]($style) "
 detect_files = ["pyproject.toml", "requirements.txt", ".python-version"]
 format = "[$symbol($version)]($style) "
 
+[hostname]
+disabled = true
+
+[username]
+disabled = true
+
 [docker_context]
 disabled = true

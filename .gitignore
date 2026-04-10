@@ -3,3 +3,4 @@
 .DS_Store
 .zshrc_local
 tmux/.config/tmux/plugins/
+.claude/settings.local.json
