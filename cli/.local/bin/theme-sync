@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "$#" -ne 0 ]; then
+  echo "Usage: theme-sync" >&2
+  exit 2
+fi
+
+appearance=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
+if [ "$appearance" = "Dark" ]; then
+  target="dark"
+else
+  target="light"
+fi
+
+# Ghostty follows macOS automatically via `theme = light:...,dark:...`.
+# Neovim picks up the same source of truth at startup; running instances get
+# nudged below because they do not always receive the system notification.
+
+tmux_theme_script="$HOME/.config/tmux/apply-tmux-theme.sh"
+if [ -f "$tmux_theme_script" ]; then
+  bash "$tmux_theme_script" "$target" 2>/dev/null || true
+fi
+
+nvim_tmpdir="${TMPDIR:-/tmp/}"
+for sock in "${nvim_tmpdir}nvim.${USER}"/*/nvim.*.0; do
+  [ -S "$sock" ] && nvim --server "$sock" --remote-expr "execute('set background=$target')" 2>/dev/null || true
+done

@@ -175,8 +175,6 @@ dotfiles:
     platform: [macos, linux]
   - name: ideavim
     platform: [macos, linux]
-  - name: lazygit
-    platform: [macos, linux]
   - name: tmux
     platform: [macos, linux]
   # macOS-only dotfiles

@@ -24,7 +24,6 @@ packages=(
   "cursor"
   "ghostty"
   "ideavim"
-  "lazygit"
   "nvim"
   "starship"
   "tmux"

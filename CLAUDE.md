@@ -40,7 +40,6 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 | `starship` | macOS, Linux | |
 | `zsh` | macOS, Linux | Supports `~/.zshrc_local` for machine-local overrides |
 | `ideavim` | macOS, Linux | |
-| `lazygit` | macOS, Linux | |
 | `tmux` | macOS, Linux | |
 | `ghostty` | macOS | |
 | `cursor` | macOS | |
@@ -50,10 +49,16 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
 A unified dark/light toggle spans multiple configs. Themes: **Catppuccin Mocha** (dark), **Alabaster** or **Catppuccin Latte** (light).
 
-- **`bin/theme-toggle`** — orchestrator (aliased `tt`). Updates macOS appearance, Zed, Cursor, Lazygit, Tmux, and Claude Code. Read this script to see exactly what it changes.
-- **Ghostty** and **Neovim** — follow macOS appearance automatically (Ghostty natively, Neovim via `dark-notify` plugin + `appearance.lua`).
+- **macOS appearance** — source of truth for dark/light mode.
+- **`theme-toggle`** — user-facing toggle (aliased `tt`). Changes macOS appearance, then runs `theme-sync`.
+- **`theme-sync`** — reads macOS appearance and updates Tmux and running Neovim instances.
+- **`apply-tmux-theme.sh`** — tmux-only renderer used by `theme-sync`; it is not a source of truth.
+- **Lazygit** — uses default terminal-aware colors; do not update Lazygit config from theme scripts.
+- **Cursor** — uses built-in auto sync; do not update Cursor settings from theme scripts.
+- **Claude Code** — uses built-in auto sync; do not update `~/.claude.json` from theme scripts.
+- **Ghostty** and **Neovim** — follow macOS appearance from their configs; `theme-sync` nudges running Neovim instances.
 
-When modifying themes: `theme-toggle` is the source of truth for most tools; `appearance.lua` for Neovim; Ghostty's `config` for the terminal.
+When modifying themes: preserve the flow `macOS appearance -> theme-sync -> app configs`. `appearance.lua` handles Neovim startup; Ghostty's `config` handles the terminal.
 
 ## Keybind Conventions
 

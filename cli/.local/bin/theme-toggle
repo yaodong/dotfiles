@@ -1,153 +1,42 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-# Determine current macOS appearance
+if [ "$#" -gt 1 ]; then
+  echo "Usage: theme-toggle [dark|light]" >&2
+  exit 2
+fi
+
 current_appearance=$(defaults read -g AppleInterfaceStyle 2>/dev/null || echo "Light")
 
-# Determine target
-if [ -n "$1" ]; then
+case "${1:-}" in
+dark | light)
   target="$1"
-else
+  ;;
+"")
   if [ "$current_appearance" = "Dark" ]; then
     target="light"
   else
     target="dark"
   fi
-fi
+  ;;
+*)
+  echo "Usage: theme-toggle [dark|light]" >&2
+  exit 2
+  ;;
+esac
 
-# 1. Toggle macOS system appearance
-#    Ghostty follows this automatically (theme = light:X,dark:Y)
-#    Neovim dark-notify follows this automatically
 if [ "$target" = "dark" ]; then
   osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
 else
   osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to false'
 fi
 
-# 2. Update Zed theme mode
-zed_config="$HOME/.config/zed/settings.json"
-if [ -f "$zed_config" ]; then
-  tmp=$(mktemp)
-  sed "s/\"mode\": \"[^\"]*\"/\"mode\": \"$target\"/" "$zed_config" > "$tmp"
-  cat "$tmp" > "$zed_config"
-  rm "$tmp"
+if command -v theme-sync >/dev/null 2>&1; then
+  theme-sync
+else
+  script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+  "$script_dir/theme-sync"
 fi
-
-# 3. Update Cursor colorTheme and iconTheme
-cursor_config="$HOME/.config/cursor/settings.json"
-if [ -f "$cursor_config" ]; then
-  if [ "$target" = "dark" ]; then
-    cursor_theme="Catppuccin Mocha"
-    cursor_icon="catppuccin-mocha"
-  else
-    cursor_theme="Alabaster"
-    cursor_icon="catppuccin-latte"
-  fi
-  tmp=$(mktemp)
-  sed -e "s/\"workbench.colorTheme\": \"[^\"]*\"/\"workbench.colorTheme\": \"$cursor_theme\"/" \
-      -e "s/\"workbench.iconTheme\": \"[^\"]*\"/\"workbench.iconTheme\": \"$cursor_icon\"/" "$cursor_config" > "$tmp"
-  cat "$tmp" > "$cursor_config"
-  rm "$tmp"
-fi
-
-# 4. Update lazygit theme
-lazygit_config="$HOME/.config/lazygit/config.yml"
-if [ -f "$lazygit_config" ]; then
-  if [ "$target" = "dark" ]; then
-    # Catppuccin Mocha
-    active="#89b4fa"
-    inactive="#a6adc8"
-    options="#89b4fa"
-    selectedBg="#313244"
-    cherryBg="#45475a"
-    cherryFg="#89b4fa"
-    unstaged="#f38ba8"
-    defaultFg="#cdd6f4"
-    searching="#f9e2af"
-    author="#b4befe"
-  else
-    # Catppuccin Latte
-    active="#1e66f5"
-    inactive="#9ca0b0"
-    options="#1e66f5"
-    selectedBg="#e6e9ef"
-    cherryBg="#ccd0da"
-    cherryFg="#1e66f5"
-    unstaged="#d20f39"
-    defaultFg="#4c4f69"
-    searching="#df8e1d"
-    author="#7287fd"
-  fi
-  tmp=$(mktemp)
-  sed \
-    -e "/activeBorderColor:/{n;s/- \"#[a-f0-9]*\"/- \"$active\"/;}" \
-    -e "/inactiveBorderColor:/{n;s/- \"#[a-f0-9]*\"/- \"$inactive\"/;}" \
-    -e "/optionsTextColor:/{n;s/- \"#[a-f0-9]*\"/- \"$options\"/;}" \
-    -e "/selectedLineBgColor:/{n;s/- \"#[a-f0-9]*\"/- \"$selectedBg\"/;}" \
-    -e "/cherryPickedCommitBgColor:/{n;s/- \"#[a-f0-9]*\"/- \"$cherryBg\"/;}" \
-    -e "/cherryPickedCommitFgColor:/{n;s/- \"#[a-f0-9]*\"/- \"$cherryFg\"/;}" \
-    -e "/unstagedChangesColor:/{n;s/- \"#[a-f0-9]*\"/- \"$unstaged\"/;}" \
-    -e "/defaultFgColor:/{n;s/- \"#[a-f0-9]*\"/- \"$defaultFg\"/;}" \
-    -e "/searchingActiveBorderColor:/{n;s/- \"#[a-f0-9]*\"/- \"$searching\"/;}" \
-    -e "s/\"\\*\": \"#[a-f0-9]*\"/\"*\": \"$author\"/" \
-    "$lazygit_config" > "$tmp"
-  cat "$tmp" > "$lazygit_config"
-  rm "$tmp"
-
-  # Update the active theme comment (only match the line after "Active theme")
-  tmp=$(mktemp)
-  if [ "$target" = "dark" ]; then
-    sed '/# Active theme/{ n; s/.*/  # Dark: Catppuccin Mocha/; }' "$lazygit_config" > "$tmp"
-  else
-    sed '/# Active theme/{ n; s/.*/  # Light: Catppuccin Latte/; }' "$lazygit_config" > "$tmp"
-  fi
-  cat "$tmp" > "$lazygit_config"
-  rm "$tmp"
-fi
-
-# 5. Update tmux Catppuccin theme
-tmux_config="$HOME/.config/tmux/tmux.conf"
-if [ -f "$tmux_config" ]; then
-  if [ "$target" = "dark" ]; then
-    tmux_flavor="mocha"
-    tmux_theme_comment="# Dark: Catppuccin Mocha"
-    tmux_bg="#1e1e2e"
-  else
-    tmux_flavor="latte"
-    tmux_theme_comment="# Light: Catppuccin Latte"
-    tmux_bg="#f7f7f7"
-  fi
-  tmp=$(mktemp)
-  sed \
-    -e "s/@catppuccin_flavor '[^']*'/@catppuccin_flavor '$tmux_flavor'/" \
-    -e "s/@catppuccin_status_background \"#[a-f0-9]*\"/@catppuccin_status_background \"$tmux_bg\"/" \
-    -e '/# Active theme/{n;s/.*/'"$tmux_theme_comment"'/;}' \
-    "$tmux_config" > "$tmp"
-  cat "$tmp" > "$tmux_config"
-  rm "$tmp"
-
-  # Build a temp config that unsets all catppuccin/theme options
-  # and re-sources tmux.conf in a single atomic operation
-  tmp_conf=$(mktemp)
-  tmux show -g 2>/dev/null | grep -oE '^@(thm_|catppuccin_|_ctp_)\S+' | while read -r opt; do
-    echo "set -gu $opt"
-  done > "$tmp_conf"
-  echo "source-file $tmux_config" >> "$tmp_conf"
-  tmux source-file "$tmp_conf" 2>/dev/null || true
-  rm -f "$tmp_conf"
-fi
-
-# 6. Update Claude Code theme
-claude_config="$HOME/.claude.json"
-if [ -f "$claude_config" ]; then
-  tmp=$(mktemp)
-  jq --arg theme "$target" '.theme = $theme' "$claude_config" > "$tmp" && cat "$tmp" > "$claude_config"
-  rm "$tmp"
-fi
-
-# 7. Clean up orphaned state file from old toggle mechanism
-rm -f "$HOME/.config/theme/current"
-rmdir "$HOME/.config/theme" 2>/dev/null || true
 
 echo "Switched to $target mode"

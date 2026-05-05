@@ -18,9 +18,6 @@ alias vi=nvim
 alias vim=nvim
 alias tt='theme-toggle'
 
-# Wrappers for CLI tools that need to change shell state
-ticket() { local d; d=$(command ticket "$@") && [ -n "$d" ] && cd "$d"; }
-
 # common configurations
 export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8

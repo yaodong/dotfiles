@@ -38,7 +38,6 @@ Each `<tool>/` directory at repo root mirrors `$HOME/` via Stow. Example: `nvim/
 | `tmux` | macOS, Linux | Tmux with [Catppuccin](https://github.com/catppuccin/tmux) theme |
 | `zsh` | macOS, Linux | Zsh + [Oh My Zsh](https://ohmyz.sh/); supports `~/.zshrc_local` for machine-local overrides |
 | `starship` | macOS, Linux | [Starship](https://starship.rs/) prompt config |
-| `lazygit` | macOS, Linux | [Lazygit](https://github.com/jesseduffield/lazygit) Git UI config |
 | `ideavim` | macOS, Linux | [IdeaVim](https://github.com/JetBrains/ideavim) config for JetBrains IDEs |
 | `ghostty` | macOS | [Ghostty](https://ghostty.org/) terminal config |
 | `cursor` | macOS | [Cursor](https://cursor.sh/) editor config |
@@ -52,18 +51,17 @@ Installed via Homebrew (macOS) or system package manager (Linux). Full manifest 
 
 ## Theme System (macOS)
 
-A unified dark/light toggle (`bin/theme-toggle`, aliased as `tt`) switches between **Catppuccin Mocha** (dark) and **Alabaster/Catppuccin Latte** (light) across all tools:
+macOS appearance is the source of truth for dark/light mode. The `theme-toggle` command, aliased as `tt`, only changes macOS appearance and then runs `theme-sync` to update tools that do not follow macOS automatically.
 
 | Tool | Dark | Light | Mechanism |
 |------|------|-------|-----------|
-| macOS | System dark mode | System light mode | `osascript` |
-| Ghostty | Catppuccin Mocha | Alabaster | Follows macOS automatically |
-| Neovim | Catppuccin Mocha | Alabaster | `dark-notify` plugin follows macOS |
-| Cursor | Catppuccin Mocha | Alabaster | Updated by `theme-toggle` |
-| Zed | dark mode | light mode | Updated by `theme-toggle` |
-| Lazygit | Catppuccin Mocha | Catppuccin Latte | Updated by `theme-toggle` |
-| Tmux | Catppuccin Mocha | Catppuccin Latte | Updated by `theme-toggle` |
-| Claude Code | dark | light | Updated by `theme-toggle` |
+| macOS | System dark mode | System light mode | Changed by `theme-toggle` |
+| Ghostty | Catppuccin Mocha | Catppuccin Latte | Follows macOS automatically |
+| Neovim | Catppuccin Mocha | Catppuccin Latte | Reads macOS at startup; running instances nudged by `theme-sync` |
+| Cursor | Catppuccin Mocha | Alabaster | Uses built-in auto sync |
+| Lazygit | terminal/default colors | terminal/default colors | Uses Lazygit defaults |
+| Tmux | Catppuccin Mocha | Catppuccin Latte | Synced by `theme-sync`, rendered by `apply-tmux-theme.sh` |
+| Claude Code | dark | light | Uses built-in auto sync |
 
 ## Cross-Platform Support
 

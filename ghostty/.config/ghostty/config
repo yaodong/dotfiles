@@ -1,4 +1,4 @@
-theme = light:Alabaster,dark:Catppuccin Mocha
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 
 font-family = "JetBrainsMono Nerd Font"
 font-family = "Noto Sans Mono CJK SC"
@@ -14,8 +14,8 @@ mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
 shell-integration-features = no-cursor, sudo, no-title
 
-window-padding-x = 10
-window-padding-y = 10
+window-padding-x = 0
+window-padding-y = 0
 window-padding-balance = true
 window-save-state = always
 

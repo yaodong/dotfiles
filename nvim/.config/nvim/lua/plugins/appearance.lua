@@ -26,44 +26,24 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = dark and "catppuccin-mocha" or "alabaster",
+      colorscheme = dark and "catppuccin-mocha" or "catppuccin-latte",
     },
   },
 
-  -- alabaster: light colorscheme
-  {
-    "p00f/alabaster.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-
-  -- catppuccin: dark colorscheme
+  -- catppuccin: dark and light colorscheme
   {
     "catppuccin/nvim",
     lazy = false,
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "mocha",
+      flavour = "auto",
       integrations = {
         blink_cmp = true,
         native_lsp = { enabled = true },
         bufferline = false,
       },
     },
-  },
-
-  -- dark-notify: auto-switch colorscheme with macOS appearance
-  {
-    "cormacrelf/dark-notify",
-    config = function()
-      require("dark_notify").run({
-        schemes = {
-          dark = "catppuccin-mocha",
-          light = "alabaster",
-        },
-      })
-    end,
   },
 
   -- incline: creating lightweight floating statuslines
