@@ -19,8 +19,8 @@ cd "$REPO_DIR"
 
 # Stow all packages (hardcoded list)
 packages=(
+  "bin"
   "claude"
-  "cli"
   "cursor"
   "ghostty"
   "ideavim"

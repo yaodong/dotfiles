@@ -3,7 +3,7 @@
 set -euo pipefail
 
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
-script="$repo_root/cli/.local/bin/theme-toggle"
+script="$repo_root/bin/.local/bin/theme-toggle"
 workdir=$(mktemp -d)
 trap 'rm -rf "$workdir"' EXIT
 
