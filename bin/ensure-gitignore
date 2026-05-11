@@ -14,7 +14,7 @@ if [ ! -f "$GITIGNORE_YAML" ]; then
   exit 1
 fi
 
-# Parse YAML patterns (requires ruby, typically on macOS/Linux)
+# Parse YAML patterns (requires Ruby, available on macOS)
 if ! command -v ruby &>/dev/null; then
   echo "Error: ruby required to parse gitignore.yaml. Install ruby or run ensure-gitignore manually."
   exit 1

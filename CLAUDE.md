@@ -4,48 +4,39 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-Personal development environment setup containing dotfiles and installation scripts. Uses GNU Stow for symlink management. Supports **macOS** and **Linux**.
+Personal macOS development environment setup containing dotfiles and installation scripts. Uses GNU Stow for symlink management.
 
 ## Source of Truth for AI Agents
 
-**`bin/packages.yaml`** is the structured package manifest. It lists every package with `platform` tags (`[macos, linux]` or `[macos]`), install methods, and notes on Linux-specific alternatives. Read this file first when setting up a new machine.
+**`Brewfile`** is the package manifest. It lists Homebrew formulae, casks, fonts, and taps used by `bin/install`. Read this file first when setting up a new machine.
 
 ## Setup Commands
 
-### macOS
-
 ```bash
-./bin/install-macos   # Install Homebrew packages, apps, fonts
-./bin/link-macos      # Link all dotfiles + theme-toggle to ~/.local/bin
+./bin/install         # Install Homebrew packages, apps, fonts
+./bin/link            # Link all dotfiles into $HOME
 ./bin/macos-defaults  # Apply macOS system defaults
 ```
 
-### Linux
-
-```bash
-./bin/install-linux   # Install cross-platform packages via apt/dnf
-./bin/link-linux      # Link cross-platform dotfiles only
-```
-
-Link scripts use `stow --target=$HOME --restow <package>` and also run `bin/ensure-gitignore` to merge patterns from `bin/gitignore.yaml` into `~/.config/git/ignore`.
+The link script uses `stow --target=$HOME --adopt --restow <package>` and also runs `bin/ensure-gitignore` to merge patterns from `bin/gitignore.yaml` into `~/.config/git/ignore`.
 
 ## Dotfile Management
 
 Each `<tool>/` directory at repo root mirrors `$HOME/` via GNU Stow.
 Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
-| Dotfile | Platform | Notes |
-|---------|----------|-------|
-| `nvim` | macOS, Linux | LazyVim framework |
-| `starship` | macOS, Linux | |
-| `zsh` | macOS, Linux | Supports `~/.zshrc_local` for machine-local overrides |
-| `ideavim` | macOS, Linux | |
-| `tmux` | macOS, Linux | |
-| `ghostty` | macOS | |
-| `cursor` | macOS | |
-| `zed` | macOS | |
+| Dotfile | Notes |
+|---------|-------|
+| `nvim` | LazyVim framework |
+| `starship` | |
+| `zsh` | Supports `~/.zshrc_local` for machine-local overrides |
+| `ideavim` | |
+| `tmux` | |
+| `ghostty` | |
+| `cursor` | |
+| `zed` | |
 
-## Theme System (macOS)
+## Theme System
 
 A unified dark/light toggle spans multiple configs. Themes: **Rose Pine Moon** (dark), **Rose Pine Dawn** (light).
 
