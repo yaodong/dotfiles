@@ -1,4 +1,4 @@
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+theme = light:Rose Pine Dawn,dark:Rose Pine Moon
 
 font-family = "JetBrainsMono Nerd Font"
 font-family = "Noto Sans Mono CJK SC"
@@ -9,6 +9,8 @@ adjust-cell-height = 20%
 
 cursor-style = block
 cursor-style-blink = false
+cursor-color = cell-foreground
+cursor-text = cell-background
 
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2

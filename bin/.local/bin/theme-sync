@@ -15,13 +15,9 @@ else
 fi
 
 # Ghostty follows macOS automatically via `theme = light:...,dark:...`.
+# Tmux uses terminal-default colors, so it tracks Ghostty with no nudge.
 # Neovim picks up the same source of truth at startup; running instances get
 # nudged below because they do not always receive the system notification.
-
-tmux_theme_script="$HOME/.config/tmux/apply-tmux-theme.sh"
-if [ -f "$tmux_theme_script" ]; then
-  bash "$tmux_theme_script" "$target" 2>/dev/null || true
-fi
 
 nvim_tmpdir="${TMPDIR:-/tmp/}"
 for sock in "${nvim_tmpdir}nvim.${USER}"/*/nvim.*.0; do

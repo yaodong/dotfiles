@@ -26,24 +26,32 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = dark and "catppuccin-mocha" or "catppuccin-latte",
+      colorscheme = "rose-pine",
     },
   },
 
-  -- catppuccin: dark and light colorscheme
+  -- rose-pine: auto-switches between moon (dark) and dawn (light) based on
+  -- vim.o.background. Re-apply on background change so running instances
+  -- receive the swap when `theme-sync` flips the option.
   {
-    "catppuccin/nvim",
+    "rose-pine/neovim",
     lazy = false,
-    name = "catppuccin",
+    name = "rose-pine",
     priority = 1000,
     opts = {
-      flavour = "auto",
-      integrations = {
-        blink_cmp = true,
-        native_lsp = { enabled = true },
-        bufferline = false,
-      },
+      variant = "auto",
+      dark_variant = "moon",
     },
+    config = function(_, opts)
+      require("rose-pine").setup(opts)
+      vim.cmd.colorscheme("rose-pine")
+      vim.api.nvim_create_autocmd("OptionSet", {
+        pattern = "background",
+        callback = function()
+          vim.cmd.colorscheme("rose-pine")
+        end,
+      })
+    end,
   },
 
   -- incline: creating lightweight floating statuslines

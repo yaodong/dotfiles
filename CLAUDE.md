@@ -47,12 +47,12 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
 ## Theme System (macOS)
 
-A unified dark/light toggle spans multiple configs. Themes: **Catppuccin Mocha** (dark), **Alabaster** or **Catppuccin Latte** (light).
+A unified dark/light toggle spans multiple configs. Themes: **Rose Pine Moon** (dark), **Rose Pine Dawn** (light).
 
 - **macOS appearance** — source of truth for dark/light mode.
 - **`theme-toggle`** — user-facing toggle (aliased `tt`). Changes macOS appearance, then runs `theme-sync`.
-- **`theme-sync`** — reads macOS appearance and updates Tmux and running Neovim instances.
-- **`apply-tmux-theme.sh`** — tmux-only renderer used by `theme-sync`; it is not a source of truth.
+- **`theme-sync`** — reads macOS appearance and nudges running Neovim instances. Tmux, Lazygit, Cursor, Claude Code, and Ghostty each sync themselves (see below) and are not touched by this script.
+- **Tmux** — status bar uses terminal-default colors, so it inherits Ghostty's light/dark palette with no theme coupling.
 - **Lazygit** — uses default terminal-aware colors; do not update Lazygit config from theme scripts.
 - **Cursor** — uses built-in auto sync; do not update Cursor settings from theme scripts.
 - **Claude Code** — uses built-in auto sync; do not update `~/.claude.json` from theme scripts.

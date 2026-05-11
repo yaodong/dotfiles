@@ -35,7 +35,7 @@ Each `<tool>/` directory at repo root mirrors `$HOME/` via Stow. Example: `nvim/
 | Dotfile | Platform | Description |
 |---------|----------|-------------|
 | `nvim` | macOS, Linux | Neovim with [LazyVim](https://github.com/LazyVim/LazyVim) framework |
-| `tmux` | macOS, Linux | Tmux with [Catppuccin](https://github.com/catppuccin/tmux) theme |
+| `tmux` | macOS, Linux | Tmux; status bar uses terminal-default colors |
 | `zsh` | macOS, Linux | Zsh + [Oh My Zsh](https://ohmyz.sh/); supports `~/.zshrc_local` for machine-local overrides |
 | `starship` | macOS, Linux | [Starship](https://starship.rs/) prompt config |
 | `ideavim` | macOS, Linux | [IdeaVim](https://github.com/JetBrains/ideavim) config for JetBrains IDEs |
@@ -56,11 +56,11 @@ macOS appearance is the source of truth for dark/light mode. The `theme-toggle` 
 | Tool | Dark | Light | Mechanism |
 |------|------|-------|-----------|
 | macOS | System dark mode | System light mode | Changed by `theme-toggle` |
-| Ghostty | Catppuccin Mocha | Catppuccin Latte | Follows macOS automatically |
-| Neovim | Catppuccin Mocha | Catppuccin Latte | Reads macOS at startup; running instances nudged by `theme-sync` |
-| Cursor | Catppuccin Mocha | Alabaster | Uses built-in auto sync |
+| Ghostty | Rose Pine Moon | Rose Pine Dawn | Follows macOS automatically |
+| Neovim | Rose Pine Moon | Rose Pine Dawn | Reads macOS at startup; running instances nudged by `theme-sync` |
+| Tmux | terminal/default colors | terminal/default colors | Inherits Ghostty palette via ANSI colors |
+| Cursor | Catppuccin Mocha | Catppuccin Latte | Uses built-in auto sync |
 | Lazygit | terminal/default colors | terminal/default colors | Uses Lazygit defaults |
-| Tmux | Catppuccin Mocha | Catppuccin Latte | Synced by `theme-sync`, rendered by `apply-tmux-theme.sh` |
 | Claude Code | dark | light | Uses built-in auto sync |
 
 ## Cross-Platform Support
