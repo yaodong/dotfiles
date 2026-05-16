@@ -42,4 +42,12 @@ done
 # Wire up Claude Code hooks (idempotent)
 "$REPO_DIR/bin/ensure-claude-hooks"
 
+# Install overcommit git hooks (idempotent; skips if gem not installed)
+if command -v overcommit &>/dev/null; then
+  (cd "$REPO_DIR" && overcommit --install >/dev/null && overcommit --sign >/dev/null)
+  echo "Overcommit: hooks installed and signed."
+else
+  echo "Overcommit: skipping (not on PATH; gem install overcommit)."
+fi
+
 echo "All dotfiles stowed successfully!"

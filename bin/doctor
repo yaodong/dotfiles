@@ -1,0 +1,162 @@
+#!/usr/bin/env bash
+# Validate the local dev environment: tools installed, dotfiles linked,
+# git/Claude/overcommit wired up. Reports only; run bin/install or bin/link
+# to fix what's broken.
+
+set -uo pipefail
+
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if [ -t 1 ]; then
+  C_OK=$'\033[32m'; C_FAIL=$'\033[31m'; C_WARN=$'\033[33m'; C_DIM=$'\033[2m'; C_RST=$'\033[0m'
+else
+  C_OK=""; C_FAIL=""; C_WARN=""; C_DIM=""; C_RST=""
+fi
+
+fails=0
+warns=0
+
+pass() { printf "  %s✓%s %s\n" "$C_OK" "$C_RST" "$1"; }
+fail() { printf "  %s✗%s %s\n" "$C_FAIL" "$C_RST" "$1"; [ $# -ge 2 ] && printf "    %s%s%s\n" "$C_DIM" "$2" "$C_RST"; fails=$((fails+1)); }
+warn() { printf "  %s!%s %s\n" "$C_WARN" "$C_RST" "$1"; [ $# -ge 2 ] && printf "    %s%s%s\n" "$C_DIM" "$2" "$C_RST"; warns=$((warns+1)); }
+section() { printf "\n%s\n" "$1"; }
+
+check_cmd() {
+  local cmd="$1" hint="${2:-}"
+  if command -v "$cmd" &>/dev/null; then
+    pass "$cmd ($(command -v "$cmd"))"
+  else
+    fail "$cmd not found" "$hint"
+  fi
+}
+
+target_stowed() {
+  # 0 = file in HOME is a symlink (directly or via parent) into this repo
+  local target="$1" node="$1" link
+  while [ -n "$node" ] && [ "$node" != "/" ]; do
+    if [ -L "$node" ]; then
+      link="$(readlink "$node")"
+      [[ "$link" = /* ]] || link="$(cd "$(dirname "$node")" && cd "$(dirname "$link")" 2>/dev/null && pwd)/$(basename "$link")"
+      case "$link" in "$REPO_DIR"/*) return 0 ;; *) return 1 ;; esac
+    fi
+    node="$(dirname "$node")"
+  done
+  return 1
+}
+
+check_stowed() {
+  local pkg="$1"
+  local total=0 missing=0 wrong=0 first_missing="" first_wrong=""
+  while IFS= read -r rel; do
+    [ -z "$rel" ] && continue
+    rel="${rel#./}"
+    local target="$HOME/$rel"
+    total=$((total+1))
+    if [ ! -e "$target" ] && [ ! -L "$target" ]; then
+      missing=$((missing+1))
+      [ -z "$first_missing" ] && first_missing="$rel"
+    elif ! target_stowed "$target"; then
+      wrong=$((wrong+1))
+      [ -z "$first_wrong" ] && first_wrong="$rel"
+    fi
+  done < <(cd "$REPO_DIR/$pkg" && find . -mindepth 1 \( -type f -o -type l \) ! -name '.DS_Store' 2>/dev/null)
+
+  if [ "$total" -eq 0 ]; then
+    warn "$pkg: no files to check"
+  elif [ "$missing" -eq 0 ] && [ "$wrong" -eq 0 ]; then
+    pass "$pkg stowed ($total files)"
+  elif [ "$wrong" -gt 0 ]; then
+    fail "$pkg: $wrong file(s) not symlinked to repo" "e.g. ~/$first_wrong (run ./bin/link)"
+  else
+    warn "$pkg: $missing of $total file(s) missing in \$HOME" "e.g. ~/$first_missing (run ./bin/link)"
+  fi
+}
+
+# --- Tools ---
+section "Tools"
+check_cmd brew "Run ./bin/install"
+check_cmd stow "brew install stow"
+check_cmd git
+check_cmd nvim "brew install neovim"
+check_cmd tmux "brew install tmux"
+check_cmd starship "brew install starship"
+check_cmd fzf "brew install fzf"
+check_cmd rg "brew install ripgrep"
+check_cmd overcommit "gem install overcommit"
+
+# --- Dotfile symlinks ---
+section "Dotfile symlinks"
+for pkg in bin claude cursor ghostty ideavim nvim starship tmux zed zsh; do
+  check_stowed "$pkg"
+done
+
+# --- Git config ---
+section "Git"
+git_email="$(git config user.email || true)"
+git_name="$(git config user.name || true)"
+if [ -n "$git_name" ]; then pass "user.name = $git_name"; else fail "user.name not set"; fi
+if [ -n "$git_email" ]; then pass "user.email = $git_email"; else fail "user.email not set"; fi
+
+global_ignore="$HOME/.config/git/ignore"
+if [ ! -f "$global_ignore" ]; then
+  fail "global gitignore missing" "$global_ignore (run ./bin/link)"
+elif command -v ruby &>/dev/null && [ -f "$REPO_DIR/bin/gitignore.yaml" ]; then
+  missing=0
+  while IFS= read -r pat; do
+    [ -z "$pat" ] && continue
+    grep -Fxq "$pat" "$global_ignore" 2>/dev/null || missing=$((missing+1))
+  done < <(ruby -ryaml -e "(YAML.load_file('$REPO_DIR/bin/gitignore.yaml')['patterns']||[]).each{|p| puts p}" 2>/dev/null)
+  if [ "$missing" -eq 0 ]; then
+    pass "global gitignore has all patterns from gitignore.yaml"
+  else
+    fail "global gitignore missing $missing pattern(s)" "run ./bin/ensure-gitignore"
+  fi
+else
+  warn "skipping gitignore.yaml diff (ruby unavailable)"
+fi
+
+# --- Overcommit ---
+# Overcommit enforces its own hooks (AuthorEmail, etc.) at commit time. Doctor
+# only verifies overcommit is wired up here; don't duplicate per-hook logic.
+section "Overcommit"
+if command -v overcommit &>/dev/null; then
+  pre_commit="$REPO_DIR/.git/hooks/pre-commit"
+  if [ -f "$pre_commit" ] && grep -q overcommit "$pre_commit" 2>/dev/null; then
+    pass "hooks wired in this repo ($(overcommit --version 2>/dev/null))"
+  else
+    fail "hooks not wired in this repo" "run ./bin/ensure-overcommit"
+  fi
+else
+  warn "overcommit not installed; skipping"
+fi
+
+# --- Claude Code ---
+section "Claude Code"
+claude_settings="$HOME/.claude/settings.json"
+statusline_script="$HOME/.claude/statusline.sh"
+if [ -f "$claude_settings" ] && command -v ruby &>/dev/null; then
+  if ruby -rjson -e "
+    s = JSON.parse(File.read('$claude_settings'))
+    sl = s['statusLine']
+    exit(sl && sl['type']=='command' && sl['command']=='$statusline_script' ? 0 : 1)
+  " 2>/dev/null; then
+    pass "statusLine configured"
+  else
+    fail "statusLine not configured" "run ./bin/ensure-claude-hooks"
+  fi
+else
+  warn "skipping Claude settings check ($claude_settings missing or ruby unavailable)"
+fi
+
+# --- Summary ---
+section "Summary"
+if [ "$fails" -eq 0 ] && [ "$warns" -eq 0 ]; then
+  printf "  %sAll checks passed.%s\n" "$C_OK" "$C_RST"
+  exit 0
+elif [ "$fails" -eq 0 ]; then
+  printf "  %s%d warning(s).%s\n" "$C_WARN" "$warns" "$C_RST"
+  exit 0
+else
+  printf "  %s%d failure(s)%s, %s%d warning(s)%s.\n" "$C_FAIL" "$fails" "$C_RST" "$C_WARN" "$warns" "$C_RST"
+  exit 1
+fi

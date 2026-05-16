@@ -16,9 +16,10 @@ Personal macOS development environment setup containing dotfiles and installatio
 ./bin/install         # Install Homebrew packages, apps, fonts
 ./bin/link            # Link all dotfiles into $HOME
 ./bin/macos-defaults  # Apply macOS system defaults
+./bin/doctor          # Validate setup (read-only; reports failures)
 ```
 
-The link script uses `stow --target=$HOME --adopt --restow <package>` and also runs `bin/ensure-gitignore` to merge patterns from `bin/gitignore.yaml` into `~/.config/git/ignore`.
+The link script uses `stow --target=$HOME --adopt --restow <package>`, merges patterns from `bin/gitignore.yaml` into `~/.config/git/ignore`, wires the Claude statusLine, and installs overcommit git hooks (if the gem is available). `bin/doctor` only validates — it never modifies state.
 
 ## Dotfile Management
 
