@@ -49,6 +49,11 @@ if command -v mise >/dev/null 2>&1; then
 fi
 export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 
+ # pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
 # Source machine-local overrides
 [ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"
 
