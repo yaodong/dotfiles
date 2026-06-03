@@ -6,15 +6,16 @@ font-style = Regular
 font-size = 13.5
 font-thicken = true
 adjust-cell-height = 20%
+window-colorspace = display-p3
 
 cursor-style = block
 cursor-style-blink = false
 cursor-color = cell-foreground
 cursor-text = cell-background
 
-mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
-shell-integration-features = no-cursor, sudo, no-title
+macos-option-as-alt = true
+shell-integration-features = cursor, sudo, no-title
 
 window-padding-x = 5
 window-padding-y = 0
