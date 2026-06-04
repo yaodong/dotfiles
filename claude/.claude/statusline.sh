@@ -163,6 +163,13 @@ main() {
     read -r pct
   } <<< "$(parse_input "$input")"
 
+  # Normalize raw model IDs (e.g. us.anthropic.claude-opus-4-8) to friendly
+  # "Opus 4.8" form. Friendly names already contain a space — leave them be.
+  if [[ "$model" != *" "* && "$model" =~ (opus|sonnet|haiku)-([0-9]+)-([0-9]+) ]]; then
+    local fam="${BASH_REMATCH[1]}"
+    fam="$(tr '[:lower:]' '[:upper:]' <<< "${fam:0:1}")${fam:1}"
+    model="${fam} ${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+  fi
   pct=${pct%.*}  # truncate decimal
   [[ $pct -lt 0 ]] && pct=0
   [[ $pct -gt 100 ]] && pct=100
