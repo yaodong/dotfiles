@@ -31,5 +31,6 @@ cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-noto-sans-mono-cjk-sc"
 cask "ghostty"
+cask "zed"
 
 cask "orbstack" unless `whoami`.strip.include?(".")

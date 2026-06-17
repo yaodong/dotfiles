@@ -35,7 +35,7 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 | `tmux` | |
 | `ghostty` | |
 | `cursor` | |
-| `zed` | |
+| `zed` | Intentionally privacy-locked: `disable_ai`, `auto_update: false`, telemetry off, sign-in/collaboration hidden. Do not re-enable these. |
 
 ## Theme System
 
