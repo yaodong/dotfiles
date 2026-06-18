@@ -1,0 +1,12 @@
+# Global mise config (~/.config/mise/config.toml).
+# Per-project versions live in each repo's own .mise.toml and override these.
+[tools]
+coursier = "latest"
+java = "openjdk-21"
+node = "22"
+python = "3.12"
+
+[settings]
+# Honor .python-version / .ruby-version files everywhere (replaces pyenv/rbenv).
+# Off by default in mise.
+idiomatic_version_file_enable_tools = ["python", "ruby"]

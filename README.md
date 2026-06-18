@@ -1,18 +1,18 @@
 # My Dev Setup
 
-Personal macOS development environment managed with [GNU Stow](https://www.gnu.org/software/stow/).
+Personal macOS development environment.
 
 ## Setup
 
 ```bash
-git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.local/dotfiles
-cd ~/.local/dotfiles
+git clone --depth=1 https://github.com/yaodong/dotfiles.git ~/.setup
+cd ~/.setup
 ```
 
 ```bash
-./bin/install         # Install Homebrew packages, apps, fonts
-./bin/link            # Symlink dotfiles into $HOME
-./bin/macos-defaults  # Apply macOS system preferences
+./scripts/install         # Install Homebrew packages, apps, fonts
+./scripts/link            # Symlink dotfiles into $HOME
+./scripts/macos-defaults  # Apply macOS system preferences
 ```
 
 Homebrew packages are declared in `Brewfile`.
@@ -21,7 +21,7 @@ Homebrew packages are declared in `Brewfile`.
 
 ### Dotfiles
 
-Each `<tool>/` directory at repo root mirrors `$HOME/` via Stow. Example: `nvim/.config/nvim/init.lua` becomes `~/.config/nvim/init.lua`.
+Each `<tool>/` directory at repo root is symlinked into `$HOME` by `scripts/link`. Example: `nvim/` becomes `~/.config/nvim`.
 
 | Dotfile | Description |
 |---------|-------------|
@@ -42,11 +42,11 @@ Installed via Homebrew. Full manifest in `Brewfile`.
 
 ## Theme System
 
-macOS appearance is the source of truth for dark/light mode. The `theme-toggle` command, aliased as `tt`, only changes macOS appearance and then runs `theme-sync` to update tools that do not follow macOS automatically.
+macOS appearance is the source of truth for dark/light mode. Apps follow it directly where possible; `theme-sync` only nudges running Neovim instances that do not always receive the system notification.
 
 | Tool | Dark | Light | Mechanism |
 |------|------|-------|-----------|
-| macOS | System dark mode | System light mode | Changed by `theme-toggle` |
+| macOS | System dark mode | System light mode | Changed in System Settings |
 | Ghostty | Rose Pine Moon | Rose Pine Dawn | Follows macOS automatically |
 | Neovim | Rose Pine Moon | Rose Pine Dawn | Reads macOS at startup; running instances nudged by `theme-sync` |
 | Tmux | terminal/default colors | terminal/default colors | Inherits Ghostty palette via ANSI colors |

@@ -4,32 +4,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-Personal macOS development environment setup containing dotfiles and installation scripts. Uses GNU Stow for symlink management.
+Personal macOS development environment setup containing dotfiles and installation scripts.
 
 ## Source of Truth for AI Agents
 
-**`Brewfile`** is the package manifest. It lists Homebrew formulae, casks, fonts, and taps used by `bin/install`. Read this file first when setting up a new machine.
+**`Brewfile`** is the package manifest. It lists Homebrew formulae, casks, fonts, and taps used by `scripts/install`. Read this file first when setting up a new machine.
 
 ## Setup Commands
 
 ```bash
-./bin/install         # Install Homebrew packages, apps, fonts
-./bin/link            # Link all dotfiles into $HOME
-./bin/macos-defaults  # Apply macOS system defaults
-./bin/doctor          # Validate setup (read-only; reports failures)
+./scripts/install         # Install Homebrew packages, apps, fonts, runtimes
+./scripts/link            # Symlink dotfiles into $HOME
+./scripts/macos-defaults  # Apply macOS system defaults
+./scripts/doctor          # Validate setup (read-only; reports failures)
 ```
 
-The link script uses `stow --target=$HOME --adopt --restow <package>`, merges patterns from `bin/gitignore.yaml` into `~/.config/git/ignore`, wires the Claude statusLine, and installs overcommit git hooks (if the gem is available). `bin/doctor` only validates — it never modifies state.
+`scripts/install` runs once: Homebrew, mise runtimes (ruby, python), overcommit, Claude statusLine. `scripts/link` is idempotent and safe to re-run. `scripts/doctor` only validates — it never modifies state.
 
 ## Dotfile Management
 
-Each `<tool>/` directory at repo root mirrors `$HOME/` via GNU Stow.
-Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
+Each `<tool>/` directory at repo root is symlinked into `$HOME` by `scripts/link`.
+Example: `nvim/` → `~/.config/nvim`
 
 | Dotfile | Notes |
 |---------|-------|
 | `nvim` | LazyVim framework |
 | `starship` | |
+| `git` | `~/.config/git/config`. Do not set `core.excludesfile` (it would shadow `~/.config/git/ignore`). |
 | `zsh` | Supports `~/.zshrc_local` for machine-local overrides |
 | `ideavim` | |
 | `tmux` | |
@@ -39,18 +40,17 @@ Example: `nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
 ## Theme System
 
-A unified dark/light toggle spans multiple configs. Themes: **Rose Pine Moon** (dark), **Rose Pine Dawn** (light).
+A unified dark/light setup follows macOS appearance. Themes: **Rose Pine Moon** (dark), **Rose Pine Dawn** (light).
 
 - **macOS appearance** — source of truth for dark/light mode.
-- **`theme-toggle`** — user-facing toggle (aliased `tt`). Changes macOS appearance, then runs `theme-sync`.
-- **`theme-sync`** — reads macOS appearance and nudges running Neovim instances. Tmux, Lazygit, Cursor, Claude Code, and Ghostty each sync themselves (see below) and are not touched by this script.
+- **`theme-sync`** — reads macOS appearance and nudges running Neovim instances. Tmux invokes it on focus/session changes; Lazygit, Cursor, Claude Code, and Ghostty each sync themselves (see below) and are not touched by this script.
 - **Tmux** — status bar uses terminal-default colors, so it inherits Ghostty's light/dark palette with no theme coupling.
 - **Lazygit** — uses default terminal-aware colors; do not update Lazygit config from theme scripts.
 - **Cursor** — uses built-in auto sync; do not update Cursor settings from theme scripts.
 - **Claude Code** — uses built-in auto sync; do not update `~/.claude.json` from theme scripts.
 - **Ghostty** and **Neovim** — follow macOS appearance from their configs; `theme-sync` nudges running Neovim instances.
 
-When modifying themes: preserve the flow `macOS appearance -> theme-sync -> app configs`. `appearance.lua` handles Neovim startup; Ghostty's `config` handles the terminal.
+When modifying themes: preserve the flow `macOS appearance -> app configs`, with `theme-sync` only nudging running Neovim instances. `appearance.lua` handles Neovim startup; Ghostty's `config` handles the terminal.
 
 ## Keybind Conventions
 
@@ -58,7 +58,7 @@ When modifying themes: preserve the flow `macOS appearance -> theme-sync -> app 
 
 ## Neovim Configuration
 
-Uses LazyVim framework with Lua config in `nvim/.config/nvim/`:
+Uses LazyVim framework with Lua config in `nvim/`:
 - `lua/config/` — Core settings (keymaps, options, autocmds)
 - `lua/plugins/` — Plugin specs organized by concern: appearance, completion, copilot, editor, formatting, lsp, navigation
 - Plugin lock file: `lazy-lock.json`

@@ -1,0 +1,11 @@
+[user]
+	name = Yaodong Zhao
+
+[core]
+	autocrlf = input
+
+[init]
+	defaultBranch = master
+
+[include]
+	path = ~/.config/git/config.local
