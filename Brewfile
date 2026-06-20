@@ -1,5 +1,3 @@
-tap "hashicorp/tap"
-
 brew "bat"
 brew "btop"
 brew "cmake"
@@ -10,7 +8,6 @@ brew "fd"
 brew "fzf"
 brew "gcc"
 brew "git"
-brew "hashicorp/tap/terraform"
 brew "lazydocker"
 brew "lazygit"
 brew "libyaml"

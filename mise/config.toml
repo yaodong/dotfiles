@@ -5,6 +5,7 @@ coursier = "latest"
 java = "openjdk-21"
 node = "22"
 python = "3.12"
+terraform = "latest"
 
 [settings]
 # Honor .python-version / .ruby-version files everywhere (replaces pyenv/rbenv).
