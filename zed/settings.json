@@ -6,6 +6,13 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git": {
+    "gutter_debounce": 10,
+    "inline_blame": {
+      "enabled": false,
+    },
+  },
+  "diff_view_style": "split",
   "cli_default_open_behavior": "new_window",
   "disable_ai": true,
   "auto_update": false,
@@ -24,10 +31,13 @@
   "icon_theme": {
     "mode": "light",
     "light": "Catppuccin Macchiato",
-    "dark": "Catppuccin Macchiato"
+    "dark": "Catppuccin Macchiato",
   },
   "preferred_line_length": 120,
   "show_whitespaces": "all",
+  "format_on_save": "off",
+  "remove_trailing_whitespace_on_save": false,
+  "ensure_final_newline_on_save": false,
   "languages": {
     "Python": {
       "formatter": {
@@ -45,6 +55,23 @@
     },
     "CSS": {
       "tab_size": 2,
+    },
+    "Scala": {
+      "language_servers": ["metals", "..."],
+    },
+  },
+  "lsp": {
+    "metals": {
+      "binary": {
+        "path": "~/.local/bin/metals",
+      },
+      "initialization_options": {
+        "isHttpEnabled": true,
+      },
+      "settings": {
+        "autoImportBuilds": "all",
+        "bloopSbtAlreadyInstalled": true,
+      },
     },
   },
   "file_types": {
