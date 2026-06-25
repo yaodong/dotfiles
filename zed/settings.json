@@ -47,31 +47,11 @@
         },
       },
     },
-    "Ruby": {
-      "language_servers": ["ruby-lsp", "!solargraph"],
-    },
     "HTML": {
       "tab_size": 2,
     },
     "CSS": {
       "tab_size": 2,
-    },
-    "Scala": {
-      "language_servers": ["metals", "..."],
-    },
-  },
-  "lsp": {
-    "metals": {
-      "binary": {
-        "path": "~/.local/bin/metals",
-      },
-      "initialization_options": {
-        "isHttpEnabled": true,
-      },
-      "settings": {
-        "autoImportBuilds": "all",
-        "bloopSbtAlreadyInstalled": true,
-      },
     },
   },
   "file_types": {
@@ -83,14 +63,6 @@
     "hide_gitignore": false,
   },
   "auto_install_extensions": {
-    "html": true,
-    "java": true,
-    "pylsp": true,
-    "ruby": true,
-    "sql": true,
-    "toml": true,
-    "dockerfile": true,
-    "terraform": true,
     "catppuccin": true,
     "catppuccin-icons": true,
   },
