@@ -21,7 +21,7 @@
   "theme": {
     "mode": "light",
     "light": "One Light",
-    "dark": "Catppuccin Mocha",
+    "dark": "Ayu Dark",
   },
   "terminal": {
     "toolbar": { "breadcrumbs": false },
@@ -29,9 +29,9 @@
   },
   "hide_mouse": "on_typing",
   "icon_theme": {
-    "mode": "light",
-    "light": "Catppuccin Macchiato",
-    "dark": "Catppuccin Macchiato",
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
   },
   "preferred_line_length": 120,
   "show_whitespaces": "all",
@@ -62,10 +62,7 @@
     "hide_hidden": false,
     "hide_gitignore": false,
   },
-  "auto_install_extensions": {
-    "catppuccin": true,
-    "catppuccin-icons": true,
-  },
+  "auto_install_extensions": {},
   "toolbar": {
     "quick_actions": false,
     "breadcrumbs": false,
