@@ -13,15 +13,15 @@
     },
   },
   "diff_view_style": "split",
+  "buffer_font_family": "JetBrains Mono",
   "cli_default_open_behavior": "new_window",
   "disable_ai": true,
   "auto_update": false,
   "vim_mode": true,
-  "buffer_font_family": "JetBrainsMono Nerd Font",
   "theme": {
     "mode": "light",
     "light": "One Light",
-    "dark": "Ayu Dark",
+    "dark": "One Dark",
   },
   "terminal": {
     "toolbar": { "breadcrumbs": false },
@@ -29,7 +29,7 @@
   },
   "hide_mouse": "on_typing",
   "icon_theme": {
-    "mode": "dark",
+    "mode": "system",
     "light": "Zed (Default)",
     "dark": "Zed (Default)"
   },
