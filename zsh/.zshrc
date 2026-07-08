@@ -51,12 +51,7 @@ export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 # Source machine-local overrides
 [ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"
 
-# use Tmux only if current term program is Apple Terminal
-if [ "$TERM_PROGRAM" = 'Apple_Terminal' ] || [ "$TERM_PROGRAM" = 'ghostty' ]; then
-  tmux has -t scratch &> /dev/null
-  if [ $? -ne 0 ]; then
-    tmux new -s scratch
-  elif [ -z $TMUX ]; then
-    tmux attach -t scratch
-  fi
+# Ghostty: every new tab/window gets a fresh tmux session.
+if [ "$TERM_PROGRAM" = "ghostty" ] && [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1; then
+  exec tmux new-session
 fi
