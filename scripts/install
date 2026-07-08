@@ -34,6 +34,11 @@ fi
 
 echo "Installing packages from Brewfile..."
 brew update
+# Third-party taps (e.g. hashicorp/tap) require an explicit trust step since
+# Homebrew 4.6; auto-trust the taps we declare so `brew bundle` doesn't halt.
+for tap in hashicorp/tap; do
+  brew trust "$tap" >/dev/null 2>&1 || true
+done
 brew bundle --file "$REPO_DIR/Brewfile"
 
 section "Runtimes"
