@@ -53,5 +53,5 @@ export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 
 # Ghostty: every new tab/window gets a fresh tmux session.
 if [ "$TERM_PROGRAM" = "ghostty" ] && [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1; then
-  exec tmux new-session
+  exec tmux new-session -c "$HOME/Developer"
 fi
